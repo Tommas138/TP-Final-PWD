@@ -152,7 +152,7 @@ class Usuario {
     }
 
     //Definimos la funcion seleccionar
-    public static function seleccionar($condicion = "") {
+    public function seleccionar($condicion = "") {
         $arreglo = array();
         $base = new BaseDatos();
         $sql = "SELECT * FROM usuario";

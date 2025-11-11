@@ -88,5 +88,10 @@ class AbmUsuario {
     }
 
     //Definimos la funcion alta
-    public function alta($param)
+    public function alta($param) {
+        $resp = false;
+        $busquedaUsuario = ["usnombre" => $param['usnombre']];
+        $busquedaCorreo = ["usmail" => $param['usmail']];
+        $existeUsuario = $this->buscar($busquedaUsuario);
+    }
 }
