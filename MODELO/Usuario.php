@@ -1,75 +1,75 @@
 <?php
 class Usuario {
-    private $idUsuario;
-    private $usNombre;
-    private $usPass;
-    private $usMail;
-    private $usDeshabilitado;
-    private $mensajeOperacion;
+    private $idusuario;
+    private $usnombre;
+    private $uspass;
+    private $usmail;
+    private $usdeshabilitado;
+    private $mensajeoperacion;
 
     //Definimos la funcion __construct
     public function __construct () {
-        $this->idUsuario = "";
-        $this->usNombre = "";
-        $this->usPass = "";
-        $this->usMail = "";
-        $this->usDeshabilitado = "";
-        $this->mensajeOperacion = "";
+        $this->idusuario = "";
+        $this->usnombre = "";
+        $this->uspass = "";
+        $this->usmail = "";
+        $this->usdeshabilitado = "";
+        $this->mensajeoperacion = "";
     }
 
     //Definimos los set y los get
     public function getIdUsuario () {
-        return $this->idUsuario;
+        return $this->idusuario;
     }
     public function getUsNombre () {
-        return $this->usNombre;
+        return $this->usnombre;
     }
     public function getUsPass () {
-        return $this->usPass;
+        return $this->uspass;
     }
     public function getUsMail () {
-        return $this->usMail;
+        return $this->usmail;
     }
     public function getUsDeshabilitado () {
-        return $this->usDeshabilitado;
+        return $this->usdeshabilitado;
     }
     public function getMensajeOperacion () {
-        return $this->mensajeOperacion;
+        return $this->mensajeoperacion;
     }
 
-    public function setIdUsuario () {
-        $this->idUsuario = $idUsuario;
+    public function setIdUsuario ($idusuario) {
+        $this->idsuario = $idsuario;
     }
-    public function setUsNombre () {
-        $this->usNombre = $usNombre;
+    public function setUsNombre ($usnombre) {
+        $this->usombre = $usnombre;
     }
-    public function setUsPass () {
-        $this->usPass = $usPass;
+    public function setUsPass ($uspass) {
+        $this->uspass = $uspass;
     }
-    public function setUsMail () {
-        $this->usMail = $usMail;
+    public function setUsMail ($usmail) {
+        $this->usmail = $usmail;
     }
-    public function setUsDeshabilitado () {
-        $this->usDeshabilitdo = $usDeshabilitado;
+    public function setUsDeshabilitado ($usdeshabilitado) {
+        $this->usdeshabilitdo = $usdeshabilitado;
     }
-    public function setMensajeOperacion () {
-        $this->mensajeOperacion = $mensajeOperacion;
+    public function setMensajeOperacion ($mensajeoperacion) {
+        $this->mensajeoperacion = $mensajeoperacion;
     }
 
     //Definimos la funcion setear
-    public function setear ($idUsuario, $usNombre, $usPass, $usMail, $usDeshabilitado, $mensajeOperacion) {
-        $this->setIdUsuario($idUsuario);
-        $this->setUsNombre($usNombre);
-        $this->setUsPass($usPass);
-        $this->setUsMail($usMail);
-        $this->setUsDeshabilitado($usDeshabilitado);
+    public function setear ($idusuario, $usnombre, $uspass, $usmail, $usdeshabilitado, $mensajeoperacion) {
+        $this->setIdUsuario($idusuario);
+        $this->setUsNombre($usnombre);
+        $this->setUsPass($uspass);
+        $this->setUsMail($usmail);
+        $this->setUsDeshabilitado($usdeshabilitado);
     }
 
     //Definimos la funcion cargar
     public function cargar() {
         $resp = false;
         $base = new BaseDatos();
-        $sql = "SELECT * FROM usuario WHERE idUsuario=" . $this->getIdUsuario();
+        $sql = "SELECT * FROM usuario WHERE idusuario=" . $this->getIdUsuario();
         if ($base->Iniciar()) {
             $res = $base->Ejecutar(sql);
             if ($res > 0) {

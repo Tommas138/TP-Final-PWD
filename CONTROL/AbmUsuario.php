@@ -93,5 +93,43 @@ class AbmUsuario {
         $busquedaUsuario = ["usnombre" => $param['usnombre']];
         $busquedaCorreo = ["usmail" => $param['usmail']];
         $existeUsuario = $this->buscar($busquedaUsuario);
+        $existeCorreo = $this->buscar($busquedaCorreo);
+        if (($existeUsuario == null && $existeCorreo == null)) {
+            $objUsuario = $this->cargarObjeto($param);
+            if ($objUsuario->insertar()) {
+                $resp = true;
+            }
+        }
+        if ($resp) {
+            $usuarioNuevo = $this->buscar($busquedaUsuario);
+            $idUsuario = $usuarioNuevo[0]->getIdUsuario();
+            $idRolUsuario = $param['idrol'];
+            $arrayRolUsuario = ["idrol" => $idRolUsuario, "idusuario" => $idUsuario];
+            $abmUsuarioRol = new abmUsuarioRol();
+            $abmUsuarioRol->alta($arrayRolUsuario);
+        }
+        return $resp;
+    }
+
+    //Definimos la funcion deshabilitar usuario
+    //Hace un borrado logico y si ya estaba deshabilitado, lo vuelve habilitar
+    public function deshabilitarUsuario($param) {
+        $resp = false;
+        $objUsuario = $this->cargarObjetoConClave($param);
+        $listadoProductos = $objUsuario->seleccionar("idusuario=" . $param['idusuario']);
+        if(count($listadoProductos) > 0) {
+            $estadoUsuario = $listadoProductos[0]->getUsDeshabilitado();
+            if($estadoUsuario == '0000-00-00 00:00:00') {
+                if($objUsuario->estado(date("y-m-d h:i:s"))) {
+                    $resp = true;
+                }
+            } else {
+                if ($objUsuario->estado()) {
+                    $resp = true;
+                }
+            }
+        }
+
+        return $resp;
     }
 }
