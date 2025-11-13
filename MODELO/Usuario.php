@@ -56,8 +56,8 @@ class Usuario {
         $this->mensajeoperacion = $mensajeoperacion;
     }
 
-    //Definimos la funcion setear
-    public function setear ($idusuario, $usnombre, $uspass, $usmail, $usdeshabilitado, $mensajeoperacion) {
+    //Funcion set para ahorrar pasos
+    public function set ($idusuario, $usnombre, $uspass, $usmail, $usdeshabilitado, $mensajeoperacion) {
         $this->setIdUsuario($idusuario);
         $this->setUsNombre($usnombre);
         $this->setUsPass($uspass);
