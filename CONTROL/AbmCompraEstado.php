@@ -11,7 +11,7 @@ Class AbmCompraEstado {
             $objProducto->cargar();
             
             $objCompraEstadoTipo = new CompraEstadoTipo();
-            $objCompraEstadoTipo->setIdCompraEstadoTipo($parma['idcompraestadotipo']);
+            $objCompraEstadoTipo->setIdCompraEstadoTipo($param['idcompraestadotipo']);
             $objCompraEstadoTipo->cargar();
 
             $obj = new CompraEstado();
@@ -49,7 +49,7 @@ Class AbmCompraEstado {
         print_r($listadoitems);
         $stock = true;
         //busco stock
-        foreach ($listadoItems as $item) {
+        foreach ($listadoitems as $item) {
             $respStock = $abmProducto->chequearStock($item);
             if (!$respStock) {
                 $stock = false;
@@ -64,10 +64,11 @@ Class AbmCompraEstado {
         }
         // si carga carrito modifico stock y cuantas veces se compro el producto
         if ($resp) {
-            foreach ($listadoItems as $item) {
+            foreach ($listadoitems as $item) {
+                //hay que implementar clase producto
                 $objProducto = new Producto();
                 $producto = $objProducto->listar("idproducto = '" . $item->getIdProducto()->getIdProducto() . "'");
-                $stockActual = $prodcuto[0]->getProCantStock();
+                $stockActual = $producto[0]->getProCantStock();
                 $stockActualizado = $stockActual - $item->getCiCantidad();
                 $producto[0]->setProStock($stockActualizado);
                 $vecesCompradoActual = $producto[0]->getProVecesComprado();
@@ -186,7 +187,8 @@ Class AbmCompraEstado {
             if (isset($param['cefechafin']))
                 $where .= " AND cefechafin = '" . $param['cefechafin'] . "'";
         }
-        $arreglo = CompraEstado::listar($where);
+        $objCompraEstado = new CompraEstado();
+        $arreglo = $objCompraEstado->listar($where);
 
         return $arreglo;
     }

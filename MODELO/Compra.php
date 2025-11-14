@@ -16,16 +16,16 @@ class Compra {
 
     //Definimos las funciones para los gets y sets
     public function getIdCompra () {
-        return $this->idcompra;
+        return $this->idCompra;
     }
     public function getCoFecha () {
         return $this->cofecha;
     }
     public function getIdUsuario () {
-        return $this->idusuario;
+        return $this->idUsuario;
     }
     public function getMensajeOperacion () {
-        return $this->mensajeoperacion;
+        return $this->mensajeOperacion;
     }
 
     public function setIdCompra($idcompra) {
@@ -44,7 +44,7 @@ class Compra {
     //Funcion set para ahorrar pasos
     public function set($idcompra, $cofecha, $idusuario) {
         $this->setIdCompra($idcompra);
-        $this->setCoFeha($cofecha);
+        $this->setCoFecha($cofecha);
         $this->setIdUsuario($idusuario);
     }
 
@@ -58,12 +58,12 @@ class Compra {
             if ($res > 0) {
                 $fila = $base->Registro();
                 $objUsuario = NULL;
-                if (fila['idusuario'] != null) {
+                if ($fila['idusuario'] != null) {
                     $objUsuario = new Usuario();
                     $objUsuario->setIdUsuario($fila['idusuario']);
                     $objUsuario->cargar(); 
                 }
-                $this->setear($fila['idcompra'], $fila['cofecha'], $objUsuario);
+                $this->set($fila['idcompra'], $fila['cofecha'], $objUsuario);
                 $resp = true;
             }
         } else {
@@ -75,5 +75,29 @@ class Compra {
     //Definimos la funcion insertar
     public function insertar() {
         
+    }
+
+    public function modificar(){
+
+    }
+
+    public function listar($param = "") {
+        $arreglo = array();
+        $base = new BaseDatos();
+        $sql = "SELECT * FROM menu ";
+        if ($param != "") {
+            $sql .= 'WHERE ' . $param;
+        }
+        $res = $base->Ejecutar($sql);
+        if ($res > 0) {
+            while ($row = $base->Registro()) {
+                $obj = new Compra();
+                $obj->set($row['idcompra'], $row['cofecha'], $row['idusuario']);
+                array_push($arreglo, $obj);
+            }
+        } else {
+            $this->setMensajeOperacion("Compra->Listar: " . $base->getError());
+        }
+        return $arreglo;
     }
 }

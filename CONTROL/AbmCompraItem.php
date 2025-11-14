@@ -6,7 +6,7 @@ Class AbmCompraItem {
     $obj = null;
     if (array_key_exists('idproducto', $param) && array_key_exists('idcompra', $param)) {
         $objProducto = new Producto();
-        $objProducto->setIdProdcutto($param['idproducto']);
+        $objProducto->setIdProducto($param['idproducto']);
         $objProducto->cargar();
 
         $objCompra = new Compra();
@@ -43,7 +43,7 @@ Class AbmCompraItem {
         $controlVerificarCarrito = new controlVerificarCarritoCliente();
         $arrayCarritos = $controlVerificarCarrito->verificarCarrito($param['iduser']);
         // carrito habilitado
-        $carrito = arrayCarritos['carritoHabilitado'];
+        $carrito = $arrayCarritos['carritoHabilitado'];
         // si no existe creo nuevo carrito
         if ($carrito == null) {
             $abmCarrito = new AbmCompra();
@@ -73,7 +73,7 @@ Class AbmCompraItem {
         if (!$cargado) {
             //inserto item
             $objCompraItem = $this->cargarObjeto($arrayCargaItem);
-            if ($objcompraItem != null && $objCompraItem->insertar()) {
+            if ($objCompraItem != null && $objCompraItem->insertar()) {
                 $resp = true;
             }
         }
@@ -84,7 +84,7 @@ Class AbmCompraItem {
         $resp = false;
         if ($this->seteadosCamposClaves($param)) {
             $objCompraItem = $this->cargarObjetoConClave($param);
-            if ($objCompraItem != null && $objcompraItem->eliminar()) {
+            if ($objCompraItem != null && $objCompraItem->eliminar()) {
                 $resp = true;
             }
         }
@@ -95,7 +95,7 @@ Class AbmCompraItem {
         $resp = false;
         if ($this->seteadosCamposClaves($param)) {
             $objCompraItem = $this->cargarObjeto($param);
-            if ($objCompraItem != null && $objcompraItem->modificar()) {
+            if ($objCompraItem != null && $objCompraItem->modificar()) {
                 $resp = true;
             }
         }
@@ -108,9 +108,9 @@ Class AbmCompraItem {
             $objCompraItem = $this->cargarObjetoConClave($param);
             $objCompraItem = $this->buscar(['idcompraitem' => $param['idcompraitem']]);
             if ($objCompraItem[0] != null) {
-                $idProducto = $objcompraItem[0]->getIdProducto()->getIdProducto();
+                $idProducto = $objCompraItem[0]->getIdProducto()->getIdProducto();
                 $abmProducto = new AbmProducto();
-                $objProducto = $abmProducto->buscar(['idproducto' => $idproducto]);
+                $objProducto = $abmProducto->buscar(['idproducto' => $idProducto]);
                 $stockActual = $objProducto[0]->getProCantStock();
                 $cantItems = $objCompraItem[0]->getCiCantidad();
                 if ($stockActual > $cantItems) {

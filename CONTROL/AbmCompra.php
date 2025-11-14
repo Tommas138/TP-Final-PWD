@@ -54,7 +54,8 @@ Class AbmCompra {
             if (isset($param['idusuario']))
                 $where .= " AND idusuario = '" . $param['idusuario'] . "'";
         }
-        $arreglo = Compra::listar($where);
+        $unaCompra = new Compra();
+        $arreglo = $unaCompra->listar($where);
         return $arreglo;
     }
  }

@@ -17,7 +17,7 @@ Class ControlVerificarCarritoCliente {
             if (!$compraEstadoCarrito) {
                 $carritoHabilitado = $carrito;
             } else {
-                array_pish($arrayCompras, $carrito);
+                array_push($arrayCompras, $carrito);
             }
         }
 

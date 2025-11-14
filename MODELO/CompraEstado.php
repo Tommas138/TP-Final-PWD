@@ -158,7 +158,7 @@ Class CompraEstado {
             return $resp;
         }
 
-        public static function listar($parametro = "") {
+        public function listar($parametro = "") {
             $arreglo = array();
             $base = new BaseDatos();
             $sql = "SELECT * FROM compraestado ";

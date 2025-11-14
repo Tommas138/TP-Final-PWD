@@ -72,6 +72,7 @@ Class AbmCompraEstadoTipo {
             if (isset($param['cetdetalle']))
                 $where .= " AND cetdetalle = '" . $param['cetdetalle'] . "'";
         }
+        
         $arreglo = CompraEstadoTipo::listar($where);
         return $arreglo;
     }
