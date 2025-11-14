@@ -9,17 +9,20 @@ Class AbmMenu {
             $id = isset($param['idmenu']) ? $param['idmenu'] : '';
             $menombre = isset($param['menombre']) ? $param['menombre'] : '';
             $menurl = isset($param['menurl']) ? $param['menurl'] : '';
+            $medescripcion = isset($param["medescripcion"]) ? $param["medescripcion"] : "";
+            $medeshabilitado = isset($param["medeshabilitado"]) ? $param["medeshabilitado"] : "";
+
 
             // So hay padre lo buscamos y cargamos para dsps setearlo
             $objPadre = null;
             if (isset($param['idpadre']) && $param['idpadre'] !== '') {
                 $objPadre = new Menu();
-                $objPadre->set($param['idpadre'], null, null, null);
+                $objPadre->set($param['idpadre'], null, null, null, null, null);
                 $objPadre->cargar();
             }
 
             $obj = new Menu();
-            $obj->set($id, $menombre, $menurl, $objPadre);
+            $obj->set($id, $menombre, $menurl, $objPadre,$medescripcion,$medeshabilitado);
         }
         return $obj;
     }
@@ -28,7 +31,7 @@ Class AbmMenu {
         $obj = null;
         if (isset($param['idmenu'])) {
             $obj = new Menu();
-            $obj->set($param['idmenu'], null, null, null);
+            $obj->set($param['idmenu'], null, null, null, null, null);
         }
         return $obj;
     }
@@ -84,7 +87,8 @@ Class AbmMenu {
             if (isset($param['idpadre']))
                 $where .= " AND idpadre = '" . $param['idpadre'] . "'";
         }
-        $arreglo = Menu::listar($where);
+        $menu = new Menu();
+        $arreglo = $menu->listar($where);
         return $arreglo;
     }
 

@@ -4,16 +4,32 @@ class Menu {
     private $idmenu;
     private $menombre;
     private $menurl;
+    private $medescripcion;
+    private $medeshabilitado;
     private $idpadre; // puede ser null o un objeto Menu
+    private $mensajeoperacion;
 
     public function __construct() {
     }
 
-    public function set($idmenu, $menombre, $menurl, $idpadre) {
+    public function set($idmenu, $menombre, $menurl, $idpadre,$medescripcion,$medeshabilitado) {
         $this->setIdMenu($idmenu);
         $this->setMenombre($menombre);
         $this->setMenurl($menurl);
         $this->setIdPadre($idpadre);
+        $this->setMedescripcion($medescripcion);
+        $this->setMedeshabilitado($medeshabilitado);
+    }
+
+    public function setMedescripcion($medescripcion){
+        $this->medescripcion = $medescripcion;
+    }
+
+    public function setMensajeOperacion($mensaje){
+        $this->mensajeoperacion = $mensaje;
+    }
+    public function setMedeshabilitado($medeshabilitado){
+        $this->medeshabilitado = $medeshabilitado;
     }
 
     public function setIdMenu($idMenu){
@@ -40,6 +56,10 @@ class Menu {
         return $this->menombre;
     }
 
+    public function getMedescripcion(){
+        return $this->medescripcion;
+    }
+
     public function getMenUrl() {
         return $this->menurl;
     }
@@ -48,31 +68,92 @@ class Menu {
         return $this->idpadre;
     }
 
-    // Los siguientes métodos son implementaciones mínimas/placeholder.
-    // Si ya existe una clase BaseDatos y convenciones, reemplazar/implementar con consultas reales.
+    public function getMedeshabilitado(){
+        return $this->medeshabilitado;
+    }
 
     public function insertar() {
-        // TODO: implementar inserción real en la DB
-        return true;
+        $resp = false;
+        $base = new BaseDatos();
+        $sql = "INSERT INTO menu (idmenu, menombre, medescripcion, idpadre, medeshabilitado ) VALUES ('" . $this->getIdMenu() . "','" . $this->getMenNombre() . "','" . $this->getMedescripcion() . "','" . $this->getIdPadre() . "','" . $this->getMedeshabilitado();
+        if($base->Iniciar()) {
+            if($elid = $base->Ejecutar($sql)) {
+                $this->setIdMenu($elid);
+                $resp = true;
+            } else {
+                $this->setMensajeOperacion("menu->insertar: " . $base->getError());
+            }
+        } else {
+            $this->setMensajeOperacion("menu->insertar: " . $base->getError());
+        }
+        return $resp;
     }
 
     public function modificar() {
-        // TODO: implementar actualización real en la DB
-        return true;
+        $resp = false;
+        $base = new BaseDatos();
+        $sql = "UPDATE menu SET idmenu= '" . $this->getIdMenu() . "', menombre='" . $this->getMenNombre() . "', medescripcion='" . $this->getMedescripcion() . "', idpadre= '" . $this->getIdPadre() . "', medeshabilitado=  '".$this->getMedeshabilitado() ."";
+        if($base->Iniciar()) {
+            if ($base->Ejecutar($sql)) {
+                $resp = true;
+            } else {
+                $this->setmensajeOperacion("menu->modificar: " . $base->getError());
+            }
+        } else {
+            $this->setMensajeOperacion("menu->modificar: " . $base->getError());
+        }
+        return $resp;
     }
 
     public function eliminar() {
-        // TODO: implementar eliminación real en la DB
-        return true;
+        $resp = false;
+        $base = new BaseDatos();
+        $sql = "DELETE FROM menu WHERE idmenu=" . $this->getIdMenu();
+        if($base->Iniciar()) {
+            if($base->Ejecutar($sql)) {
+                $resp = true;
+            } else {
+                $this->setMensajeOperacion("menu->eliminar: " . $base->getError());
+            }
+        } else {
+            $this->setMensajeOperacion("menu->eliminar: " . $base->getError());
+        }
+        return $resp;
     }
 
     public function cargar() {
-        // TODO: implementar carga real desde la DB usando $this->idmenu
-        return true;
+        $resp = false;
+        $base = new BaseDatos();
+        $sql = "SELECT * FROM menu WHERE idmenu=" . $this->getIdMenu();
+        if ($base->Iniciar()) {
+            $res = $base->Ejecutar($sql);
+            if ($res > 0) {
+                $fila = $base->Registro();
+                $this->set($fila['idmenu'], $fila['menombre'], $fila['menurl'], $fila['idpadre'], $fila['medescripcion'], $fila["medeshabilitado"]);
+            }
+        } else {
+            $this->setMensajeOperacion("usuario->cargar: " . $base->getError());
+        }
+        return $resp;
     }
 
-    public static function listar($where = " true ") {
-        // TODO: implementar listado real con BaseDatos
-        return [];
+    public function listar($param = "") {
+        $arreglo = array();
+        $base = new BaseDatos();
+        $sql = "SELECT * FROM menu ";
+        if ($param != "") {
+            $sql .= 'WHERE ' . $param;
+        }
+        $res = $base->Ejecutar($sql);
+        if ($res > 0) {
+            while ($row = $base->Registro()) {
+                $obj = new Menu();
+                $obj->set($row['idmenu'], $row['menombre'], $row['menurl'], $row["idpadre"],$row["medescripcion"],$row["medeshabilitado"]);
+                array_push($arreglo, $obj);
+            }
+        } else {
+            $this->setMensajeOperacion("Menu->Listar: " . $base->getError());
+        }
+        return $arreglo;
     }
 }
