@@ -8,14 +8,9 @@ Class AbmProducto {
         $obj = new Producto();
         $obj->set(
             $param['idproducto'],
-            '',
-            $param['proprecio'],
-            $param['prodescuento'],
-            $param['pronombre'],
+            $param["pronombre"],
             $param['prodetalle'],
-            $param['provecescomprado'],
             $param['procantstock'],
-            ''
         );
         }
         return $obj;
@@ -25,7 +20,7 @@ Class AbmProducto {
         $obj = null;
         if (isset($param['idproducto'])) {
             $obj = new Producto();
-            $obj->set($param['idproducto'], null, null, null, null, null, null, null, null);
+            $obj->set($param['idproducto'], null, null, null);
         }
         return $obj;
     }
@@ -71,7 +66,7 @@ Class AbmProducto {
     public function modificacion($param) {
         $resp = false;
         print_r($param);
-        if ($this->seteadosCamposClavesq($param)) {
+        if ($this->seteadosCamposClaves($param)) {
             $listaProductos = $this->buscar(['idproducto'=> $param['idproducto']]);
             if ($listaProductos != null) {
                 $objProducto = $this->cargarObjeto($param);
@@ -89,24 +84,6 @@ Class AbmProducto {
         return $resp;
     }
 
-    public function deshabilitarProd($param) {
-        $resp = false;
-        $objProducto = $this->cargarObjetoConClave($param);
-        $listaProductos = $objProducto->listar("idproducto= '" . $param['idproducto'] . "'");
-        if (count($listaProductos) > 0) {
-            $estadoProducto = $listaProductos[0]->getProDeshabilitado();
-            if ($estadoProducto == '0000-00-00 00:00:00') {
-                if ($objProducto->estado(date("Y-m-d H:i:s"))) {
-                    $resp = true;
-                }
-            } else {
-                if ($objProducto->estado()) {
-                    $resp = true;
-                }
-            }
-        }
-        return $resp;
-    }
 
     public function chequearStock($param) {
         $resp = false;
@@ -127,20 +104,15 @@ Class AbmProducto {
         if ($param <> null) {
             if (isset($param['idproducto']))
                 $where .= " AND idproducto = '" . $param['idproducto'] . "'";
-            if (isset($param['proprecio']))
-                $where .= "AND proprecio = '" . $param['proprecio'] . "'";
-            if (isset($param['prodescuento']))
-                $where .= " AND prodescuento = '" . $param['prodescuento'] . "'";
             if (isset($param['pronombre']))
                 $where .= " AND pronombre = '" . $param['pronombre'] . "'";
             if (isset($param['prodetalle']))
                 $where .= " AND prodetalle = '" . $param['prodetalle'] . "'";
-            if (isset($param['provecescomprado']))
-                $where .= " AND provecescomprado = '" . $param['provecescomprado'] . "'";
             if (isset($param['procantstock']))
                 $where .= " AND procantstock = '" . $param['procantstock'] . "'";
         }
-        $arreglo = Producto::listar($where);
+        $objProd = new Producto();
+        $arreglo = $objProd->listar($where);
         return $arreglo;
     } 
     

@@ -9,6 +9,72 @@ Class Producto {
 
     }
 
+    /*
+    public function estado($param = "") {
+        $resp = false;
+        $base = new BaseDatos();
+        $sql = "UPDATE producto SET prodeshabilitado='" . $param . "'WHERE idproducto=" . $this->getIdProducto();
+        if($base->Iniciar()) {
+            if($base->Ejecutar($sql)) {
+                $resp = true;
+            } else {
+                $this->setMensajeOperacion("producto->estado: " . $base->getError());
+            }
+        } else {
+            $this->setMensajeOperacion("producto->estado: " . $base->getError());
+        }
+        return $resp;
+    }
+*/
+    public function insertar() {
+        $resp = false;
+        $base = new BaseDatos();
+        $sql = "INSERT INTO producto (idproducto, pronombre, prodetalle, procantstock) VALUES ('" . $this->getIdProducto() . "','" . $this->getPronombre() . "','" . $this->getProdetalle() . "','" . $this->getProcantstock();
+        if($base->Iniciar()) {
+            if($elid = $base->Ejecutar($sql)) {
+                $this->setIdProducto($elid);
+                $resp = true;
+            } else {
+                $this->setMensajeOperacion("producto->insertar: " . $base->getError());
+            }
+        } else {
+            $this->setMensajeOperacion("producto->insertar: " . $base->getError());
+        }
+        return $resp;
+    }
+
+    public function modificar() {
+        $resp = false;
+        $base = new BaseDatos();
+        $sql = "UPDATE producto SET idproducto= '" . $this->getIdProducto() . "', pronombre='" . $this->getPronombre() . "', prodetalle='" . $this->getProdetalle() . "', procantstock= '" . $this->getProcantstock();
+        if($base->Iniciar()) {
+            if ($base->Ejecutar($sql)) {
+                $resp = true;
+            } else {
+                $this->setmensajeOperacion("producto->modificar: " . $base->getError());
+            }
+        } else {
+            $this->setMensajeOperacion("producto->modificar: " . $base->getError());
+        }
+        return $resp;
+    }
+
+    public function eliminar() {
+        $resp = false;
+        $base = new BaseDatos();
+        $sql = "DELETE FROM producto WHERE idproducto=" . $this->getIdProducto();
+        if($base->Iniciar()) {
+            if($base->Ejecutar($sql)) {
+                $resp = true;
+            } else {
+                $this->setMensajeOperacion("producto->eliminar: " . $base->getError());
+            }
+        } else {
+            $this->setMensajeOperacion("producto->eliminar: " . $base->getError());
+        }
+        return $resp;
+    }
+
     public function cargar() {
         $resp = false;
         $base = new BaseDatos();
