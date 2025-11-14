@@ -21,10 +21,10 @@ Class AbmMenuRol {
 
     private function cargarObjetoConClave($param) {
         $obj = null;
-        if (isset($param['idmenu'] && isset($param['idrol']))) {
+        if (isset($param['idmenu']) && isset($param['idrol'])) {
             $obj = new MenuRol();
             $obj->set($param['idmenu'], $param['idrol']);
-            $obj->cargar()
+            $obj->cargar();
         }
         return $obj;
     }
