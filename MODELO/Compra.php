@@ -41,8 +41,8 @@ class Compra {
         $this->mensajeoperacion = $mensajeoperacion;
     }
 
-    //Definimos la funcion setear
-    public function setear($idcompra, $cofecha, $idusuario) {
+    //Funcion set para ahorrar pasos
+    public function set($idcompra, $cofecha, $idusuario) {
         $this->setIdCompra($idcompra);
         $this->setCoFeha($cofecha);
         $this->setIdUsuario($idusuario);
