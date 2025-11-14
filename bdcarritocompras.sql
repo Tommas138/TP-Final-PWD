@@ -150,7 +150,7 @@ CREATE TABLE `rol` (
 --
 
 CREATE TABLE `usuario` (
-  `idusuario` bigint(20) NOT NULL,
+  `idusuario` bigint(20) NOT NULL AUTO_INCREMENT,
   `usnombre` varchar(50) NOT NULL,
   `uspass` int(11) NOT NULL,
   `usmail` varchar(50) NOT NULL,
