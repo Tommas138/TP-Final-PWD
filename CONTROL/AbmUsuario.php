@@ -24,7 +24,8 @@ class AbmUsuario {
             }
         }
         $usuario = new Usuario();
-        $usuario->set($param['idusuario'], $param['usnombre'], $param['uspass'], $param['usmail'], $param['usdeshabilitado']);
+        // $usuario->set($param['idusuario'], $param['usnombre'], $param['uspass'], $param['usmail'], $param['usdeshabilitado']);
+        $usuario->set(null, $param['usnombre'], $param['uspass'], $param['usmail'], null);
         $arreglo = $usuario->seleccionar($where);
         return $arreglo;
     }
@@ -95,10 +96,10 @@ class AbmUsuario {
     //Definimos la funcion alta
     public function alta($param) {
         $resp = false;
-        $busquedaUsuario = ["usnombre" => $param['usnombre']];
-        $busquedaCorreo = ["usmail" => $param['usmail']];
-        $existeUsuario = $this->buscar($busquedaUsuario);
-        $existeCorreo = $this->buscar($busquedaCorreo);
+        // $busquedaUsuario = ["usnombre" => $param['usnombre']];
+        // $busquedaCorreo = ["usmail" => $param['usmail']];
+        $existeUsuario = $this->buscar($param);
+        $existeCorreo = $this->buscar($param);
         if (($existeUsuario == null && $existeCorreo == null)) {
             $objUsuario = $this->cargarObjeto($param);
             if ($objUsuario->insertar()) {
@@ -106,7 +107,7 @@ class AbmUsuario {
             }
         }
         if ($resp) {
-            $usuarioNuevo = $this->buscar($busquedaUsuario);
+            $usuarioNuevo = $this->buscar($param);
             $idUsuario = $usuarioNuevo[0]->getIdUsuario();
             $idRolUsuario = $param['idrol'];
             $arrayRolUsuario = ["idrol" => $idRolUsuario, "idusuario" => $idUsuario];
