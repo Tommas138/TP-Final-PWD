@@ -23,7 +23,7 @@ Class AbmUsuarioRol {
         $obj = null;
         if (isset($param[''])) {
             $obj = new UsuarioRol();
-            $obj->set($param[''], null, null);
+            $obj->set($param[''], null);
         }
         return $obj;
     }

@@ -45,7 +45,7 @@ Class AbmCompraItem {
         // carrito habilitado
         $carrito = $arrayCarritos['carritoHabilitado'];
         // si no existe creo nuevo carrito
-        if ($carrito == null) {
+        if ($carrito == null || !($carrito instanceof Compra)) {
             $abmCarrito = new AbmCompra();
             $array = ['idusuario' => $param['iduser']];
             // alta de carrito
