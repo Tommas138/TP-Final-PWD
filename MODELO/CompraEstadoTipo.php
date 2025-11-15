@@ -31,7 +31,7 @@ Class CompraEstadoTipo {
     public function setIdCompraEstadoTipo($idcompraestadotipo) {
         $this->idcompraestadotipo = $idcompraestadotipo;
     }
-    public function setCetDescripcion($setdescripcion) {
+    public function setCetDescripcion($cetdescripcion) {
         $this->cetdescripcion = $cetdescripcion;
     }
     public function setCetDetalle($cetdetalle) {
@@ -117,7 +117,7 @@ Class CompraEstadoTipo {
         return $resp;
     }
 
-    public static function listar($param = "") {
+    public function listar($param = "") {
         $arreglo = array();
         $base = new BaseDatos();
         $sql = "SELECT * FROM compraestadotipo ";

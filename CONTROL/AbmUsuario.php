@@ -20,7 +20,9 @@ class AbmUsuario {
                 $where .= " and usdeshabilitado ='" . $param['usdeshabilitado'] . "'";
             }
         }
-        $arreglo = Usuario::seleccionar($where);
+        $usuario = new Usuario();
+        $usuario->set($param['idusuario'], $param['usnombre'], $param['uspass'], $param['usmail'], $param['usdeshabilitado']);
+        $arreglo = $usuario->seleccionar($where);
         return $arreglo;
     }
 
@@ -30,7 +32,7 @@ class AbmUsuario {
         if(array_key_exists('usnombre', $param) && array_key_exists('usmail', $param) && array_key_exists('uspass', $param)) {
             $objUs = new Usuario();
             $pass =md5($param['uspass']);
-            $objUs->setear('', $param['usnombre'], $pass, $param['usmail'], '');
+            $objUs->set('', $param['usnombre'], $pass, $param['usmail'], '');
         }
         return $objUs;
     }
@@ -49,7 +51,7 @@ class AbmUsuario {
         $objUs = null;
         if(isset($param['idusuario'])) {
             $objUs = new Usuario();
-            $objUs->setear($param['idusuario'], null, null, null, null);
+            $objUs->set($param['idusuario'], null, null, null, null);
         }
         return $objUs;
     }
@@ -61,7 +63,7 @@ class AbmUsuario {
         if ($lista != null) {
             $objUs = new Usuario();
             $pass = md5($param['uspass']);
-            $objUs->setear($param['idusuario'], $param['usnombre'], $pass, $param['usmail'], $param['usdeshabilitado']);
+            $objUs->set($param['idusuario'], $param['usnombre'], $pass, $param['usmail'], $param['usdeshabilitado']);
             if($objUs->modificar()) {
                 $resp = true;
             }
@@ -77,7 +79,7 @@ class AbmUsuario {
             $usActual = true;
         }
         if (!$usActual) {
-            if ($this->seteadoCamposClaves($param)) {
+            if ($this->seteadosCamposClaves($param)) {
                 $objUsuario = $this->cargarObjetoConClave($param);
                 if($objUsuario != null && $objUsuario->eliminar()) {
                     $resp = true;

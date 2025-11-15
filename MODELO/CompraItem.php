@@ -136,7 +136,7 @@ Class CompraItem {
         return $resp;
     }
 
-    public static function listar($param = "") {
+    public function listar($param = "") {
         $arreglo = array();
         $base = new BaseDatos();
         $sql = "SELECT * FROM compraitem ";

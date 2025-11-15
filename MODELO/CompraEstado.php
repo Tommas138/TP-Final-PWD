@@ -10,8 +10,8 @@ Class CompraEstado {
 
     public function __construct() {
         $this->idcompraestado = "";
-        $this->idcompra = new Compra();
-        $this->idcompraestadotipo = new CompraEstadoTipo();
+        $this->idcompra = "";
+        $this->idcompraestadotipo = "";
         $this->cefechaini = "";
         $this->cefechafin = "";
         $this->mensajeOperacion = "";
@@ -34,7 +34,7 @@ Class CompraEstado {
         return $this->cefechafin;
     }
     public function getMensajeOperacion() {
-        return $this->mensajeoperacion;
+        return $this->mensajeOperacion;
     }
 
     //setters
@@ -54,7 +54,7 @@ Class CompraEstado {
         $this->cefechafin = $cefechafin;
     }
     public function setMensajeOperacion($mensaje) {
-        $this->mensajeoperacion = $mensaje;
+        $this->mensajeOperacion = $mensaje;
     }
 
     //funcion set para ahorrar tiempo xd
@@ -105,14 +105,18 @@ Class CompraEstado {
     public function insertar() {
         $resp = false;
         $base = new BaseDatos();
-        $objCompra = $this->getIdCompra();
-        $objCompraEstadoTipo = $this->getIdCompraEstadoTipo();
+        $objCompra = new Compra();
+        $objCompra->setIdCompra($this->getIdCompra());
+        $objCompra->cargar();
+        $objCompraEstadoTipo = new CompraEstadoTipo();
+        $objCompraEstadoTipo->setIdCompraEstadoTipo($this->getIdCompraEstadoTipo());
+        $objCompraEstadoTipo->cargar();
         $sql = "INSERT INTO compraestado (idcompra, idcompraestadotipo, cefechafin) VALUES (" . $objCompra->getIdCompra() . 
         ", " . $objCompraEstadoTipo->getIdCompraEstadoTipo() . ", '0000-00-00 00:00:00')";
 
         if ($base->Iniciar()) {
-            if ($base = $base->Ejecutar($sql)) {
-                $this->setIdCompraEstado($base);
+            if ($res = $base->Ejecutar($sql)) {
+                $this->setIdCompraEstado($res);
                 $resp = true;
             } else {
                 $this->setMensajeOperacion("CompraEstado->Insertar: " . $base->getError());

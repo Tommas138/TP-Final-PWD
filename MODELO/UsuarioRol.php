@@ -1,21 +1,21 @@
 <?php
 
 Class UsuarioRol {
-    private $idRol;
-    private $idUsuario;
+    private $objRol;
+    private $objUsuario;
     private $mensajeOperacion;
 
     public function __construct() {
-        $this->idUsuario = "";
-        $this->idRol = "";
+        $this->objUsuario = "";
+        $this->objRol = "";
         $this->mensajeOperacion = "";
     }
 
     public function getObjUsuario() {
-        return $this->idUsuario();
+        return $this->objUsuario;
     }
     public function getObjRol() {
-        return $this->idRol;
+        return $this->objRol;
     }
     public function getMensajeOperacion() {
         return $this->mensajeOperacion;
@@ -31,15 +31,15 @@ Class UsuarioRol {
         $this->mensajeOperacion = $mensajeOperacion;
     }
 
-    public function set($idUsuario, $idRol) {
-        $this->setObjUsuario($idUsuario);
-        $this->setObjRol($idRol);
+    public function set($objUsuario, $objRol) {
+        $this->setObjUsuario($objUsuario);
+        $this->setObjRol($objRol);
     }
 
     public function cargar() {
         $resp = false;
         $base = new BaseDatos();
-        $sql = "SELECT * FROM usuariorol WHERE idusuario = " . $this->getObjUsuario()->getIdusuario() . " AND idrol = " . $this->getObjRol()->getIdRol();
+        $sql = "SELECT * FROM usuariorol WHERE idusuario = " . $this->getObjUsuario()->getIdUsuario() . " AND idrol = " . $this->getObjRol()->getIdRol();
 
         if ($base->Iniciar()) {
             $res = $base->Ejecutar($sql);
@@ -47,8 +47,8 @@ Class UsuarioRol {
                     $row = $base->Registro();
                     $objUsuario = null;
                     if ($row['idusuario'] != null) {
-                        $objUsuario - new Usuario();
-                        $objUsuario->setIdUsuariuo($row['idusuario']);
+                        $objUsuario = new Usuario();
+                        $objUsuario->setIdUsuario($row['idusuario']);
                         $objUsuario->cargar();
                     }
                     $objRol = null;
@@ -99,7 +99,7 @@ Class UsuarioRol {
         return $resp;
     }
 
-    public static function listar($param) {
+    public function listar($param) {
         $arreglo = array();
         $base = new BaseDatos();
         $sql = "SELECT * FROM usuariorol ";

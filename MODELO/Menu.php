@@ -33,7 +33,7 @@ class Menu {
     }
 
     public function setIdMenu($idMenu){
-        $this->idMenu = $idMenu;
+        $this->idmenu = $idMenu;
     }
 
     public function setMenombre($menombre){
