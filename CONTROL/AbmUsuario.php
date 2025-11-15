@@ -24,6 +24,7 @@ class AbmUsuario {
             }
         }
         $usuario = new Usuario();
+        $usuario->set($param['idusuario'], $param['usnombre'], $param['uspass'], $param['usmail'], $param['usdeshabilitado']);
         $arreglo = $usuario->seleccionar($where);
         return $arreglo;
     }
@@ -53,7 +54,7 @@ class AbmUsuario {
         $objUs = null;
         if(isset($param['idusuario'])) {
             $objUs = new Usuario();
-            $objUs->setear($param['idusuario'], null, null, null, null);
+            $objUs->set($param['idusuario'], null, null, null, null);
         }
         return $objUs;
     }
@@ -81,7 +82,7 @@ class AbmUsuario {
             $usActual = true;
         }
         if (!$usActual) {
-            if ($this->seteadoCamposClaves($param)) {
+            if ($this->seteadosCamposClaves($param)) {
                 $objUsuario = $this->cargarObjetoConClave($param);
                 if($objUsuario != null && $objUsuario->eliminar()) {
                     $resp = true;

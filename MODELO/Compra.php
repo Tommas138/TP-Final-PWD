@@ -8,10 +8,10 @@ class Compra {
 
     //Definimos la funcion __construct
     public function __construct() {
-        $this->idcompra = "";
+        $this->idCompra = "";
         $this->cofecha = "";
-        $this->idusuario = new Usuario();
-        $this->mensajeoperacion = "";
+        $this->idUsuario = new Usuario();
+        $this->mensajeOperacion = "";
     }
 
     //Definimos las funciones para los gets y sets
@@ -29,16 +29,16 @@ class Compra {
     }
 
     public function setIdCompra($idcompra) {
-        $this->idcompra = $idcompra;
+        $this->idCompra = $idcompra;
     }
     public function setCoFecha($cofecha) {
         $this->cofecha = $cofecha;
     }
     public function setIdUsuario($idusuario) {
-        $this->idusuario = $idusuario;
+        $this->idUsuario = $idusuario;
     }
-    public function setMensajeOperacion($mensajeoperacion) {
-        $this->mensajeoperacion = $mensajeoperacion;
+    public function setMensajeOperacion($mensajeOperacion) {
+        $this->mensajeOperacion = $mensajeOperacion;
     }
 
     //Funcion set para ahorrar pasos

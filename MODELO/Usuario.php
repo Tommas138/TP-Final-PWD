@@ -41,10 +41,10 @@ class Usuario {
     }
 
     public function setIdUsuario ($idusuario) {
-        $this->idsuario = $idsuario;
+        $this->idusuario = $idusuario;
     }
     public function setUsNombre ($usnombre) {
-        $this->usombre = $usnombre;
+        $this->usnombre = $usnombre;
     }
     public function setUsPass ($uspass) {
         $this->uspass = $uspass;
@@ -53,14 +53,14 @@ class Usuario {
         $this->usmail = $usmail;
     }
     public function setUsDeshabilitado ($usdeshabilitado) {
-        $this->usdeshabilitdo = $usdeshabilitado;
+        $this->usdeshabilitado = $usdeshabilitado;
     }
     public function setMensajeOperacion ($mensajeoperacion) {
         $this->mensajeoperacion = $mensajeoperacion;
     }
 
     //Funcion set para ahorrar pasos
-    public function set($idusuario, $usnombre, $uspass, $usmail, $usdeshabilitado, $mensajeoperacion) {
+    public function set ($idusuario, $usnombre, $uspass, $usmail, $usdeshabilitado) {
         $this->setIdUsuario($idusuario);
         $this->setUsNombre($usnombre);
         $this->setUsPass($uspass);
@@ -126,7 +126,7 @@ class Usuario {
         $base = new BaseDatos();
         $sql = "UPDATE usuario SET usdeshabilitado='" . $param . "'WHERE idusuario=" . $this->getIdUsuario();
         if($base->Iniciar()) {
-            if($base->Ejecuta($sql)) {
+            if($base->Ejecutar($sql)) {
                 $resp = true;
             } else {
                 $this->setMensajeOperacion("usuario->estado: " . $base->getError());
@@ -166,7 +166,7 @@ class Usuario {
         if($res > 0) {
             while ($fila = $base->Registro()) {
                 $obj = new Usuario();
-                $obj->setear($fila['idusuario'], $fila['usnombre'], $fila['uspass'], $fila['usmail'], $fila['usdeshabilitado']);
+                $obj->set($fila['idusuario'], $fila['usnombre'], $fila['uspass'], $fila['usmail'], $fila['usdeshabilitado']);
                 array_push($arreglo, $obj);
             }
         } else {

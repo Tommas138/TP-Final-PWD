@@ -60,7 +60,7 @@ Class AbmUsuarioRol {
         $resp = false;
         $objUsRol = new UsuarioRol();
         $abmRol = new AbmRol();
-        $listaRol = $ambRol->buscar(['idrol' => $param['idrol']]);
+        $listaRol = $abmRol->buscar(['idrol' => $param['idrol']]);
         $abmUs = new AbmUsuario();
         $listaUs = $abmUs->buscar(['idusuario' => $param['idusuario']]);
         $objUsRol->set($listaUs[0], $listaRol[0]);
@@ -78,7 +78,9 @@ Class AbmUsuarioRol {
             if (isset($param['idrol']))
                 $where .= " AND idrol = " . $param['idrol'];
         }
-        $arreglo = UsuarioRol::listar($where);
+        $usuarioRol = new UsuarioRol();
+        $usuarioRol->set($param['idusuario'], $param['idrol']);
+        $arreglo = $usuarioRol->listar($where);
         return $arreglo;
     }
 

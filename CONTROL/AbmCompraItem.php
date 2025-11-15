@@ -148,13 +148,15 @@ Class AbmCompraItem {
             if (isset($param['idcompraitem']))
                 $where .= " AND idcompraitem = " . $param['idcompraitem'];
             if (isset($param['idproducto'])) 
-                $where .= " AND idproducto = " . $param['idproduco'];
+                $where .= " AND idproducto = " . $param['idproducto'];
             if (isset($param['idcompra']))
                 $where .= " AND idcompra = '" . $param['idcompra'] . "'";
             if (isset($param['cicantidad']))
-                $where .= " AND cicantidad = '" . $param['cicanttidad'] . "'";
+                $where .= " AND cicantidad = '" . $param['cicantidad'] . "'";
         }
-        $arreglo = CompraItem::listar($where);
+        $compraItem = new CompraItem();
+        $compraItem->set($param['idcompraitem'], null, null, null);
+        $arreglo = $compraItem->listar($where);
         return $arreglo;
     }
 }

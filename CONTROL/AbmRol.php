@@ -1,6 +1,6 @@
 <?php
 
-Class Rol {
+Class AbmRol {
 
     private function cargarObjeto($param) {
         $rol =  null;
@@ -71,7 +71,9 @@ Class Rol {
             }
         }
 
-        $arreglo = Rol::listar($where);
+        $rol = new Rol();
+        $rol->set($param['idrol'], $param['roldescripcion']);
+        $arreglo = $rol->listar($where);
         return $arreglo;
     }
 }
