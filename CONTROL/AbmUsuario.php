@@ -1,4 +1,7 @@
 <?php
+
+include_once __DIR__ . '/../MODELO/Usuario.php';
+
 class AbmUsuario {
     //Funcion que busca un objeto
     public function buscar($param) {
@@ -20,7 +23,8 @@ class AbmUsuario {
                 $where .= " and usdeshabilitado ='" . $param['usdeshabilitado'] . "'";
             }
         }
-        $arreglo = Usuario::seleccionar($where);
+        $usuario = new Usuario();
+        $arreglo = $usuario->seleccionar($where);
         return $arreglo;
     }
 
@@ -30,7 +34,7 @@ class AbmUsuario {
         if(array_key_exists('usnombre', $param) && array_key_exists('usmail', $param) && array_key_exists('uspass', $param)) {
             $objUs = new Usuario();
             $pass =md5($param['uspass']);
-            $objUs->setear('', $param['usnombre'], $pass, $param['usmail'], '');
+            $objUs->set('', $param['usnombre'], $pass, $param['usmail'], '');
         }
         return $objUs;
     }
@@ -61,7 +65,7 @@ class AbmUsuario {
         if ($lista != null) {
             $objUs = new Usuario();
             $pass = md5($param['uspass']);
-            $objUs->setear($param['idusuario'], $param['usnombre'], $pass, $param['usmail'], $param['usdeshabilitado']);
+            $objUs->set($param['idusuario'], $param['usnombre'], $pass, $param['usmail'], $param['usdeshabilitado']);
             if($objUs->modificar()) {
                 $resp = true;
             }

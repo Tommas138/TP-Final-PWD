@@ -1,4 +1,7 @@
 <?php
+
+include_once 'conector/BaseDatos.php';
+
 class Usuario {
     private $idusuario;
     private $usnombre;
@@ -57,7 +60,7 @@ class Usuario {
     }
 
     //Funcion set para ahorrar pasos
-    public function set ($idusuario, $usnombre, $uspass, $usmail, $usdeshabilitado, $mensajeoperacion) {
+    public function set($idusuario, $usnombre, $uspass, $usmail, $usdeshabilitado, $mensajeoperacion) {
         $this->setIdUsuario($idusuario);
         $this->setUsNombre($usnombre);
         $this->setUsPass($uspass);
@@ -71,10 +74,10 @@ class Usuario {
         $base = new BaseDatos();
         $sql = "SELECT * FROM usuario WHERE idusuario=" . $this->getIdUsuario();
         if ($base->Iniciar()) {
-            $res = $base->Ejecutar(sql);
+            $res = $base->Ejecutar($sql);
             if ($res > 0) {
                 $fila = $base->Registro();
-                $this->setear($fila['idusuario'], $fila['usnombre'], $fila['uspass'], $fila['usmail'], $fila['usdeshabilitado']);
+                $this->set($fila['idusuario'], $fila['usnombre'], $fila['uspass'], $fila['usmail'], $fila['usdeshabilitado']);
             }
         } else {
             $this->setMensajeOperacion("usuario->cargar: " . $base->getError());

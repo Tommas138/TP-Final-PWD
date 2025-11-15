@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="./VISTA/ACCION/ESTRUCTURA/styles.css">
 </head>
 <body>
-
     <div class="login-container">
         <div class="login-header">
             <i class="bi bi-person-circle" style="font-size: 3rem;"></i>
@@ -53,7 +52,7 @@
             
             <div class="text-center">
                 <p class="text-muted mb-0">¿No tienes cuenta?</p>
-                <a href="#" class="text-decoration-none fw-bold">Regístrate aquí</a>
+                <a href="./VISTA/ACCION/registrarUsuario.php" class="text-decoration-none fw-bold">Regístrate aquí</a>
             </div>
         </div>
     </div>
