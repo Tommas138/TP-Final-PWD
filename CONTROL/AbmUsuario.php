@@ -25,7 +25,7 @@ class AbmUsuario {
         }
         $usuario = new Usuario();
         // $usuario->set($param['idusuario'], $param['usnombre'], $param['uspass'], $param['usmail'], $param['usdeshabilitado']);
-        $usuario->set(null, $param['usnombre'], $param['uspass'], $param['usmail'], null);
+        $usuario->set(1, $param['usnombre'], $param['uspass'], $param['usmail'], null);
         $arreglo = $usuario->seleccionar($where);
         return $arreglo;
     }

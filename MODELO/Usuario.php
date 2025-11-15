@@ -156,9 +156,8 @@ class Usuario {
 
     //Definimos la funcion seleccionar
     public function seleccionar($condicion = "") {
-        $arreglo = array();
         $base = new BaseDatos();
-        $sql = "SELECT * FROM usuario";
+        $sql = "SELECT * FROM usuario ";
         if($condicion != "") {
             $sql .= 'WHERE ' . $condicion;
         }
@@ -172,6 +171,6 @@ class Usuario {
         } else {
             $this->setMensajeOperacion("usuario->seleccionar: " . $base->getError());
         }
-        return $arreglo;
+        return $obj;
     } 
 }

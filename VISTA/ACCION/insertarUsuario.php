@@ -5,7 +5,8 @@
     include_once '../../CONTROL/Session.php';
 
     $sesion = new Session();
-    $usuario = data_submitted();
+    $usuario = data_submitted(); // Array ( [usnombre] => jeremias herrera [usmail] => emai123l@gmail.com [uspass] => 123 )
+    // print_r($usuario);
     $abmUsuario = new AbmUsuario();
     $respuesta = $abmUsuario->alta($usuario);
 
