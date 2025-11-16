@@ -16,7 +16,7 @@ class AbmUsuario {
                 $where .= " and usnombre ='" . $param['usnombre'] . "'";
             }
             if (isset($param['uspass'])) {
-                $where .= " and uspass ='" . $param['uspass'] . "'";
+                $where .= " and uspass ='" . md5($param['uspass']) . "'";
             }
             if(isset($param['usmail'])) {
                 $where .= " and usmail ='" . $param['usmail'] . "'";
@@ -129,8 +129,8 @@ class AbmUsuario {
         $resp = false;
         $objUsuario = $this->cargarObjetoConClave($param);
         $listadoProductos = $objUsuario->seleccionar("idusuario=" . $param['idusuario']);
-        if(count($listadoProductos) > 0) {
-            $estadoUsuario = $listadoProductos[0]->getUsDeshabilitado();
+        if($listadoProductos != null) {
+            $estadoUsuario = $listadoProductos->getUsDeshabilitado();
             if($estadoUsuario == '0000-00-00 00:00:00') {
                 if($objUsuario->estado(date("y-m-d h:i:s"))) {
                     $resp = true;

@@ -15,12 +15,20 @@
             <h2 class="mt-3 mb-0">Iniciar Sesión</h2>
         </div>
         <div class="login-body">            
-            <form method="POST" action="">
+            <form method="POST" action="./VISTA/ACCION/iniciarSesion.php">
+                <div class="mb-3">
+                    <label for="usmail" class="form-label">
+                        <i class="bi bi-person-fill me-1"></i>E-mail
+                    </label>
+                    <input type="text" class="form-control" id="usmail" name="usmail" 
+                           placeholder="Ingresa tu e-mail" required>
+                </div>
+
                 <div class="mb-3">
                     <label for="usuario" class="form-label">
                         <i class="bi bi-person-fill me-1"></i>Usuario
                     </label>
-                    <input type="text" class="form-control" id="usuario" name="usuario" 
+                    <input type="text" class="form-control" id="usuario" name="usnombre" 
                            placeholder="Ingresa tu usuario" required>
                 </div>
                 
@@ -28,7 +36,7 @@
                     <label for="password" class="form-label">
                         <i class="bi bi-lock-fill me-1"></i>Contraseña
                     </label>
-                    <input type="password" class="form-control" id="password" name="password" 
+                    <input type="password" class="form-control" id="password" name="uspass" 
                            placeholder="Ingresa tu contraseña" required>
                 </div>
                 
