@@ -1,5 +1,7 @@
 <?php
 
+include_once __DIR__ . '/../MODELO/UsuarioRol.php';
+
 Class AbmUsuarioRol {
 
     private function cargarObjeto($param) {

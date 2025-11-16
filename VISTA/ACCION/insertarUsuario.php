@@ -6,12 +6,13 @@
 
     $sesion = new Session();
     $usuario = data_submitted(); // Array ( [usnombre] => jeremias herrera [usmail] => emai123l@gmail.com [uspass] => 123 )
-    // print_r($usuario);
     $abmUsuario = new AbmUsuario();
     $respuesta = $abmUsuario->alta($usuario);
 
     if($respuesta){
-        header("Location: ../../index.php");
+        header("Location: ../home.php");
         $sesion->iniciar($usuario['usnombre'], $usuario['uspass']);
+    }else{
+        header("Location: ../registrarUsuario.php?error=1");
     }
 ?>

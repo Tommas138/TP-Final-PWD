@@ -9,8 +9,6 @@
     Bienvenido a pagina segura xd
     <?php
 
-    include_once './ACCION/insertarUsuario.php'
-
 
 
 

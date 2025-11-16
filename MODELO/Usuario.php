@@ -92,7 +92,7 @@ class Usuario {
         $sql = "INSERT INTO usuario (usnombre, uspass, usmail, usdeshabilitado) VALUES ('" . $this->getUsNombre() . "','" . $this->getUsPass() . "','" . $this->getUsMail() .  "','0000-00-00 00:00:00');";
         if($base->Iniciar()) {
             if($elid = $base->Ejecutar($sql)) {
-                $this->setIdUsuario($elid);
+                // $this->setIdUsuario($elid);
                 $resp = true;
             } else {
                 $this->setMensajeOperacion("usuario->insertar: " . $base->getError());
@@ -156,6 +156,8 @@ class Usuario {
 
     //Definimos la funcion seleccionar
     public function seleccionar($condicion = "") {
+        $arreglo = array();
+        $obj = null;    
         $base = new BaseDatos();
         $sql = "SELECT * FROM usuario ";
         if($condicion != "") {

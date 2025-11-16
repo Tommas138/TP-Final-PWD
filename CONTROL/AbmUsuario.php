@@ -1,6 +1,8 @@
 <?php
 
 include_once __DIR__ . '/../MODELO/Usuario.php';
+include_once __DIR__ . '/../CONTROL/AbmUsuarioRol.php';
+
 
 class AbmUsuario {
     //Funcion que busca un objeto
@@ -96,23 +98,27 @@ class AbmUsuario {
     //Definimos la funcion alta
     public function alta($param) {
         $resp = false;
+        $objUsuario = null;
         // $busquedaUsuario = ["usnombre" => $param['usnombre']];
         // $busquedaCorreo = ["usmail" => $param['usmail']];
+        // $existeUsuario = $this->buscar($busquedaUsuario);
+        // $existeCorreo = $this->buscar($busquedaCorreo);
+        
         $existeUsuario = $this->buscar($param);
-        $existeCorreo = $this->buscar($param);
-        if (($existeUsuario == null && $existeCorreo == null)) {
+
+        if (($existeUsuario == null)) {
             $objUsuario = $this->cargarObjeto($param);
             if ($objUsuario->insertar()) {
                 $resp = true;
             }
         }
         if ($resp) {
-            $usuarioNuevo = $this->buscar($param);
-            $idUsuario = $usuarioNuevo[0]->getIdUsuario();
-            $idRolUsuario = $param['idrol'];
-            $arrayRolUsuario = ["idrol" => $idRolUsuario, "idusuario" => $idUsuario];
-            $abmUsuarioRol = new abmUsuarioRol();
-            $abmUsuarioRol->alta($arrayRolUsuario);
+            // $usuarioNuevo = $this->buscar($param);
+            // $idUsuario = $usuarioNuevo[0]->getIdUsuario();
+            // $idRolUsuario = $param['idrol'];
+            // $arrayRolUsuario = ["idrol" => $idRolUsuario, "idusuario" => $idUsuario];
+            // $abmUsuarioRol = new abmUsuarioRol();
+            // $abmUsuarioRol->alta($arrayRolUsuario);
         }
         return $resp;
     }
