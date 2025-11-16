@@ -1,18 +1,21 @@
 <?php
 
 include_once __DIR__ . '/../MODELO/UsuarioRol.php';
+include_once __DIR__ . '/../MODELO/Rol.php';
+
 
 Class AbmUsuarioRol {
 
     private function cargarObjeto($param) {
         $obj = null;
-        if (array_key_exists('idusuario', $param) && array_key_exists('idrol', $param)) {
+        if (array_key_exists('idusuario', $param)) {
             $objUs = new Usuario();
             $objUs->setIdUsuario($param['idusuario']);
             $objUs->cargar();
 
             $objRol = new Rol();
-            $objRol->setIdRol($param['idrol']);
+            $objRol->alta();
+
             $objRol->cargar();
             
             $obj = new UsuarioRol();

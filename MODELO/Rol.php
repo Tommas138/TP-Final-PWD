@@ -1,5 +1,7 @@
 <?php
 
+include_once __DIR__ . '/./Usuario.php';
+
 Class Rol {
     private $idRol;
     private $rolDescripcion;
@@ -38,10 +40,31 @@ Class Rol {
         $this->setRolDescripcion($rolDescripcion);
     }
 
+    public function alta() {
+        $resp = false;
+        $base = new BaseDatos();
+        $sql = "INSERT INTO rol (rodescripcion) VALUES ('" . $this->getRolDescripcion() . "')";
+        if ($base->Iniciar()) {
+            if ($elid = $base->Ejecutar($sql)) {
+                $this->setIdRol($elid);
+                $resp = true;
+            } else {
+                $this->setMensajeOperacion("Rol->Insertar: " . $base->getError());
+            }
+        } else {
+            $this->setMensajeOperacion("Rol->Insertar: " . $base->getError());
+        }
+
+        return $resp;
+    }
+
+
     public function cargar() {
         $resp = false;
         $base = new BaseDatos();
         $sql = "SELECT * FROM rol where idrol = " . $this->getIdRol();
+        print_r($sql);
+
 
         if ($base->Iniciar()) {
             $res = $base->Ejecutar($sql);
@@ -49,7 +72,7 @@ Class Rol {
                 $row = $base->Registro();
                 $this->set(
                     $row['idrol'],
-                    $row['roldescripcion']
+                    $row['rodescripcion']
                 );
             }
         } else {

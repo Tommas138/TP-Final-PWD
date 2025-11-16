@@ -99,11 +99,6 @@ class AbmUsuario {
     public function alta($param) {
         $resp = false;
         $objUsuario = null;
-        // $busquedaUsuario = ["usnombre" => $param['usnombre']];
-        // $busquedaCorreo = ["usmail" => $param['usmail']];
-        // $existeUsuario = $this->buscar($busquedaUsuario);
-        // $existeCorreo = $this->buscar($busquedaCorreo);
-        
         $existeUsuario = $this->buscar($param);
 
         if (($existeUsuario == null)) {
@@ -113,12 +108,13 @@ class AbmUsuario {
             }
         }
         if ($resp) {
-            // $usuarioNuevo = $this->buscar($param);
-            // $idUsuario = $usuarioNuevo[0]->getIdUsuario();
-            // $idRolUsuario = $param['idrol'];
-            // $arrayRolUsuario = ["idrol" => $idRolUsuario, "idusuario" => $idUsuario];
-            // $abmUsuarioRol = new abmUsuarioRol();
-            // $abmUsuarioRol->alta($arrayRolUsuario);
+            $usuarioNuevo = $this->buscar($param);
+            print_r($usuarioNuevo);
+            $idUsuario = $usuarioNuevo->getIdUsuario();
+            $arrayRolUsuario = ["idusuario" => $idUsuario];
+            $abmUsuarioRol = new abmUsuarioRol();
+            $abmUsuarioRol->alta($arrayRolUsuario);
+            print_r("UsuarioRol asignado correctamente.");
         }
         return $resp;
     }

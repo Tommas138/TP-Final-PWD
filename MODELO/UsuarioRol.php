@@ -4,21 +4,29 @@ Class UsuarioRol {
     private $objRol;
     private $objUsuario;
     private $mensajeOperacion;
+    private $objID;
+
 
     public function __construct() {
         $this->objUsuario = "";
         $this->objRol = "";
+        $this->objID = "";
         $this->mensajeOperacion = "";
     }
 
     public function getObjUsuario() {
         return $this->objUsuario;
     }
+
     public function getObjRol() {
         return $this->objRol;
     }
     public function getMensajeOperacion() {
         return $this->mensajeOperacion;
+    }
+
+    public function getObjID() {
+        return $this->objID;
     }
 
     public function setObjUsuario($objUsuario) {
@@ -68,7 +76,9 @@ Class UsuarioRol {
     public function insertar() {
         $resp = false;
         $base = new BaseDatos();
-        $sql = "INSERT INTO usuariorol (idusuario, idrol) VALUES ('" . $this->getObjUsuario()->getIdUsuario() . "', '" . $this->getObjRol()->getIdRol() . "')";
+        $objUsuario = $this->getObjUsuario();
+        print_r($objUsuario);
+        $sql = "INSERT INTO usuariorol (idusuario, idrol) VALUES ( '" . $objUsuario->getIdUsuario() . "','" . $this->getObjRol()->getIdRol() . "')";
 
         if ($base->Iniciar()) {
             if ($base->Ejecutar($sql)) {
