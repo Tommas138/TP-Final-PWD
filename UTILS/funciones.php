@@ -3,6 +3,20 @@
 include_once __DIR__ . '/../CONTROL/AbmUsuario.php';
 include_once __DIR__ . '/../CONTROL/AbmRol.php';
 include_once __DIR__ . '/../CONTROL/Session.php';
+include_once __DIR__ . '/../CONTROL/AbmUsuarioRol.php';
+include_once __DIR__ . '/../CONTROL/ControlCambioRoles.php';
+include_once __DIR__ . '/../CONTROL/ControlIngresoCliente.php';
+include_once __DIR__ . '/../CONTROL/AbmCompra.php';
+include_once __DIR__ . '/../CONTROL/AbmCompraEstado.php';
+include_once __DIR__ . '/../CONTROL/AbmCompraEstadoTipo.php';
+include_once __DIR__ . '/../CONTROL/AbmCompraItem.php';
+include_once __DIR__ . '/../CONTROL/AbmMenu.php';
+include_once __DIR__ . '/../CONTROL/AbmMenuRol.php';
+include_once __DIR__ . '/../CONTROL/AbmProducto.php';
+include_once __DIR__ . '/../CONTROL/ControlCargaImagenes.php';
+include_once __DIR__ . '/../CONTROL/ControlIngresoAdmin.php';
+include_once __DIR__ . '/../CONTROL/ControlIngresoManagerDeposito.php';
+include_once __DIR__ . '/../CONTROL/ControlVerificarCarritoCliente.php';
 
 function verificarUsuario(Usuario $usuario) {
     $abmUsuario = new AbmUsuario();
@@ -74,3 +88,4 @@ function mostrarUsuarios($arregloUsuarios)
 
     return $tabla;
 }
+
