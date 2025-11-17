@@ -3,7 +3,7 @@ require_once __DIR__ . '/../../UTILS/funciones.php';
 
 $titulo = 'Dunder Mifflin Store';
 
-include_once '../estructura/header.php';
+include_once '../ACCION/ESTRUCTURA/reusables/header.php';
 $sesion = new Session();
 $abmProductos = new AbmProducto();
 $listaProductos = $abmProductos->buscar(null);
