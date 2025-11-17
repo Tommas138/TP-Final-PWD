@@ -1,6 +1,7 @@
-<?php
 
-$session = new Session();
+/**
+ * 
+ * $session = new Session();
 
 if ($session->activa()) {
     header('Location: ../VISTA/home/index.php?message=' . urlencode('Sesion no iniciada'));
@@ -45,3 +46,4 @@ if ($session->activa()) {
     header('Location: ../VISTA/home/index.php?message=' . urlencode("Cambio de rol con exito"));
     exit;
 }
+ */

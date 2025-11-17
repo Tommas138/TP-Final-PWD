@@ -63,8 +63,6 @@ Class Rol {
         $resp = false;
         $base = new BaseDatos();
         $sql = "SELECT * FROM rol where idrol = " . $this->getIdRol();
-        print_r($sql);
-
 
         if ($base->Iniciar()) {
             $res = $base->Ejecutar($sql);

@@ -1,10 +1,21 @@
-        body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+        
+        
+    body {
+        font-family: "Stack Sans Text", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 400;
+        font-style: normal;
+        min-height: 100vh;
+        background-color: #f5f5f5;
+    }
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+
+
+/* -------------------INICIAR SESION/REGISTRAR-------------------------- */
         .login-container {
             background: white;
             border-radius: 15px;
@@ -36,4 +47,72 @@
         .btn-login:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            -webkit-transform: translateY(-2px);
+            -moz-transform: translateY(-2px);
+            -ms-transform: translateY(-2px);
+            -o-transform: translateY(-2px);
         }
+
+
+/* -------------------------FIN INICIO SESION/REGISTRO------------------------------------------------*/
+
+/* -------------------------NAVBAR------------------------------------------------*/
+
+.navbar {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 0 3rem;
+    display: flex;
+    align-items: center;
+    height: 120px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+
+
+nav {
+  display: flex;
+  height: 100%;
+}
+
+
+/* animacion del logo  */
+
+a {
+  font-size: 2rem;
+  margin-left: 10px;
+  color:  white;
+  text-decoration: none;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(
+    	to right,
+	    #4c58a0,
+	    #283271 50%,
+	    white 50%);
+	    background-size: 200% 100%;
+	    background-position: 100%;
+}
+
+a:hover {
+  transition: all 0.3s cubic-bezier(0.000, 0.000, 0.230, 1);
+  background-position: 0%;
+  -webkit-transition: all 0.3s cubic-bezier(0.000, 0.000, 0.230, 1);
+  -moz-transition: all 0.3s cubic-bezier(0.000, 0.000, 0.230, 1);
+  -ms-transition: all 0.3s cubic-bezier(0.000, 0.000, 0.230, 1);
+  -o-transition: all 0.3s cubic-bezier(0.000, 0.000, 0.230, 1);
+}
+
+/* fin animacion de logo  */
+
+
+
+
+
+
+/* -------------------------FIN NAVBAR------------------------------------------------*/

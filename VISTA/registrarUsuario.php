@@ -117,7 +117,7 @@
             <hr class="my-4">
             <div class="text-center">
                 <p class="text-muted mb-0">¿Ya tienes cuenta?</p>
-                <a href="#" class="text-decoration-none fw-bold">Inicia sesión aquí</a>
+                <a href="../index.php" class="text-decoration-none fw-bold">Inicia sesión aquí</a>
             </div>
         </div>
     </div>
