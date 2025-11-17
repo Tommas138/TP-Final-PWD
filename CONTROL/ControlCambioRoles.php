@@ -1,9 +1,9 @@
 <?php
-
+include_once __DIR__ . '/./CONTROL/Session.php';
 $session = new Session();
 
 if ($session->activa()) {
-    header('Location: ../VISTA/home/index.php?message=' . urlencode('Sesion no iniciada'));
+    header('Location: ../../index.php?message=' . urlencode('Sesion no iniciada'));
     exit;
 } else {
     $datos = data_submitted();
@@ -42,6 +42,6 @@ if ($session->activa()) {
             break;
     }
 
-    header('Location: ../VISTA/home/index.php?message=' . urlencode("Cambio de rol con exito"));
+    header('Location: ../../index.php?message=' . urlencode("Cambio de rol con exito"));
     exit;
 }

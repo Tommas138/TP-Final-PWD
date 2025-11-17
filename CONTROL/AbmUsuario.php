@@ -112,7 +112,7 @@ class AbmUsuario {
             print_r($usuarioNuevo);
             $idUsuario = $usuarioNuevo->getIdUsuario();
             $arrayRolUsuario = ["idusuario" => $idUsuario];
-            $abmUsuarioRol = new abmUsuarioRol();
+            $abmUsuarioRol = new AbmUsuarioRol();
             $abmUsuarioRol->alta($arrayRolUsuario);
             print_r("UsuarioRol asignado correctamente.");
         }

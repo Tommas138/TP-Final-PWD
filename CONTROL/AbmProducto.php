@@ -72,7 +72,7 @@ Class AbmProducto {
                 $objProducto = $this->cargarObjeto($param);
                 if ($objProducto->modificar()) {
                     $resp = true;
-                    $controlCargaImagen = new controlCargaImagenes();
+                    $controlCargaImagen = new ControlCargaImagenes();
                     $nombreImagen = $param['files']['imagen']['name'];
                     if ($nombreImagen != "") {
                         $controlCargaImagen->eliminarImagen($param['idproducto']);
