@@ -84,7 +84,7 @@
             <p class="mb-0 mt-2">Completa el formulario para registrarte</p>
         </div>
         <div class="registro-body">
-            <form id="registroForm" action="./ACCION/insertarUsuario.php" method="POST">
+            <form id="registroForm" action="./acciones/insertarUsuario.php" method="POST">
                 <div class="mb-3">
                     <label for="usuario" class="form-label">
                         <i class="bi bi-person-badge me-1"></i>Nombre de Usuario
@@ -117,7 +117,7 @@
             <hr class="my-4">
             <div class="text-center">
                 <p class="text-muted mb-0">¿Ya tienes cuenta?</p>
-                <a href="#" class="text-decoration-none fw-bold">Inicia sesión aquí</a>
+                <a href="../index.php" class="text-decoration-none fw-bold">Inicia sesión aquí</a>
             </div>
         </div>
     </div>

@@ -6,7 +6,7 @@
     <title>Iniciar Sesión</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="./VISTA/ACCION/ESTRUCTURA/styles.css">
+    <link rel="stylesheet" href="./VISTA/acciones/ESTRUCTURA/styles.css">
 </head>
 <body>
     <div class="login-container">
@@ -15,7 +15,7 @@
             <h2 class="mt-3 mb-0">Iniciar Sesión</h2>
         </div>
         <div class="login-body">            
-            <form method="POST" action="./VISTA/ACCION/iniciarSesion.php">
+            <form method="POST" action="./VISTA/acciones/iniciarSesion.php">
                 <div class="mb-3">
                     <label for="usmail" class="form-label">
                         <i class="bi bi-person-fill me-1"></i>E-mail
