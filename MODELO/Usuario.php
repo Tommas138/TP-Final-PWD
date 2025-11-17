@@ -141,7 +141,7 @@ class Usuario {
     public function eliminar() {
         $resp = false;
         $base = new BaseDatos();
-        $sql = "DELETE FROM usuario WHERE idusuario=" . $this->getIdUSuario();
+        $sql = "DELETE FROM usuario WHERE idusuario=" . $this->getIdUsuario();
         if($base->Iniciar()) {
             if($base->Ejecutar($sql)) {
                 $resp = true;
@@ -173,6 +173,6 @@ class Usuario {
         } else {
             $this->setMensajeOperacion("usuario->seleccionar: " . $base->getError());
         }
-        return $obj;
+        return $arreglo;
     } 
 }
