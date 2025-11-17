@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="./VISTA/acciones/ESTRUCTURA/styles.css">
 </head>
-<body>
+<body class="d-flex align-items-center justify-content-center vh-100">
     <div class="login-container">
         <div class="login-header">
             <i class="bi bi-person-circle" style="font-size: 3rem;"></i>
