@@ -3,6 +3,7 @@
     include_once '../../CONTROL/AbmUsuario.php';
     include_once '../../UTILS/funciones.php';
     include_once '../../CONTROL/Session.php';
+    require_once __DIR__ . '/../../UTILS/funciones.php';
 
     $sesion = new Session();
     $usuario = data_submitted(); // Array ( [usnombre] => jeremias herrera [usmail] => emai123l@gmail.com [uspass] => 123 )
