@@ -1,8 +1,8 @@
 <?php
-include_once __DIR__ . '/./CONTROL/Session.php';
+include_once __DIR__ . '/Session.php';
 $session = new Session();
 
-if ($session->activa()) {
+if (!$session->activa()) {
     header('Location: ../../index.php?message=' . urlencode('Sesion no iniciada'));
     exit;
 } else {
@@ -45,4 +45,4 @@ if ($session->activa()) {
     header('Location: ../../index.php?message=' . urlencode("Cambio de rol con exito"));
     exit;
 }
- */
+

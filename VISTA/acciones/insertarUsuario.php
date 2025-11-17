@@ -1,19 +1,28 @@
 <?php 
 
-    include_once '../../CONTROL/AbmUsuario.php';
-    include_once '../../UTILS/funciones.php';
-    include_once '../../CONTROL/Session.php';
+    ini_set('display_errors', 1);
+    error_reporting(E_ALL);
+
     require_once __DIR__ . '/../../UTILS/funciones.php';
 
-    $sesion = new Session();
-    $usuario = data_submitted(); // Array ( [usnombre] => jeremias herrera [usmail] => emai123l@gmail.com [uspass] => 123 )
+    $usuario = data_submitted();
+    
+    // Validar que tenemos datos
+    if (empty($usuario['usnombre']) || empty($usuario['usmail']) || empty($usuario['uspass'])) {
+        echo "Error: Datos incompletos";
+        die();
+    }
+
     $abmUsuario = new AbmUsuario();
     $respuesta = $abmUsuario->alta($usuario);
 
     if($respuesta){
-        header("Location: ../home.php");
+        $sesion = new Session();
         $sesion->iniciar($usuario['usnombre'], $usuario['uspass']);
+        header("Location: ../home/index.php");
+        exit;
     }else{
-        header("Location: ../registrarUsuario.php?error=1");
+        echo "Error al registrar usuario";
+        die();
     }
 ?>

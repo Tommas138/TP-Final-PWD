@@ -10,7 +10,7 @@ class AbmUsuario {
         $where = "true";
         if ($param != null) {
             if (isset($param['idusuario'])) {
-                $where .= " and idusuario ='" . $param['usnombre'] . "'";
+                $where .= " and idusuario ='" . $param['idusuario'] . "'";
             }
             if (isset($param['usnombre'])) {
                 $where .= " and usnombre ='" . $param['usnombre'] . "'";
@@ -103,19 +103,19 @@ class AbmUsuario {
 
         if (($existeUsuario == null)) {
             $objUsuario = $this->cargarObjeto($param);
-            if ($objUsuario->insertar()) {
+            
+            if ($objUsuario && $objUsuario->insertar()) {
                 $resp = true;
+                $idUsuario = $objUsuario->getIdUsuario();
+                
+                if ($idUsuario) {
+                    $arrayRolUsuario = ["idusuario" => $idUsuario];
+                    $abmUsuarioRol = new AbmUsuarioRol();
+                    $abmUsuarioRol->alta($arrayRolUsuario);
+                }
             }
         }
-        if ($resp) {
-            $usuarioNuevo = $this->buscar($param);
-            print_r($usuarioNuevo);
-            $idUsuario = $usuarioNuevo->getIdUsuario();
-            $arrayRolUsuario = ["idusuario" => $idUsuario];
-            $abmUsuarioRol = new AbmUsuarioRol();
-            $abmUsuarioRol->alta($arrayRolUsuario);
-            print_r("UsuarioRol asignado correctamente.");
-        }
+        
         return $resp;
     }
 

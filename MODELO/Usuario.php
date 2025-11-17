@@ -89,10 +89,14 @@ class Usuario {
     public function insertar() {
         $resp = false;
         $base = new BaseDatos();
-        $sql = "INSERT INTO usuario (usnombre, uspass, usmail, usdeshabilitado) VALUES ('" . $this->getUsNombre() . "','" . $this->getUsPass() . "','" . $this->getUsMail() .  "','0000-00-00 00:00:00');";
+        // Escapar valores para evitar SQL injection
+        $usnombre = addslashes($this->getUsNombre());
+        $uspass = addslashes($this->getUsPass());
+        $usmail = addslashes($this->getUsMail());
+        $sql = "INSERT INTO usuario (usnombre, uspass, usmail, usdeshabilitado) VALUES ('" . $usnombre . "','" . $uspass . "','" . $usmail .  "','0000-00-00 00:00:00');";
         if($base->Iniciar()) {
             if($elid = $base->Ejecutar($sql)) {
-                // $this->setIdUsuario($elid);
+                $this->setIdUsuario($elid);
                 $resp = true;
             } else {
                 $this->setMensajeOperacion("usuario->insertar: " . $base->getError());
