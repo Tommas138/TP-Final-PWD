@@ -98,7 +98,11 @@ class AbmUsuario {
         return $resp;
     }
 
-    //Definimos la funcion alta
+    /**
+     * Carga un nuevo usuario en la base de datos e inicia su sesión
+     * @param array datos de usuario
+     * @return bool éxito o fracaso
+     */
     public function alta($param) {
         $resp = false;
         $objUsuario = null;
@@ -115,9 +119,17 @@ class AbmUsuario {
                     $arrayRolUsuario = ["idusuario" => $idUsuario];
                     $abmUsuarioRol = new AbmUsuarioRol();
                     $abmUsuarioRol->alta($arrayRolUsuario);
+                    $sesion = new Session();
+                    $sesion->iniciar($objUsuario->getIdUsuario(), $objUsuario->getUsNombre(), $objUsuario->getUsPass());
                 }
             }
+        }else{
+            $objUsuario = $this->cargarObjeto($param);
+            $sesion = new Session();
+            $sesion->iniciar($objUsuario->getIdUsuario(), $objUsuario->getUsNombre(), $objUsuario->getUsPass());
         }
+
+
         
         return $resp;
     }

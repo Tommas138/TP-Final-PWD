@@ -42,12 +42,11 @@ Class AbmUsuarioRol {
     }
 
     public function alta($param) {
-        $resp = false;
+        $obj = null;
         $obj = $this->cargarObjeto($param);
-        if ($obj != null && $obj->insertar()) {
-            $resp = true;
-        }
-        return $resp;
+        $obj->insertar();
+
+        return $obj;
     }
 
     public function baja($param) {
@@ -84,8 +83,8 @@ Class AbmUsuarioRol {
                 $where .= " AND idrol = " . $param['idrol'];
         }
         $usuarioRol = new UsuarioRol();
-        $usuarioRol->set($param['idusuario'], $param['idrol']);
         $arreglo = $usuarioRol->listar($where);
+        $usuarioRol->set($arreglo[0]->getObjUsuario()->getIDUsuario(), $arreglo[0]->getObjRol()->getIdRol());
         return $arreglo;
     }
 

@@ -13,17 +13,23 @@ class Session
     // Getters
     public function getIdUsuario()
     {
-        return $_SESSION['idusuario'];
+        return $_SESSION['idusuario'] ?? null;
     }
+
+    public function getIDRol()
+    {
+        return $_SESSION['idrol'] ?? null;
+    }
+
 
     public function getUsNombre()
     {
-        return $_SESSION['usnombre'];
+        return $_SESSION['usnombre'] ?? null;
     }
 
     public function getUsPass()
     {
-        return $_SESSION['uspass'];
+        return $_SESSION['uspass'] ?? null;
     }
 
     public function getUsRoles()
@@ -52,31 +58,36 @@ class Session
         $_SESSION['roles'] = $roles;
     }
 
+    public function mostrarDetallesSesion()
+    {
+        echo "<pre>";
+        print_r($_SESSION);
+        echo "</pre>";
+    }
+
 
     // Metodos
-    public function iniciar($nombreUsuario, $passUsuario)
+
+    /**
+     * Inicia la sesión del usuario con los datos proporcionados y asigna sus roles
+     * @param int $id ID del usuario
+     * @param string $nombre Nombre del usuario
+     * @param string $pass Contraseña del usuario (se encripta con MD5)
+     */
+    public function iniciar($id, $nombre, $pass)
     {
-        $passEncriptada = md5($passUsuario);
-        $this->setUsNombre($nombreUsuario);
-        $this->setUsPass($passEncriptada);
+        $abmUsuarioRol = new AbmUsuarioRol();
+
+        $this->setUsNombre($nombre);
+        $this->setUsPass(md5($pass));
         
-        // Buscar el usuario en la base de datos para obtener su ID y roles
-        $abmUsuario = new AbmUsuario();
-        $where = array('usnombre' => $nombreUsuario, 'uspass' => $passEncriptada);
-        $listaUsuarios = $abmUsuario->buscar($where);
+        $idRol = $abmUsuarioRol->buscar(['idusuario' => $id]);
         
-        if ($listaUsuarios != null) {
-            $usuario = $listaUsuarios;
-            $this->setIdUsuario($usuario->getIdUsuario());
+        if ($id && $nombre && $pass) {
+            $this->setIdUsuario($id);
             
             // Obtener roles del usuario
-            $abmUsuarioRol = new AbmUsuarioRol();
-            $arrayBusqueda = ["idusuario" => $usuario->getIdUsuario()];
-            $arrayUsuarioRoles = $abmUsuarioRol->buscar($arrayBusqueda);
-            
-            if (count($arrayUsuarioRoles) > 0) {
-                $this->setUsRoles(array($arrayUsuarioRoles[0]->getObjRol()->getIdRol()));
-            }
+            $this->setUsRoles($idRol);
         }
     }
 
@@ -118,9 +129,7 @@ class Session
             $arrayBusqueda = ["idusuario" => $listaUsuarios[0]->getIdUsuario()];
             $arrayUsuarioRoles = $abmUsuarioRol->buscar($arrayBusqueda);
 
-            if (count($arrayUsuarioRoles) > 0) {
-                $this->setUsRoles(array($arrayUsuarioRoles[0]->getObjRol()->getIdRol()));
-            }
+            $this->setUsRoles(array($arrayUsuarioRoles[0]->getObjRol()->getIdRol()));
         }
 
         return array($inicia, $error);
@@ -149,14 +158,10 @@ class Session
     public function getUsuario()
     {
         $abmUsuario = new AbmUsuario();
-        $where = ['idusuario' => $_SESSION['idusuario']];
+        $where = ['idusuario' => $this->getIdUsuario()];
         $listaUsuarios = $abmUsuario->buscar($where);
 
-        if ($listaUsuarios >= 1) {
-            $datosUsuario = $listaUsuarios[0];
-        }
-
-        return $datosUsuario;
+        return $where;
     }
 
 

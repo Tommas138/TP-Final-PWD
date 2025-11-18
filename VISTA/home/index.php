@@ -3,8 +3,8 @@ require_once __DIR__ . '/../../UTILS/funciones.php';
 
 $titulo = 'Dunder Mifflin Store';
 
-include_once '../ACCION/ESTRUCTURA/reusables/header.php';
 $sesion = new Session();
+
 $abmProductos = new AbmProducto();
 $listaProductos = $abmProductos->buscar(null);
 shuffle($listaProductos);
@@ -23,21 +23,23 @@ shuffle($listaProductos);
           referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="../acciones/ESTRUCTURA/styles.css">
 </head>
-<!-- <header class="bg-dark py-5">
-    <div class="container px-4 px-lg-5 my-5">
-        <div class="text-center text-white">
-            <h1 class="display-4 fw-bolder">Tienda de suplementos</h1>
-            <p class="lead fw-normal text-white-50 mb-0">
-            <h4><i class="fas fa-car-crash"></i></h4>
-            </p>
+<nav class="navbar navbar-expand-custom navbar-mainbg">
+
+        <a class="navbar-brand navbar-logo" href="#">Dunder Mifflin Store</a>
+        <div class="bg-primary text-white p-2 rounded">
+                <form action="../acciones/cerrarSesion.php">
+                        <button type="submit" class="btn btn-sm">
+                                Cerrar Sesión
+                        </button>
+                </form>
         </div>
-    </div>
-</header> -->
+</nav>
 <!-- Section-->
 <section class="py-2">
     <div class="container px-4 px-lg-5 mt-5">
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
             <?php
+            print_r($sesion->mostrarDetallesSesion());
             if (count($listaProductos) > 0) {
                 $max = min(count($listaProductos), 8);
                 for ($cont_prod = 0; $cont_prod < $max; $cont_prod++) {
@@ -67,9 +69,8 @@ shuffle($listaProductos);
                                     </div>
                                 </div>
                                 <?php
-                                if ($sesion->activa()) {
-                                    foreach ($sesion->getUsRoles() as $rol) {
-                                        
+                                if ($sesion->activa() && $sesion->getIDRol() == 1) {
+                                    // foreach ($sesion->getUsRoles() as $rol) {
                                 ?>
                                             <div class='card-footer p-4 pt-0 border-top-0 bg-transparent'>
                                                 <div class='text-center'>
@@ -83,8 +84,10 @@ shuffle($listaProductos);
                                             </div>
                                     <?php
                                         
-                                    }
+                                    // }
                                 } else {
+                                    print_r($sesion->getIDRol() . "ID ROL");
+
                                     ?>
                                     <div class='card-footer p-4 pt-0 border-top-0 bg-transparent'>
                                         <div class='text-center'><a class='btn btn-outline-dark mt-auto' href='../acciones/iniciarSesion.php'>Agregar al carrito</a></div>

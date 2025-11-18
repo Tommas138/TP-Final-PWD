@@ -16,9 +16,10 @@
     $abmUsuario = new AbmUsuario();
     $respuesta = $abmUsuario->alta($usuario);
 
+    print_r($respuesta);
+
+
     if($respuesta){
-        $sesion = new Session();
-        $sesion->iniciar($usuario['usnombre'], $usuario['uspass']);
         header("Location: ../home/index.php");
         exit;
     }else{
