@@ -84,7 +84,7 @@ Class AbmUsuarioRol {
         }
         $usuarioRol = new UsuarioRol();
         $arreglo = $usuarioRol->listar($where);
-        $usuarioRol->set($arreglo[0]->getObjUsuario()->getIDUsuario(), $arreglo[0]->getObjRol()->getIdRol());
+        $usuarioRol->set($arreglo[0]->getObjUsuario()->getIdUsuario(), $arreglo[0]->getObjRol());
         return $arreglo;
     }
 
