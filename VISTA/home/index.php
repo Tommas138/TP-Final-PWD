@@ -11,7 +11,19 @@ shuffle($listaProductos);
 
 ?>
 <!-- Header-->
-<header class="bg-dark py-5">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title><?php echo $titulo; ?></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
+          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZmCNUxC+GQYUQDFN1VqM7uH60lZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" 
+          referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../acciones/ESTRUCTURA/styles.css">
+</head>
+<!-- <header class="bg-dark py-5">
     <div class="container px-4 px-lg-5 my-5">
         <div class="text-center text-white">
             <h1 class="display-4 fw-bolder">Tienda de suplementos</h1>
@@ -20,7 +32,7 @@ shuffle($listaProductos);
             </p>
         </div>
     </div>
-</header>
+</header> -->
 <!-- Section-->
 <section class="py-2">
     <div class="container px-4 px-lg-5 mt-5">
