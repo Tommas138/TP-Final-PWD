@@ -24,17 +24,6 @@ shuffle($listaProductos);
           referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="../acciones/ESTRUCTURA/styles.css">
 </head>
-<nav class="navbar navbar-expand-custom navbar-mainbg">
-
-        <a class="navbar-brand navbar-logo" href="#">Dunder Mifflin Store</a>
-        <div class="bg-primary text-white p-2 rounded">
-                <form action="../acciones/cerrarSesion.php">
-                        <button type="submit" class="btn btn-sm">
-                                Cerrar Sesión
-                        </button>
-                </form>
-        </div>
-</nav>
 <!-- Section-->
 <section class="py-2">
     <div class="container px-4 px-lg-5 mt-5">
@@ -42,33 +31,45 @@ shuffle($listaProductos);
             <?php
             print_r($sesion->mostrarDetallesSesion());
             if (count($listaProductos) > 0) {
-                $max = min(count($listaProductos), 8);
+                $max = min(count($listaProductos), 4);
                 for ($cont_prod = 0; $cont_prod < $max; $cont_prod++) {
                     $producto = $listaProductos[$cont_prod];
-                    $idHash = md5($producto->getIdProducto());
-                    $idHashImg = strtolower($idHash);
 
-                                 ?>
+                    ?>
 
-                                <?php
-                                    $imgRel = '../../uploads/img/' . $idHashImg . '.jpeg';
-                                    $imgAbs = __DIR__ . '/../../uploads/img/' . $idHashImg . '.jpeg';
-                                    if (!file_exists($imgAbs)) {
-                                        // fallback to generic existing image
-                                        $imgRel = '../../uploads/img/producto1.jpg';
-                                    }
-                                ?>
-                                <img class='card-img-top' src='<?php echo $imgRel; ?>' alt='Imagen de un suplemento' />
+                    <?php
+                    $imgWebBase = '../../uploads/img/';
+                    $imgCarpeta = realpath(__DIR__ . '/../../uploads/img/');
+                    $imgSrc = $imgWebBase . 'default.jpg';
+                    $idPlain = 'producto' . intval($producto->getIdProducto());
+                    $idHashImg = strtolower(md5($producto->getIdProducto()));
+                    if ($imgCarpeta) {
+                        $exts = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
+                        foreach ($exts as $ext) {
+                            $candidateHash = $imgCarpeta . DIRECTORY_SEPARATOR . $idHashImg . '.' . $ext;
+                            $candidatePlain = $imgCarpeta . DIRECTORY_SEPARATOR . $idPlain . '.' . $ext;
+                            if (file_exists($candidateHash)) {
+                                $imgSrc = $imgWebBase . $idHashImg . '.' . $ext;
+                                break;
+                            }
+                            if (file_exists($candidatePlain)) {
+                                $imgSrc = $imgWebBase . $idPlain . '.' . $ext;
+                                break;
+                            }
+                        }
+                    }
+                    ?>
+                    <img class='card-img-top' src='<?php echo $imgSrc ?>' alt='<?php echo htmlspecialchars($producto->getProNombre(), ENT_QUOTES) ?>' />
 
-                                <div class='card-body p-4'>
-                                    <div class='text-center'>
-                                        <h5 class='fw-bolder'><?php echo $producto->getProNombre() ?></h5>
-                                        <p><?php echo $producto->getProDetalle() ?></p>
-                                            <span>$<?php echo $producto->getProPrecio() ?></span>
-                                        <?php
-                                         ?>
-                                    </div>
-                                </div>
+                    <div class='card-body p-4'>
+                    <div class='text-center'>
+                    <h5 class='fw-bolder'><?php echo $producto->getProNombre() ?></h5>
+                    <p><?php echo $producto->getProDetalle() ?></p>
+                    <span>$<?php echo $producto->getProPrecio() ?></span>
+                    <?php
+                     ?>
+                    </div>
+                    </div>
                                 <?php
                                 if ($sesion->activa() && $sesion->getIDRol() == 1) {
                                     // foreach ($sesion->getUsRoles() as $rol) {
@@ -98,10 +99,10 @@ shuffle($listaProductos);
                                 ?>
                             </div>
                         </div>
-            <?php
-                    }
+                <?php
                 }
-             ?>
+            }
+            ?>
         </div>
     </div>
 </section>
