@@ -54,7 +54,7 @@ shuffle($listaProductos);
                                     $imgAbs = __DIR__ . '/../../uploads/img/' . $idHashImg . '.jpeg';
                                     if (!file_exists($imgAbs)) {
                                         // fallback to generic existing image
-                                        $imgRel = '../../uploads/img/image.jpeg';
+                                        $imgRel = '../../uploads/img/producto1.jpg';
                                     }
                                 ?>
                                 <img class='card-img-top' src='<?php echo $imgRel; ?>' alt='Imagen de un suplemento' />
