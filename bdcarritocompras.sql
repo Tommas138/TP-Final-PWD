@@ -139,6 +139,32 @@ CREATE TABLE `producto` (
     `proprecio` decimal(11,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `producto`
+--
+
+INSERT INTO `producto` (`idproducto`, `pronombre`, `prodetalle`, `procantstock`, `proprecio`) VALUES
+(1, 'Creatina Star', 'Creatina Monohidrato Marca Star creapure', 10, 28470),
+(2, 'Creatina Protein', 'Creatina Monohidrato marca Protein Project', 5, 20762),
+(3, 'Creatina Animal', 'Creatina Monohidrato marca Animal', 3, 57070),
+(4, 'Creatina BSN', 'Creatina Monohidrato marca BSN', 14, 54470),
+(5, 'Creatina Optimum', 'Creatina Monohidrato marca Optimum Nutrion', 2, 51510),
+(6, 'Creatina Gold', 'Creatina Monohidrato marca Gold', 15, 40365),
+(7, 'Creatina Ultimate', 'Creatina Monohidrato marca Ultimate Nutrition', 7, 46313),
+(8, 'Whey Proteina', 'Proteina marca Star', 8, 57070),
+(9, 'Best Whey', 'Proteina marca Atlhetica nutrition', 9, 77870),
+(10, 'Syntha6', 'Proteina marca BSN', 6, 174624),
+(11, 'Proteina Vegetal', 'Proteina marca gold', 10, 49078),
+(12, 'Barra Proteica QLP', 'Barra de proteina marca Que Lo Paleo pack x12 ', 10, 64870),
+(13, 'Pancakes Proteicos', 'Pancakes marca Granger', 19, 16770),
+(14, 'Omelettes proteicos', 'Omelettes Proteicos marca Granger', 18, 17278),
+(15, 'Barra Proteica Fuerza', 'Barra Proteica marca Mole pack x12', 14, 20670),
+(16, 'Gelatina', 'Gelatina marca Granger', 11, 10724),
+(17, 'Proteina Woman', 'Proteina marca pampita', 13, 38900),
+(18, 'Barra Proteica Placer', 'Barra Proteica marca Mole pack x12', 12, 19370),
+(19, 'Barra Proteica Energia', 'Barra Proteica marca Mole pack x12', 20, 19370),
+(20, 'Barra Proteica Brava', 'Barra Proteica marca BRAVA* pack x12', 22, 25900);
+
 -- --------------------------------------------------------
 
 --

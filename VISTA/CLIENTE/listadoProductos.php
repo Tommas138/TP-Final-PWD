@@ -66,23 +66,7 @@ $listaProductos = $abmProductos->buscar(null);
                                     </div>
                                     <?php
                                     if ($sesion->activa()) {
-                                        foreach ($sesion->getUsRoles() as $rol) {
-                                            if ($rol == 3) {
-                                    ?>
-                                                <div class='card-footer p-4 pt-0 border-top-0 bg-transparent'>
-                                                    <div class='text-center'>
-                                                        <form method='post' action='../acciones/accionAgregarItemCarrito.php'>
-                                                            <td class='text-center'>
-                                                                <input name='codigoProducto' id='codigoProducto' type='hidden' value='<?php echo $producto->getIdProducto() ?>'>
-                                                                <button class='btn btn-outline-dark mt-auto' type='submit' role='button'>Agregar al carrito</button>
-                                                            </td>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                        <?php
-                                            }
-                                        }
-                                    } else {
+                                       
                                         ?>
                                         <div class='card-footer p-4 pt-0 border-top-0 bg-transparent'>
                                             <div class='text-center'><a class='btn btn-outline-dark mt-auto' href='../login/login.php'>Agregar al carrito</a></div>
