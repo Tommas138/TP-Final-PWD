@@ -10,7 +10,7 @@
     $respuesta = $abmUsuario->buscar($usuario);
 
     if($respuesta){
-        header("Location: ../home.php");
+        header("Location: ../home/index.php");
         $sesion->iniciar($usuario['usnombre'], $usuario['uspass']);
     }else{
         header("Location: ../../index.php");

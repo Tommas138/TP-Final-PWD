@@ -27,14 +27,23 @@ shuffle($listaProductos);
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
             <?php
             if (count($listaProductos) > 0) {
-                for ($cont_prod = 0; $cont_prod <= 7; $cont_prod++) {
+                $max = min(count($listaProductos), 8);
+                for ($cont_prod = 0; $cont_prod < $max; $cont_prod++) {
                     $producto = $listaProductos[$cont_prod];
                     $idHash = md5($producto->getIdProducto());
                     $idHashImg = strtolower($idHash);
 
                                  ?>
 
-                                <img class='card-img-top' src='../../uploads/img/<?php echo $idHashImg . ".jpeg"; ?>' alt='Imagen de una autoparte' />
+                                <?php
+                                    $imgRel = '../../uploads/img/' . $idHashImg . '.jpeg';
+                                    $imgAbs = __DIR__ . '/../../uploads/img/' . $idHashImg . '.jpeg';
+                                    if (!file_exists($imgAbs)) {
+                                        // fallback to generic existing image
+                                        $imgRel = '../../uploads/img/image.jpeg';
+                                    }
+                                ?>
+                                <img class='card-img-top' src='<?php echo $imgRel; ?>' alt='Imagen de un suplemento' />
 
                                 <div class='card-body p-4'>
                                     <div class='text-center'>
@@ -83,6 +92,6 @@ shuffle($listaProductos);
 
 <?php
 
-include_once '../estructura/footer.php';
+//include_once '../estructura/footer.php';
 
 ?>

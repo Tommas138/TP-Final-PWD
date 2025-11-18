@@ -1,5 +1,5 @@
 <?php
-
+require_once __DIR__ . '../../MODELO/Producto.php';
 Class AbmProducto {
 
     private function cargarObjeto($param) {
@@ -11,6 +11,7 @@ Class AbmProducto {
             $param["pronombre"],
             $param['prodetalle'],
             $param['procantstock'],
+            $param['proprecio']
         );
         }
         return $obj;
@@ -110,6 +111,8 @@ Class AbmProducto {
                 $where .= " AND prodetalle = '" . $param['prodetalle'] . "'";
             if (isset($param['procantstock']))
                 $where .= " AND procantstock = '" . $param['procantstock'] . "'";
+             if (isset($param['proprecio']))
+                $where .= " AND proprecio = '" . $param['proprecio'] . "'";
         }
         $objProd = new Producto();
         $arreglo = $objProd->listar($where);

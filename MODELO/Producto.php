@@ -4,32 +4,23 @@ Class Producto {
     private $pronombre;
     private $prodetalle;
     private $procantstock;
+    private $proprecio;
+    private $prodescuento;
     private $mensajeOperacion;
     public function __construct(){
-
+        $this->idproducto = null;
+        $this->pronombre = "";
+        $this->prodetalle = "";
+        $this->procantstock = 0;
+        $this->proprecio = 0.0;
+        $this->prodescuento = 0;
+        $this->mensajeOperacion = "";
     }
 
-    /*
-    public function estado($param = "") {
-        $resp = false;
-        $base = new BaseDatos();
-        $sql = "UPDATE producto SET prodeshabilitado='" . $param . "'WHERE idproducto=" . $this->getIdProducto();
-        if($base->Iniciar()) {
-            if($base->Ejecutar($sql)) {
-                $resp = true;
-            } else {
-                $this->setMensajeOperacion("producto->estado: " . $base->getError());
-            }
-        } else {
-            $this->setMensajeOperacion("producto->estado: " . $base->getError());
-        }
-        return $resp;
-    }
-*/
     public function insertar() {
         $resp = false;
         $base = new BaseDatos();
-        $sql = "INSERT INTO producto (idproducto, pronombre, prodetalle, procantstock) VALUES ('" . $this->getIdProducto() . "','" . $this->getPronombre() . "','" . $this->getProdetalle() . "','" . $this->getProcantstock();
+        $sql = "INSERT INTO producto (pronombre, prodetalle, procantstock, proprecio) VALUES ('" . addslashes($this->getPronombre()) . "','" . addslashes($this->getProdetalle()) . "','" . intval($this->getProcantstock()) . "','" . floatval($this->getProPrecio()). "')";
         if($base->Iniciar()) {
             if($elid = $base->Ejecutar($sql)) {
                 $this->setIdProducto($elid);
@@ -46,7 +37,7 @@ Class Producto {
     public function modificar() {
         $resp = false;
         $base = new BaseDatos();
-        $sql = "UPDATE producto SET idproducto= '" . $this->getIdProducto() . "', pronombre='" . $this->getPronombre() . "', prodetalle='" . $this->getProdetalle() . "', procantstock= '" . $this->getProcantstock();
+        $sql = "UPDATE producto SET pronombre='" . addslashes($this->getPronombre()) . "', prodetalle='" . addslashes($this->getProdetalle()) . "', procantstock='" . intval($this->getProcantstock()) . "', proprecio='" . floatval($this->getProPrecio()) . "' WHERE idproducto=" . intval($this->getIdProducto());
         if($base->Iniciar()) {
             if ($base->Ejecutar($sql)) {
                 $resp = true;
@@ -91,11 +82,12 @@ Class Producto {
         return $resp;
     }
 
-    public function set($idproducto, $pronombre, $prodetalle, $procantstock) {
+    public function set($idproducto, $pronombre, $prodetalle, $procantstock, $proprecio) {
         $this->idproducto = $idproducto;
         $this->pronombre = $pronombre;
         $this->prodetalle = $prodetalle;
         $this->procantstock = $procantstock;
+        $this->proprecio = $proprecio;
     }
 
     // getters y setters individuales
@@ -127,6 +119,21 @@ Class Producto {
         $this->procantstock = $procantstock;
     }
 
+    public function getProPrecio() {
+        return $this->proprecio;
+    }
+    public function setProPrecio($precio) {
+        $this->proprecio = $precio;
+    }
+
+    public function getProDescuento() {
+        return $this->prodescuento;
+    }
+    public function setProDescuento($descuento) {
+        $this->prodescuento = $descuento;
+    }
+
+
     public function setMensajeOperacion($mensajeOperacion){
         $this->mensajeOperacion = $mensajeOperacion;
     }
@@ -134,7 +141,7 @@ Class Producto {
     public function listar($param = "") {
         $arreglo = array();
         $base = new BaseDatos();
-        $sql = "SELECT * FROM menu ";
+        $sql = "SELECT * FROM producto ";
         if ($param != "") {
             $sql .= 'WHERE ' . $param;
         }
@@ -142,7 +149,14 @@ Class Producto {
         if ($res > 0) {
             while ($row = $base->Registro()) {
                 $obj = new Producto();
-                $obj->set($row['idproducto'], $row['pronombre'], $row['prodetalle'], $row["procantstock"]);
+                // Set fields; handle missing columns safely
+                $id = isset($row['idproducto']) ? $row['idproducto'] : null;
+                $nombre = isset($row['pronombre']) ? $row['pronombre'] : '';
+                $detalle = isset($row['prodetalle']) ? $row['prodetalle'] : '';
+                $stock = isset($row['procantstock']) ? $row['procantstock'] : 0;
+                $precio = isset($row['proprecio']) ? $row['proprecio'] : 0.0;
+                $obj->set($id, $nombre, $detalle, $stock, $precio);
+                $obj->setProPrecio($precio);
                 array_push($arreglo, $obj);
             }
         } else {
