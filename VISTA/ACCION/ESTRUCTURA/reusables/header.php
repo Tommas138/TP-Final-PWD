@@ -16,8 +16,9 @@ $enlace = "";
 <nav class="navbar navbar-expand-custom navbar-mainbg">
 
         <a class="navbar-brand navbar-logo" href="#">Dunder Mifflin Store</a>
+                        <a class="navbar-brand navbar-logo" href="../../VISTA/home/index.php">Inicio</a>
         <div class="bg-primary text-white p-2 rounded">
-                <form action="../../../acciones/cerrarSesion.php">
+                <form action="../../VISTA/acciones/cerrarSesion.php">
                         <button type="submit" class="btn btn-sm">
                                 Cerrar Sesión
                         </button>

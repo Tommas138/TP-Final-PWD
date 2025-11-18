@@ -25,19 +25,21 @@ shuffle($listaProductos);
     <link rel="stylesheet" href="../acciones/ESTRUCTURA/styles.css">
 </head>
 <!-- Section-->
+ <div class="container mt-2">
 <section class="py-2">
-    <div class="container px-4 px-lg-5 mt-5">
-        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+
             <?php
-            print_r($sesion->mostrarDetallesSesion());
+            //print_r($sesion->mostrarDetallesSesion());
             if (count($listaProductos) > 0) {
                 $max = min(count($listaProductos), 4);
                 for ($cont_prod = 0; $cont_prod < $max; $cont_prod++) {
                     $producto = $listaProductos[$cont_prod];
-
                     ?>
-
-                    <?php
+                    
+                    <div class='row mb-4 justify-content-center'>
+                        <br><Br>
+                                <div class='card shadow h-60 w-50  align-items-center justify-content-center'>
+                                    <?php
                     $imgWebBase = '../../uploads/img/';
                     $imgCarpeta = realpath(__DIR__ . '/../../uploads/img/');
                     $imgSrc = $imgWebBase . 'default.jpg';
@@ -59,7 +61,7 @@ shuffle($listaProductos);
                         }
                     }
                     ?>
-                    <img class='card-img-top' src='<?php echo $imgSrc ?>' alt='<?php echo htmlspecialchars($producto->getProNombre(), ENT_QUOTES) ?>' />
+                    <img class='card shadow-sm ' style="width: 300px; height: 300px;" src='<?php echo $imgSrc ?>' alt='<?php echo htmlspecialchars($producto->getProNombre(), ENT_QUOTES) ?>' />
 
                     <div class='card-body p-4'>
                     <div class='text-center'>
@@ -98,14 +100,15 @@ shuffle($listaProductos);
                                 }
                                 ?>
                             </div>
+                            </div>
+                            </div>
                         </div>
                 <?php
                 }
             }
             ?>
-        </div>
-    </div>
 </section>
+</div>
 
 <?php
 
