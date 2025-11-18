@@ -62,6 +62,7 @@ $listaProductos = $abmProductos->buscar(null);
                                         <div class='text-center'>
                                             <h5 class='fw-bolder'><?php echo $producto->getProNombre() ?></h5>
                                             <p><?php echo $producto->getProDetalle() ?></p>
+                                            <span>$<?php echo $producto->getProPrecio() ?></span>
                                         </div>
                                     </div>
                                     <?php
