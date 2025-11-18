@@ -90,7 +90,7 @@ shuffle($listaProductos);
                                         
                                     // }
                                 } else {
-                                    print_r($sesion->getIDRol() . "ID ROL");
+                                    //print_r($sesion->getIDRol() . "ID ROL");
 
                                     ?>
                                     <div class='card-footer p-4 pt-0 border-top-0 bg-transparent'>
@@ -99,9 +99,11 @@ shuffle($listaProductos);
                                 <?php
                                 }
                                 ?>
+                                
                             </div>
                             </div>
                             </div>
+                            
                         </div>
                 <?php
                 }

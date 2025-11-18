@@ -7,6 +7,8 @@ $sesion = new Session();
 $abmProductos = new AbmProducto();
 $listaProductos = $abmProductos->buscar(null);
 ?>
+
+
 <header class="bg-dark py-1">
     <div class="container px-4 px-lg-5 my-2">
         <div class="text-center text-white">
@@ -14,7 +16,8 @@ $listaProductos = $abmProductos->buscar(null);
         </div>
     </div>
 </header>
-<div class="container mt-2">
+<body style="background-color: #858c96ff;">
+<div class="container mt-2" >
     <section class="py-2">
         <div class="container px-4 px-lg-5 mt-5">
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
@@ -26,8 +29,8 @@ $listaProductos = $abmProductos->buscar(null);
                         $idHashImg = strtolower($idHash);
                         $deshabilitado = isset($producto->proDeshabilitado) ? $producto->proDeshabilitado : '0000-00-00 00:00:00'; //Defino la variable debido a que tira error
                         if ($deshabilitado == "0000-00-00 00:00:00" && $producto->getProCantStock() > 0) { ?>
-                            <div class='col mb-5'>
-                                <div class='card shadow h-100'>
+                            <div class='col mb-5' >
+                                <div class='card shadow h-100' style="background-color: #858c96ff;;">
                                     <?php
                                     //Los ifs siguientes son para los carteles avisando de las ultimas unidades
                                     if ($producto->getProCantStock() == 1) { ?>
@@ -58,7 +61,7 @@ $listaProductos = $abmProductos->buscar(null);
 
                                     <img class='card-img-top' src='<?php echo $imgSrc ?>' alt='<?php echo htmlspecialchars($producto->getProNombre(), ENT_QUOTES) ?>' />
 
-                                    <div class='card-body p-4'>
+                                    <div class='card-body p-4' >
                                         <div class='text-center'>
                                             <h5 class='fw-bolder'><?php echo $producto->getProNombre() ?></h5>
                                             <p><?php echo $producto->getProDetalle() ?></p>
@@ -85,7 +88,7 @@ $listaProductos = $abmProductos->buscar(null);
         </div>
     </section>
 </div>
-
+</body>
 <?php
 
 //include_once '../estructura/footer.php';
