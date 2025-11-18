@@ -8,8 +8,8 @@ Class UsuarioRol {
 
 
     public function __construct() {
-        $this->objUsuario = "";
-        $this->objRol = "";
+        $this->objUsuario = null;
+        $this->objRol = null;
         $this->objID = "";
         $this->mensajeOperacion = "";
     }
@@ -77,7 +77,6 @@ Class UsuarioRol {
         $resp = false;
         $base = new BaseDatos();
         $objUsuario = $this->getObjUsuario();
-        print_r($objUsuario);
         $sql = "INSERT INTO usuariorol (idusuario, idrol) VALUES ( '" . $objUsuario->getIdUsuario() . "','" . $this->getObjRol()->getIdRol() . "')";
 
         if ($base->Iniciar()) {
