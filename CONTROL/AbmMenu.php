@@ -1,5 +1,5 @@
 <?php
-
+include_once __DIR__ . '/../MODELO/Menu.php';
 Class AbmMenu {
 
     private function cargarObjeto($param) {
@@ -8,7 +8,6 @@ Class AbmMenu {
         if ($param <> null && (array_key_exists('menombre', $param) || array_key_exists('idmenu', $param))) {
             $id = isset($param['idmenu']) ? $param['idmenu'] : '';
             $menombre = isset($param['menombre']) ? $param['menombre'] : '';
-            $menurl = isset($param['menurl']) ? $param['menurl'] : '';
             $medescripcion = isset($param["medescripcion"]) ? $param["medescripcion"] : "";
             $medeshabilitado = isset($param["medeshabilitado"]) ? $param["medeshabilitado"] : "";
 
@@ -17,12 +16,12 @@ Class AbmMenu {
             $objPadre = null;
             if (isset($param['idpadre']) && $param['idpadre'] !== '') {
                 $objPadre = new Menu();
-                $objPadre->set($param['idpadre'], null, null, null, null, null);
+                $objPadre->set($param['idpadre'], null, null, null, null);
                 $objPadre->cargar();
             }
 
             $obj = new Menu();
-            $obj->set($id, $menombre, $menurl, $objPadre,$medescripcion,$medeshabilitado);
+            $obj->set($id, $menombre,  $objPadre,$medescripcion,$medeshabilitado);
         }
         return $obj;
     }
@@ -31,7 +30,7 @@ Class AbmMenu {
         $obj = null;
         if (isset($param['idmenu'])) {
             $obj = new Menu();
-            $obj->set($param['idmenu'], null, null, null, null, null);
+            $obj->set($param['idmenu'], null, null, null, null);
         }
         return $obj;
     }
@@ -75,7 +74,7 @@ Class AbmMenu {
         return $resp;
     }
 
-    public function buscar($param) {
+    public function buscar($param = "") {
         $where = " true ";
         if ($param <> NULL) {
             if (isset($param['idmenu']))
@@ -83,8 +82,6 @@ Class AbmMenu {
             if (isset($param['menombre']))
                 $where .= " AND menombre = '" . $param['menombre'] . "'";
             if (isset($param['menurl']))
-                $where .= " AND menurl = '" . $param['menurl'] . "'";
-            if (isset($param['idpadre']))
                 $where .= " AND idpadre = '" . $param['idpadre'] . "'";
         }
         $menu = new Menu();

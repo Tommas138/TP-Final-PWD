@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../../UTILS/funciones.php';
+require_once __DIR__ . '../../ACCION/ESTRUCTURA/reusables/header.php';
 
 $titulo = 'Dunder Mifflin Store';
 

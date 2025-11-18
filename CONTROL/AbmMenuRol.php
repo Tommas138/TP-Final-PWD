@@ -1,5 +1,6 @@
 <?php
 
+include_once __DIR__ . '/../MODELO/MenuRol.php';
 Class AbmMenuRol {
 
     private function cargarObjeto($param) {

@@ -13,7 +13,7 @@ Class ControlIngresoAdmin {
             header('Location: ../home/index.php');
             exit;
         } else {
-            header('Location: ../admin/' . $pagina . 'php?verificado=1');
+            header('Location: ../admin/' . $pagina . '.php?verificado=1');
             exit;
         }
     }
