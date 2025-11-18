@@ -1,10 +1,11 @@
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 <?php
 
 include_once __DIR__ . '/../CONTROL/AbmUsuario.php';
 include_once __DIR__ . '/../CONTROL/AbmRol.php';
 include_once __DIR__ . '/../CONTROL/Session.php';
 include_once __DIR__ . '/../CONTROL/AbmUsuarioRol.php';
-// include_once __DIR__ . '/../CONTROL/ControlCambioRoles.php'; // No debería ser incluido automáticamente
 include_once __DIR__ . '/../CONTROL/ControlIngresoCliente.php';
 include_once __DIR__ . '/../CONTROL/AbmCompra.php';
 include_once __DIR__ . '/../CONTROL/AbmCompraEstado.php';
