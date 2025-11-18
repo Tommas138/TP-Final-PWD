@@ -1,5 +1,12 @@
 <?php
 
+include_once __DIR__ . '/../MODELO/CompraItem.php';
+include_once __DIR__ . '/../MODELO/Producto.php';
+include_once __DIR__ . '/../MODELO/Compra.php';
+include_once __DIR__ . '/../CONTROL/ControlVerificarCarritoCliente.php';
+include_once __DIR__ . '/../CONTROL/AbmCompra.php';
+include_once __DIR__ . '/../CONTROL/AbmProducto.php';
+
 Class AbmCompraItem {
 
     private function cargarObjeto($param) {
@@ -55,6 +62,11 @@ Class AbmCompraItem {
                 $arrayCarritos = $controlVerificarCarrito->verificarCarrito($param['iduser']);
                 $carrito = $arrayCarritos['carritoHabilitado'];
             }
+        }
+        // validar que carrito existe antes de continuar
+        if ($carrito == null) {
+            error_log("AbmCompraItem::alta - No se pudo crear/obtener carrito para usuario " . $param['iduser']);
+            return $resp;
         }
         // saco id carrito actual
         $idCarrito = $carrito->getIdCompra();
@@ -155,7 +167,8 @@ Class AbmCompraItem {
                 $where .= " AND cicantidad = '" . $param['cicantidad'] . "'";
         }
         $compraItem = new CompraItem();
-        $compraItem->set($param['idcompraitem'], null, null, null);
+        $idcompraitem = isset($param['idcompraitem']) ? $param['idcompraitem'] : null;
+        $compraItem->set($idcompraitem, null, null, null);
         $arreglo = $compraItem->listar($where);
         return $arreglo;
     }

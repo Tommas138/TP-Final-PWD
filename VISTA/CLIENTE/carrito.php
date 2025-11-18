@@ -4,7 +4,7 @@ require_once __DIR__ . '/../../UTILS/funciones.php';
 
 $datos = data_submitted();
 
-if (!$isset($datos["verificado"])) {
+if (!isset($datos["verificado"])) {
     $controlIngresoCarrito = new ControlIngresoCliente();
     $controlIngresoCarrito->verificarIngreso("carrito");
 }

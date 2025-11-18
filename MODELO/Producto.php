@@ -5,7 +5,6 @@ Class Producto {
     private $prodetalle;
     private $procantstock;
     private $proprecio;
-    private $prodescuento;
     private $mensajeOperacion;
     public function __construct(){
         $this->idproducto = null;
@@ -13,7 +12,6 @@ Class Producto {
         $this->prodetalle = "";
         $this->procantstock = 0;
         $this->proprecio = 0.0;
-        $this->prodescuento = 0;
         $this->mensajeOperacion = "";
     }
 
@@ -74,7 +72,13 @@ Class Producto {
             $res = $base->Ejecutar($sql);
             if ($res > 0) {
                 $fila = $base->Registro();
-                $this->set($fila['idproducto'], $fila['pronombre'], $fila['prodetalle'], $fila['procantstock']);
+                $precio = isset($fila['proprecio']) ? $fila['proprecio'] : 0.0;
+                $this->setIdProducto($fila['idproducto']);
+                $this->setPronombre($fila['pronombre']);
+                $this->setProdetalle($fila['prodetalle']);
+                $this->setProcantstock($fila['procantstock']);
+                $this->setProPrecio($precio);
+                $resp = true;
             }
         } else {
             $this->setMensajeOperacion("producto->cargar: " . $base->getError());
@@ -82,7 +86,7 @@ Class Producto {
         return $resp;
     }
 
-    public function set($idproducto, $pronombre, $prodetalle, $procantstock, $proprecio) {
+    public function set($idproducto, $pronombre, $prodetalle, $procantstock, $proprecio = 0.0) {
         $this->idproducto = $idproducto;
         $this->pronombre = $pronombre;
         $this->prodetalle = $prodetalle;
@@ -125,14 +129,6 @@ Class Producto {
     public function setProPrecio($precio) {
         $this->proprecio = $precio;
     }
-
-    public function getProDescuento() {
-        return $this->prodescuento;
-    }
-    public function setProDescuento($descuento) {
-        $this->prodescuento = $descuento;
-    }
-
 
     public function setMensajeOperacion($mensajeOperacion){
         $this->mensajeOperacion = $mensajeOperacion;

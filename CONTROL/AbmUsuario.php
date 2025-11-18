@@ -26,8 +26,11 @@ class AbmUsuario {
             }
         }
         $usuario = new Usuario();
-        // $usuario->set($param['idusuario'], $param['usnombre'], $param['uspass'], $param['usmail'], $param['usdeshabilitado']);
-        $usuario->set(1, $param['usnombre'], $param['uspass'], $param['usmail'], null);
+        // Set only with safely retrieved values; avoid undefined index warnings
+        $usnombre = isset($param['usnombre']) ? $param['usnombre'] : '';
+        $uspass = isset($param['uspass']) ? $param['uspass'] : '';
+        $usmail = isset($param['usmail']) ? $param['usmail'] : '';
+        $usuario->set(1, $usnombre, $uspass, $usmail, null);
         $arreglo = $usuario->seleccionar($where);
         return $arreglo;
     }

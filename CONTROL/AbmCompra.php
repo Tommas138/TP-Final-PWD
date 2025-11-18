@@ -1,5 +1,8 @@
 <?php
 
+include_once __DIR__ . '/../MODELO/Compra.php';
+include_once __DIR__ . '/../MODELO/Usuario.php';
+
 Class AbmCompra {
 
     private function cargarObjeto($param) {
@@ -35,9 +38,10 @@ Class AbmCompra {
 
     public function alta ($param) {
         $resp = false;
-        if ($this->seteadosCamposClaves($param)) {
+        // Para crear un nuevo carrito, solo necesitamos idusuario
+        if (array_key_exists('idusuario', $param)) {
             $objCompra = $this->cargarObjeto($param);
-            if ($objCompra != null && $objCompra->modificar()) {
+            if ($objCompra != null && $objCompra->insertar()) {
                 $resp = true;
             }
         }

@@ -57,7 +57,7 @@ shuffle($listaProductos);
                                 <?php
                                 if ($sesion->activa()) {
                                     foreach ($sesion->getUsRoles() as $rol) {
-                                        if ($rol == 3) {
+                                        
                                 ?>
                                             <div class='card-footer p-4 pt-0 border-top-0 bg-transparent'>
                                                 <div class='text-center'>
@@ -70,7 +70,7 @@ shuffle($listaProductos);
                                                 </div>
                                             </div>
                                     <?php
-                                        }
+                                        
                                     }
                                 } else {
                                     ?>

@@ -1,4 +1,7 @@
 <?php
+include_once __DIR__ . '/Usuario.php';
+include_once __DIR__ . '/conector/BaseDatos.php';
+
 class Compra {
     //Definimos los atributos
     private $idCompra;
@@ -74,17 +77,50 @@ class Compra {
     
     //Definimos la funcion insertar
     public function insertar() {
-        
+        $resp = false;
+        $base = new BaseDatos();
+        $idusuario = null;
+        if ($this->getIdUsuario() instanceof Usuario) {
+            $idusuario = $this->getIdUsuario()->getIdUsuario();
+        }
+        $sql = "INSERT INTO compra (cofecha, idusuario) VALUES ('" . $this->getCoFecha() . "', '" . $idusuario . "')";
+        if ($base->Iniciar()) {
+            if ($elid = $base->Ejecutar($sql)) {
+                $this->setIdCompra($elid);
+                $resp = true;
+            } else {
+                $this->setMensajeOperacion("compra->insertar: " . $base->getError());
+            }
+        } else {
+            $this->setMensajeOperacion("compra->insertar: " . $base->getError());
+        }
+        return $resp;
     }
 
-    public function modificar(){
-
+    public function modificar() {
+        $resp = false;
+        $base = new BaseDatos();
+        $idusuario = null;
+        if ($this->getIdUsuario() instanceof Usuario) {
+            $idusuario = $this->getIdUsuario()->getIdUsuario();
+        }
+        $sql = "UPDATE compra SET cofecha = '" . $this->getCoFecha() . "', idusuario = '" . $idusuario . "' WHERE idcompra = " . $this->getIdCompra();
+        if ($base->Iniciar()) {
+            if ($base->Ejecutar($sql)) {
+                $resp = true;
+            } else {
+                $this->setMensajeOperacion("compra->modificar: " . $base->getError());
+            }
+        } else {
+            $this->setMensajeOperacion("compra->modificar: " . $base->getError());
+        }
+        return $resp;
     }
 
     public function listar($param = "") {
         $arreglo = array();
         $base = new BaseDatos();
-        $sql = "SELECT * FROM menu ";
+        $sql = "SELECT * FROM compra ";
         if ($param != "") {
             $sql .= 'WHERE ' . $param;
         }
@@ -92,7 +128,13 @@ class Compra {
         if ($res > 0) {
             while ($row = $base->Registro()) {
                 $obj = new Compra();
-                $obj->set($row['idcompra'], $row['cofecha'], $row['idusuario']);
+                $objUsuario = null;
+                if (isset($row['idusuario']) && $row['idusuario'] != null) {
+                    $objUsuario = new Usuario();
+                    $objUsuario->setIdUsuario($row['idusuario']);
+                    $objUsuario->cargar();
+                }
+                $obj->set($row['idcompra'], $row['cofecha'], $objUsuario);
                 array_push($arreglo, $obj);
             }
         } else {
