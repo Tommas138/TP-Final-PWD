@@ -57,7 +57,6 @@ $totalFinalCompra = 0;
                                 $producto = $compraItem->getIdProducto();
                                 $id = $producto->getIdProducto();
                                 $precio = $producto->getProPrecio();
-                                $descuento = $producto->getProDescuento();
                                 $unidades = $compraItem->getCiCantidad();
                                 $subTotalProducto = ($precio * $unidades) - ((($precio * $unidades) * $descuento) / 100);
                                 $subTotalCompra = $subTotalCompra + $subTotalProducto;
