@@ -7,8 +7,8 @@ Class MenuRol {
     private $mensajeOperacion;
 
     public function __construct() {
-        $this->objMenu = "";
-        $this->objRol = "";
+        $this->objMenu = null;
+        $this->objRol = null;
         $this->mensajeOperacion = "";
     }
 
@@ -40,7 +40,7 @@ Class MenuRol {
     public function cargar() {
         $resp = false;
         $base = new BaseDatos();
-        $sql = "SELECT * FROM menurol WHERE idmenu = " . $this->getObjMenu()->getIdMenu() . " AND idrol = " . $this->getObjRol()->getIdRol();
+        $sql = "SELECT * FROM menurol WHERE idmenu = " . $this->getObjMenu() . " AND idrol = " . $this->getObjRol();
 
         if ($base->Iniciar()) {
             $res = $base->Ejecutar($sql);
@@ -63,7 +63,7 @@ Class MenuRol {
     public function insertar() {
         $resp = false;
         $base = new BaseDatos();
-        $sql = "INSERT INTO menurol (idmenu, idrol) VALUES ('{$this->getObjMenu()->getIdMenu()}', '{$this->getObjRol()->getIdRol()}');";
+        $sql = "INSERT INTO menurol (idmenu, idrol) VALUES ('{$this->getObjMenu()}', '{$this->getObjRol()}');";
         if ($base->Iniciar()) {
             if ($base->Ejecutar($sql)) {
                 $resp = true;
@@ -79,7 +79,7 @@ Class MenuRol {
     public function eliminar() {
         $resp = false;
         $base = new BaseDatos();
-        $sql = "DELETE * FROM menurol WHERE idmenu = " . $this->getObjMenu()->getIdMenu() . " AND idrol = " . $this->getObjRol()->getIdRol();
+        $sql = "DELETE * FROM menurol WHERE idmenu = " . $this->getObjMenu() . " AND idrol = " . $this->getObjRol();
         if ($base->Iniciar()) {
             if($base->Ejecutar($sql)) {
                 $resp = true;

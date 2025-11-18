@@ -161,7 +161,10 @@ class Session
         $where = ['idusuario' => $this->getIdUsuario()];
         $listaUsuarios = $abmUsuario->buscar($where);
 
-        return $where;
+        if ($listaUsuarios >= 1) {
+            $datosUsuario = $listaUsuarios[0];
+        }
+        return $datosUsuario;
     }
 
 

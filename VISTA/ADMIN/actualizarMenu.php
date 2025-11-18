@@ -3,14 +3,14 @@ require_once __DIR__ . '/../../UTILS/funciones.php';
 
 $titulo = 'Actualizar Menú';
 
-include_once '../estructura/header.php';
+include_once '../ACCION/ESTRUCTURA/reusables/header.php';
 
 $datos = data_submitted();
 $abmMenu = new AbmMenu();
 
-$arrayBusqueda = ["idmenu" => $datos['idmenu']];
+$arrayBusqueda = ["idmenu" => $datos];
 
-$listaMenus = $abmMenu->buscar($arrayBusqueda);
+$listaMenus = $abmMenu->buscar();
 $objMenu = $listaMenus[0];
 
 ?>
@@ -55,6 +55,5 @@ $objMenu = $listaMenus[0];
 
 <?php
 
-include_once '../estructura/footer.php';
 
 ?>

@@ -6,7 +6,7 @@ include_once __DIR__ . '/../CONTROL/AbmUsuarioRol.php';
 
 class AbmUsuario {
     //Funcion que busca un objeto
-    public function buscar($param) {
+    public function buscar($param = "") {
         $where = "true";
         if ($param != null) {
             if (isset($param['idusuario'])) {

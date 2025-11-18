@@ -102,11 +102,17 @@ CREATE TABLE `menu` (
 --
 
 INSERT INTO `menu` (`idmenu`, `menombre`, `medescripcion`, `idpadre`, `medeshabilitado`) VALUES
-(7, 'nuevo', 'kkkkk', NULL, NULL),
-(8, 'nuevo', 'kkkkk', NULL, NULL),
-(9, 'nuevo', 'kkkkk', 7, NULL),
-(10, 'nuevo', 'kkkkk', NULL, NULL),
-(11, 'nuevo', 'kkkkk', NULL, NULL);
+(1, 'Administración', '#', NULL, '0000-00-00 00:00:00'),
+(2, 'Depósito', '#', NULL, '0000-00-00 00:00:00'),
+(3, 'Cliente', '#', NULL, '0000-00-00 00:00:00'),
+(4, 'Listado de usuarios', 'administrarUsuarios', 1, '0000-00-00 00:00:00'),
+(5, 'Administrar Menus', 'administrarMenus', 1, '0000-00-00 00:00:00'),
+(6, 'Administrar Compras', 'administrarCompras', 2, '0000-00-00 00:00:00'),
+(7, 'Administrar Productos', 'administrarProductos', 2, '0000-00-00 00:00:00'),
+(8, 'Cargar Producto', 'nuevoProducto', 2, '0000-00-00 00:00:00'),
+(9, 'Administrar Compras', 'compras', 3, '0000-00-00 00:00:00'),
+(10, 'Nuevo Menú', 'nuevoMenu', 1, '0000-00-00 00:00:00'),
+(11, 'Nuevo Usuario', 'nuevoUsuario', 1, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
