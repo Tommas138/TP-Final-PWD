@@ -18,17 +18,17 @@ $enlace = "";
 ?>
 <nav class="navbar navbar-expand-custom navbar-mainbg">
 
-    <a class="navbar-brand navbar-logo" href="#">Dunder Mifflin Store</a>
-    <a class="navbar-brand navbar-logo" href="../../VISTA/home/index.php">Inicio</a>
-    <a class="navbar-brand navbar-logo" href="../../VISTA/CLIENTE/listadoProductos.php">Productos</a>
+    <a class="navbar-brand navbar-logo navbar-button " href="#">Dunder Mifflin Store</a>
+    <a class="navbar-brand navbar-logo navbar-button" href="../../VISTA/home/index.php">Inicio</a>
+    <a class="navbar-brand navbar-logo navbar-button" href="../../VISTA/CLIENTE/listadoProductos.php">Productos</a>
     <?php
     $objUs = new UsuarioRol();
     $arrUs = $objUs->listar("idusuario = $idUser");
     if ($arrUs[0]->getObjRol()->getIdRol() == 1) {
     ?>
-        <a class="navbar-brand navbar-logo" href="../../VISTA/acciones/accionActualizarMenu.php">Administrar Menu</a>
-        <a class="navbar-brand navbar-logo" href="../../VISTA/MANAGERDEPOSITO/administrarCompras.php">Administrar Compras</a>
-        <a class="navbar-brand navbar-logo" href="../../VISTA/ADMIN/administrarUsuarios.php">Administrar Usuarios</a>
+        <a class="navbar-brand navbar-logo navbar-button" href="../../VISTA/acciones/accionActualizarMenu.php">Administrar Menu</a>
+        <a class="navbar-brand navbar-logo navbar-button" href="../../VISTA/MANAGERDEPOSITO/administrarCompras.php">Administrar Compras</a>
+        <a class="navbar-brand navbar-logo navbar-button" href="../../VISTA/ADMIN/administrarUsuarios.php">Administrar Usuarios</a>
     <?php
     }
     ?>

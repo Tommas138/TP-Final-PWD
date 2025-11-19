@@ -13,7 +13,7 @@ $session = new Session();
 
 if ($session->activa()) {
     $user = $session->getUsuario();
-    $idUser = $user->getIdUsuario();
+    $idUser = $session->getIdUsuario();
 }
 
 $titulo = 'Carrito de compras';
@@ -51,7 +51,9 @@ $totalFinalCompra = 0;
                         $subTotalCompra = 0;
                         $iva = 0;
                         $totalFinalCompra = 0;
+                        print_r($compraItems);
                         if (count($compraItems)) {
+
 
                             foreach ($compraItems as $compraItem) {
                                 $producto = $compraItem->getIdProducto();
@@ -173,7 +175,7 @@ $totalFinalCompra = 0;
                                 <?php if (count($compraItems) > 0) {
                                 ?>
                                 <div class="text-center">
-                                <a href="compras.php"><button class='btn btn-success m-1' type='submit' role='button'>Volver al historial</button></a>
+                                <a class='btn btn-success m-1' type='submit' role='button'>Volver al historial</a>
                                 </div>
                                     <a href="compra.php"> <button class='btn btn-success m-1' type='submit' role='button'>Confirmar Pedido</button>
                                 <?php
