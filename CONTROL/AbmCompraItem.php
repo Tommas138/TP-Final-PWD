@@ -47,7 +47,7 @@ Class AbmCompraItem {
     public function alta($param) {
         $resp = false;
         // traigo carritos del us
-        $controlVerificarCarrito = new controlVerificarCarritoCliente();
+        $controlVerificarCarrito = new ControlVerificarCarritoCliente();
         $arrayCarritos = $controlVerificarCarrito->verificarCarrito($param['idusuario']);
         // carrito habilitado
         $carrito = $arrayCarritos['carritoHabilitado'];
@@ -77,7 +77,7 @@ Class AbmCompraItem {
         $arrayItemsCarrito = $this->buscar(['idcompra' => $carrito->getIdCompra()]);
         //verifico que el item actual no este cargado
         foreach ($arrayItemsCarrito as $itemCarrito) {
-            if ($itemCarrito->getIdProducto()->getIdProducto() == $param['codigoProducto']) {
+            if ($itemCarrito->getIdProducto()->getIdProducto() == $param['idproducto']) {
                 $cargado = true;
             }
         }

@@ -9,9 +9,10 @@ Class ControlIngresoCliente {
             exit;
         }
 
-        if ($session->getUsRoles()[0] != 1) {
+        //cambiar el != 1 a != 3
+        if ($session->getUsRoles()[0]->getObjRol()->getIdRol() != 1) {
             if (isset($session->getUsRoles()[1])) {
-                if ($session->getUsRoles()[1] != 1) {
+                if ($session->getUsRoles()[1]->getObjRol()->getIdRol() != 1) {
                     header('Location: ../home/index.php');
                     exit;
                 }
