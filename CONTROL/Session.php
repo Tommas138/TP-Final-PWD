@@ -83,12 +83,12 @@ class Session
         
         $idRol = $abmUsuarioRol->buscar(['idusuario' => $id]);
         
-        if ($id && $nombre && $pass) {
+        //print_r($idRol);
             $this->setIdUsuario($id);
             
             // Obtener roles del usuario
             $this->setUsRoles($idRol);
-        }
+ 
     }
 
     /**

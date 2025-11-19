@@ -15,7 +15,7 @@
             <h2 class="mt-3 mb-0">Iniciar Sesión</h2>
         </div>
         <div class="login-body">            
-            <form method="POST" action="./VISTA/acciones/iniciarSesion.php">
+            <form method="POST" action="VISTA/acciones/iniciarSesion.php">
                 <div class="mb-3">
                     <label for="usmail" class="form-label">
                         <i class="bi bi-person-fill me-1"></i>E-mail

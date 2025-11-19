@@ -7,8 +7,6 @@ $sesion = new Session();
 if ($sesion->activa()) {
         
     $user = $sesion->getUsuario();
-
-
     $name = $user->getUsNombre();
     $idUser = $user->getIdUsuario();
 }

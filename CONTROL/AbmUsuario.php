@@ -6,23 +6,23 @@ include_once __DIR__ . '/../CONTROL/AbmUsuarioRol.php';
 
 class AbmUsuario {
     //Funcion que busca un objeto
-    public function buscar($param = "") {
-        $where = "true";
+    public function buscar($param) {
+        $where = " true ";
         if ($param != null) {
             if (isset($param['idusuario'])) {
-                $where .= " and idusuario ='" . $param['idusuario'] . "'";
+                $where .= " AND idusuario =" . $param['idusuario'];
             }
             if (isset($param['usnombre'])) {
-                $where .= " and usnombre ='" . $param['usnombre'] . "'";
+                $where .= " AND usnombre ='" . $param['usnombre'] . "'";
             }
             if (isset($param['uspass'])) {
-                $where .= " and uspass ='" . md5($param['uspass']) . "'";
+                $where .= " AND uspass ='" . md5($param['uspass']) . "'";
             }
             if(isset($param['usmail'])) {
-                $where .= " and usmail ='" . $param['usmail'] . "'";
+                $where .= " AND usmail ='" . $param['usmail'] . "'";
             }
             if(isset($param['usdeshabilitado'])) {
-                $where .= " and usdeshabilitado ='" . $param['usdeshabilitado'] . "'";
+                $where .= " AND usdeshabilitado ='" . $param['usdeshabilitado'] . "'";
             }
         }
         $usuario = new Usuario();

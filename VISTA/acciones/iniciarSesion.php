@@ -1,16 +1,14 @@
 <?php 
 
-    include_once '../../CONTROL/AbmUsuario.php';
-    include_once '../../UTILS/funciones.php';
-    include_once '../../CONTROL/Session.php';
-    include_once '../../CONTROL/AbmUsuarioRol.php';
-
+ require_once __DIR__ . '/../../UTILS/funciones.php';
 
     $abmrol = new AbmUsuarioRol();
     $sesion = new Session();
     $usuario = data_submitted(); // Array ( [usnombre] => jeremias herrera [usmail] => emai123l@gmail.com [uspass] => 123 )
     $abmUsuario = new AbmUsuario();
+   // print_r($usuario);
     $respuesta = $abmUsuario->buscar($usuario);
+    //echo $respuesta[0]->getIdUsuario();
     // $buscarrol = ['idusuario' => $respuesta[0]->getIdUsuario()];
     //Array ( [0] => Usuario Object ( [idusuario:Usuario:private] => 2 [usnombre:Usuario:private] => ZAROTH400 [uspass:Usuario:private] => 202 [usmail:Usuario:private] => ZAROTH400@gmail.com [usdeshabilitado:Usuario:private] => 0000-00-00 00:00:00 [mensajeoperacion:Usuario:private] => ) ) Session Object ( )
 
