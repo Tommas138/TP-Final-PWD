@@ -12,6 +12,7 @@ shuffle($listaProductos);
 
 ?>
 <!-- Header-->
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -19,96 +20,88 @@ shuffle($listaProductos);
     <meta name="author" content="" />
     <title><?php echo $titulo; ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
-          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZmCNUxC+GQYUQDFN1VqM7uH60lZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" 
-          referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZmCNUxC+GQYUQDFN1VqM7uH60lZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous"
+        referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="../acciones/ESTRUCTURA/styles.css">
 </head>
 <!-- Section-->
- <div class="container mt-2">
-<section class="py-2">
+<div class="container mt-2 d-flex justify-content-center">
+    <section class="py-2">
+        <?php
+        //print_r($sesion->mostrarDetallesSesion());
+        if (count($listaProductos) > 0) {
+            $max = min(count($listaProductos), 4);
+            for ($cont_prod = 0; $cont_prod < $max; $cont_prod++) {
+                $producto = $listaProductos[$cont_prod];
+        ?>
 
-            <?php
-            //print_r($sesion->mostrarDetallesSesion());
-            if (count($listaProductos) > 0) {
-                $max = min(count($listaProductos), 4);
-                for ($cont_prod = 0; $cont_prod < $max; $cont_prod++) {
-                    $producto = $listaProductos[$cont_prod];
-                    ?>
-                    
-                    <div class='row mb-4 justify-content-center'>
-                        <br><Br>
-                                <div class='card shadow h-60 w-50  align-items-center justify-content-center'>
-                                    <?php
-                    $imgWebBase = '../../uploads/img/';
-                    $imgCarpeta = realpath(__DIR__ . '/../../uploads/img/');
-                    $imgSrc = $imgWebBase . 'default.jpg';
-                    $idPlain = 'producto' . intval($producto->getIdProducto());
-                    $idHashImg = strtolower(md5($producto->getIdProducto()));
-                    if ($imgCarpeta) {
-                        $exts = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
-                        foreach ($exts as $ext) {
-                            $candidateHash = $imgCarpeta . DIRECTORY_SEPARATOR . $idHashImg . '.' . $ext;
-                            $candidatePlain = $imgCarpeta . DIRECTORY_SEPARATOR . $idPlain . '.' . $ext;
-                            if (file_exists($candidateHash)) {
-                                $imgSrc = $imgWebBase . $idHashImg . '.' . $ext;
-                                break;
-                            }
-                            if (file_exists($candidatePlain)) {
-                                $imgSrc = $imgWebBase . $idPlain . '.' . $ext;
-                                break;
+                <div class='row mb-4 object-fit-contain'>
+                    <div class='card shadow align-items-center'>
+                        <?php
+                        $imgWebBase = '../../uploads/img/';
+                        $imgCarpeta = realpath(__DIR__ . '/../../uploads/img/');
+                        $imgSrc = $imgWebBase . 'default.jpg';
+                        $idPlain = 'producto' . intval($producto->getIdProducto());
+                        $idHashImg = strtolower(md5($producto->getIdProducto()));
+                        if ($imgCarpeta) {
+                            $exts = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
+                            foreach ($exts as $ext) {
+                                $candidateHash = $imgCarpeta . DIRECTORY_SEPARATOR . $idHashImg . '.' . $ext;
+                                $candidatePlain = $imgCarpeta . DIRECTORY_SEPARATOR . $idPlain . '.' . $ext;
+                                if (file_exists($candidateHash)) {
+                                    $imgSrc = $imgWebBase . $idHashImg . '.' . $ext;
+                                    break;
+                                }
+                                if (file_exists($candidatePlain)) {
+                                    $imgSrc = $imgWebBase . $idPlain . '.' . $ext;
+                                    break;
+                                }
                             }
                         }
-                    }
-                    ?>
-                    <img class='card shadow-sm ' style="width: 300px; height: 300px;" src='<?php echo $imgSrc ?>' alt='<?php echo htmlspecialchars($producto->getProNombre(), ENT_QUOTES) ?>' />
+                        ?>
+                        <img class='card shadow-sm m-3 ' style="width: 300px; height: 300px;" src='<?php echo $imgSrc ?>' alt='<?php echo htmlspecialchars($producto->getProNombre(), ENT_QUOTES) ?>' />
 
-                    <div class='card-body p-4'>
-                    <div class='text-center'>
-                    <h5 class='fw-bolder'><?php echo $producto->getProNombre() ?></h5>
-                    <p><?php echo $producto->getProDetalle() ?></p>
-                    <span>$<?php echo $producto->getProPrecio() ?></span>
-                    <?php
-                     ?>
-                    </div>
-                    </div>
-                                <?php
-                                if ($sesion->activa() && $sesion->getIDRol() == 1) {
-                                    // foreach ($sesion->getUsRoles() as $rol) {
-                                ?>
-                                            <div class='card-footer p-4 pt-0 border-top-0 bg-transparent'>
-                                                <div class='text-center'>
-                                                    <form method='post' action='../acciones/accionAgregarItemCarrito.php'>
-                                                        <td class='text-center'>
-                                                            <input name='codigoProducto' id='codigoProducto' type='hidden' value='<?php echo $producto->getIdProducto() ?>'>
-                                                            <button class='btn btn-outline-dark mt-auto' type='submit' role='button'>Agregar al carrito</button>
-                                                        </td>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                    <?php
-                                        
-                                    // }
-                                } else {
-                                    //print_r($sesion->getIDRol() . "ID ROL");
-
-                                    ?>
-                                    <div class='card-footer p-4 pt-0 border-top-0 bg-transparent'>
-                                        <div class='text-center'><a class='btn btn-outline-dark mt-auto' href='../acciones/iniciarSesion.php'>Agregar al carrito</a></div>
-                                    </div>
-                                <?php
-                                }
-                                ?>
-                                
+                        <div class='card-body p-4'>
+                            <div class='text-center'>
+                                <h5 class='fw-bolder'><?php echo $producto->getProNombre() ?></h5>
+                                <p><?php echo $producto->getProDetalle() ?></p>
+                                <span>$<?php echo $producto->getProPrecio() ?></span>
+                                <form method='post' action='../acciones/accionAgregarItemCarrito.php'>
+                                    <td class='text-center'>
+                                        <input name='codigoProducto' id='codigoProducto' type='hidden' value='<?php echo $producto->getIdProducto() ?>'>
+                                        <button class="add-carrito-button m-5" type='submit' role='button'>Agregar al carrito</button>
+                                    </td>
+                                </form>
                             </div>
-                            </div>
-                            </div>
-                            
                         </div>
-                <?php
-                }
+                        <?php
+                        if ($sesion->activa() && $sesion->getIDRol() == 1) {
+                            // foreach ($sesion->getUsRoles() as $rol) {
+                        ?>
+                        <div class="container mt-2 d-flex justify-content-center"></
+
+                            <div class='pt-0 border bg-transparent'>
+                                    <form method='post' action='../acciones/accionAgregarItemCarrito.php'>
+                                        <td class='text-center'>
+                                            <input name='codigoProducto' id='codigoProducto' type='hidden' value='<?php echo $producto->getIdProducto() ?>'>
+                                            <button type='submit' role='button'>Agregar al carrito</button>
+                                        </td>
+                                    </form>
+                            </div>
+                        <?php
+                        }
+                        ?>
+
+                    </div>
+                </div>
+</div>
+
+</div>
+<?php
             }
-            ?>
+        }
+?>
 </section>
 </div>
 
