@@ -69,7 +69,7 @@ shuffle($listaProductos);
                                 <span>$<?php echo $producto->getProPrecio() ?></span>
                                 <form method='post' action='../acciones/accionAgregarItemCarrito.php'>
                                     <td class='text-center'>
-                                        <input name='codigoProducto' id='codigoProducto' type='hidden' value='<?php echo $producto->getIdProducto() ?>'>
+                                        <input name='idproducto' id='idproducto' type='hidden' value='<?php echo $producto->getIdProducto() ?>'>
                                         <button class="add-carrito-button m-5" type='submit' role='button'>Agregar al carrito</button>
                                     </td>
                                 </form>
@@ -84,7 +84,7 @@ shuffle($listaProductos);
                             <div class='pt-0 border bg-transparent'>
                                     <form method='post' action='../acciones/accionAgregarItemCarrito.php'>
                                         <td class='text-center'>
-                                            <input name='codigoProducto' id='codigoProducto' type='hidden' value='<?php echo $producto->getIdProducto() ?>'>
+                                            <input name='idproducto' id='idproducto' type='hidden' value='<?php echo $producto->getIdProducto() ?>'>
                                             <button type='submit' role='button'>Agregar al carrito</button>
                                         </td>
                                     </form>
