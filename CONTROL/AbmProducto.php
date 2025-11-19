@@ -66,7 +66,7 @@ Class AbmProducto {
 
     public function modificacion($param) {
         $resp = false;
-        print_r($param);
+       // print_r($param);
         if ($this->seteadosCamposClaves($param)) {
             $listaProductos = $this->buscar(['idproducto'=> $param['idproducto']]);
             if ($listaProductos != null) {

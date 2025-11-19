@@ -33,22 +33,41 @@ $totalFinalCompra = 0;
                         $subTotalCompra = 0;
                         $iva = 0;
                         $totalFinalCompra = 0;
-                        if (count($compraItems)) {
+                         if (count($compraItems)) {
+
                             foreach ($compraItems as $compraItem) {
                                 $producto = $compraItem->getIdProducto();
                                 $id = $producto->getIdProducto();
                                 $precio = $producto->getProPrecio();
                                 $unidades = $compraItem->getCiCantidad();
-                                $subTotalProducto = ($precio * $unidades) - ((($precio * $unidades) * $descuento) / 100);
+                                $subTotalProducto = ($precio * $unidades) - ((($precio * $unidades)) / 100);
                                 $subTotalCompra = $subTotalCompra + $subTotalProducto;
+                                $imgCarpeta = realpath(__DIR__ . '/../../uploads/img/');
                                 $idHash = md5($producto->getIdProducto());
                                 $idHashImg = strtolower($idHash);
+                                $idPlain = 'producto' . intval($producto->getIdProducto());
+                                $imgWebBase = '../../uploads/img/';
+                                if ($imgCarpeta) {
+                                    $exts = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
+                                    foreach ($exts as $ext) {
+                                        $candidateHash = $imgCarpeta . DIRECTORY_SEPARATOR . $idHashImg . '.' . $ext;
+                                        $candidatePlain = $imgCarpeta . DIRECTORY_SEPARATOR . $idPlain . '.' . $ext;
+                                        if (file_exists($candidateHash)) {
+                                            $imgSrc = $imgWebBase . $idHashImg . '.' . $ext;
+                                            break;
+                                        }
+                                        if (file_exists($candidatePlain)) {
+                                            $imgSrc = $imgWebBase . $idPlain . '.' . $ext;
+                                            break;
+                                        }
+                                    }
+                                }
 
                         ?>
                                 <div class="row mb-4">
                                     <div class="col-md-5 col-lg-3 col-xl-3">
                                         <div>
-                                            <img class='card-img-top img-producto-listado' src='../../uploads/img/<?php echo $idHashImg . ".jpeg"; ?>' alt='Imagen de una autoparte' />
+                                            <img class='card-img-top img-producto-listado' src='../../uploads/img/<?php echo $imgSrc; ?>' alt='Imagen de un suplemento' />
                                         </div>
                                     </div>
                                     <div class="col-md-7 col-lg-9 col-xl-9">
@@ -57,7 +76,6 @@ $totalFinalCompra = 0;
                                                 <div>
                                                     <h4><?php echo $producto->getProNombre() ?></h4>
                                                     <p class="mb-3 text-muted text-uppercase small">Modelo: <?php echo $producto->getProDetalle() ?></p>
-                                                    <p class="mb-2 text-muted text-uppercase small">Descuento: <?php echo $descuento ?>%</p>
                                                 </div>
                                                 <div class='text-center'>
                                                     <div class="btn-group" role="group" aria-label="Basic example">
@@ -77,7 +95,7 @@ $totalFinalCompra = 0;
                                                 <p class="mb-0"><span>Precio x unidad: <strong>$<?php echo $precio ?>.-</strong></span></p>
                                             </div>
                                             <?php
-                                            $stockFinal = $producto->getProCantStock() - $unidades;
+                                            $stockFinal = $producto->getProcantstock() - $unidades;
                                             ?>
                                         </div>
                                     </div>
@@ -126,5 +144,4 @@ $totalFinalCompra = 0;
 </div>
 
 <?php
-include_once("../estructura/footer.php");
 ?>

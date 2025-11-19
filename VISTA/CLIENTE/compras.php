@@ -9,7 +9,8 @@ if (!isset($datos["verificado"])) {
 }
 
 $titulo = 'Historial de Compras';
-include_once '../estructura/header.php';
+include_once '../ACCION/ESTRUCTURA/reusables/header.php';
+
 
 $sesion = new Session();
 $user = $sesion->getUsuario();
@@ -121,6 +122,6 @@ $compras = $arrayCarritos['arrayCompras'];
 
 <?php
 
-include_once '../estructura/footer.php';
+
 
 ?>

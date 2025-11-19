@@ -10,7 +10,7 @@ if (!isset($datos["verificado"])) {
     $controlIngresoManagerDeposito = new ControlIngresoAdmin();
     $controlIngresoManagerDeposito->verificarIngreso("nuevoMenu");
 }
-include_once '../estructura/header.php';
+include_once '../ACCION/ESTRUCTURA/reusables/header.php';
 
 ?>
 <header class="bg-dark py-1">
@@ -70,6 +70,6 @@ include_once '../estructura/header.php';
 
 <?php
 
-include_once '../estructura/footer.php';
+
 
 ?>
