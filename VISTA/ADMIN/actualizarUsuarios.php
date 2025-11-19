@@ -32,7 +32,7 @@ if (isset($listaUsuarios)) {
 
             <div class="">
                 <div class="form-floating mb-3">
-                    <input class="form-control" id="uspass" name="uspass" type="text" placeholder="Contraseña Nueva">
+                    <input class="form-control" id="uspass" name="uspass" type="password" placeholder="Contraseña Nueva" value="<?php echo $objUsuario->getUsPass(); ?>">
                     <label for="uspass">Contraseña Nueva: </label>
                 </div>
             </div>

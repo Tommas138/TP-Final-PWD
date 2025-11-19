@@ -95,7 +95,7 @@ Class UsuarioRol {
         $resp = false;
         $base = new BaseDatos();
         // Se corrige DELETE * FROM idusuario... por DELETE FROM usuariorol WHERE...
-        $sql = "DELETE FROM usuariorol WHERE idusuario=" . $this->getObjUsuario()->getIdUsuario() . " AND idrol=" . $this->getObjRol()->getIdRol();
+        $sql = "DELETE * FROM usuariorol WHERE idusuario=" . $this->getObjUsuario()->getIdUsuario() . " AND idrol=" . $this->getObjRol()->getIdRol();
         if ($base->Iniciar()) {
             if ($base->Ejecutar($sql)) {
                 $resp = true;

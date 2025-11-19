@@ -151,7 +151,6 @@ Class AbmCompraEstado {
         if ($this->seteadosCamposClaves($param)) {
             $objCompraEstado = $this->cargarObjetoConClave($param);
             $listaCompraEstado = $objCompraEstado->listar("idcompraestado= '" . $param['idcompraestado'] . "'");
-            print_r($listaCompraEstado);
             if (count($listaCompraEstado) > 0) {
                 $estadoCompra = $listaCompraEstado[0]->getCeFechaFin();
                 if ($estadoCompra == '0000-00-00 00:00:00') {

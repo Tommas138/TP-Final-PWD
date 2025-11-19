@@ -26,15 +26,9 @@ Class AbmUsuarioRol {
 
     private function cargarObjetoConClave($param) {
         $obj = null;
-        if (isset($param['idusuario']) && isset($param['idrol'])) {
-            $objUsuario = new Usuario();
-            $objUsuario->setIdUsuario($param['idusuario']);
-            
-            $objRol = new Rol();
-            $objRol->setIdRol($param['idrol']);
-            
+        if (isset($param[''])) {
             $obj = new UsuarioRol();
-            $obj->set($objUsuario, $objRol);
+            $obj->set($param[''], null);
         }
         return $obj;
     }

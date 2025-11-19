@@ -2,7 +2,7 @@
 
 include_once __DIR__ . '/../MODELO/Usuario.php';
 include_once __DIR__ . '/../CONTROL/AbmUsuarioRol.php';
-include_once __DIR__ . '/../CONTROL/AbmCompra.php';
+
 
 class AbmUsuario {
     //Funcion que busca un objeto
@@ -83,46 +83,18 @@ class AbmUsuario {
     //Definimos la funcion baja
     public function baja($param) {
         $resp = false;
-        
-        // 1. Verificaciones básicas (Claves seteadas y no borrarse a sí mismo)
-        if (!$this->seteadosCamposClaves($param)) {
-            return false;
+        $usActual = false;
+        if ($param['idusuario'] == $param['idusuariosesion']) {
+            $usActual = true;
         }
-        if (isset($param['idusuariosesion']) && $param['idusuario'] == $param['idusuariosesion']) {
-            return false;
+        if (!$usActual) {
+            if ($this->seteadosCamposClaves($param)) {
+                $objUsuario = $this->cargarObjetoConClave($param);
+                if($objUsuario != null && $objUsuario->eliminar()) {
+                    $resp = true;
+                }
+            }
         }
-
-        // 2. VERIFICACIÓN DE COMPRAS (Lo nuevo)
-        $abmCompra = new AbmCompra();
-        // Buscamos compras de este usuario
-        $listaCompras = $abmCompra->buscar(['idusuario' => $param['idusuario']]);
-
-        // Si la lista de compras es mayor a 0, tiene historial. NO LO BORRAMOS.
-        if (count($listaCompras) > 0) {
-            // Aquí retornamos false para evitar el error de SQL (Foreign Key Constraint)
-            // El usuario no se borra, pero el sistema no se rompe.
-            return false; 
-        }
-
-        // 3. ELIMINAR ROLES (Limpieza de dependencias)
-        // Si llegamos acá, es porque no tiene compras. Borramos sus roles.
-        $abmUsuarioRol = new AbmUsuarioRol();
-        $rolesUsuario = $abmUsuarioRol->buscar(['idusuario' => $param['idusuario']]);
-        
-        foreach ($rolesUsuario as $rolAsignado) {
-            $paramBajaRol = [
-                'idusuario' => $param['idusuario'], 
-                'idrol' => $rolAsignado->getObjRol()->getIdRol()
-            ];
-            $abmUsuarioRol->baja($paramBajaRol);
-        }
-
-        // 4. ELIMINAR USUARIO
-        $objUsuario = $this->cargarObjetoConClave($param);
-        if($objUsuario != null && $objUsuario->eliminar()) {
-            $resp = true;
-        }
-        
         return $resp;
     }
 
