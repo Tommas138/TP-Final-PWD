@@ -9,8 +9,7 @@ $sesion = new Session();
 $user = $sesion->getUsuario();
 $idUser = $user->getIdUsuario();
 
-$abmCompraItem = new AbmCompraItem();
-
+$abmCompraItem = new AbmCompraItem(); 
 $datos['idusuario'] = $idUser;
 print_r($datos);
 $exito = $abmCompraItem->alta($datos);

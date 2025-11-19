@@ -126,7 +126,7 @@ Class Rol {
                 $objRol = new Rol();
                 $objRol->set(
                     $row['idrol'],
-                    $row['roldescripcion']
+                    $row['rodescripcion']
                 );
                 array_push($arreglo, $objRol);
             }
@@ -139,7 +139,7 @@ Class Rol {
     public function insertar() {
         $resp = false;
         $base = new BaseDatos();
-        $sql = "INSERT INTO rol (roldescripcion) VALUES ('" . $this->getRolDescripcion() . "'";
+        $sql = "INSERT INTO rol (rodescripcion) VALUES ('" . $this->getRolDescripcion() . "'";
         if ($base->Iniciar()) {
             if ($elid = $base->Ejecutar($sql)) {
                 $this->setIdRol($elid);

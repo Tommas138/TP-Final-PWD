@@ -109,9 +109,9 @@ Class CompraEstado {
         $objCompra->setIdCompra($this->getIdCompra());
         $objCompra->cargar();
         $objCompraEstadoTipo = new CompraEstadoTipo();
-        $objCompraEstadoTipo->setIdCompraEstadoTipo($this->getIdCompraEstadoTipo());
+        $objCompraEstadoTipo->setIdCompraEstadoTipo($this->getIdCompraEstadoTipo()->getIdCompraEstadoTipo());
         $objCompraEstadoTipo->cargar();
-        $sql = "INSERT INTO compraestado (idcompra, idcompraestadotipo, cefechafin) VALUES (" . $objCompra->getIdCompra() . 
+        $sql = "INSERT INTO compraestado (idcompra, idcompraestadotipo, cefechafin) VALUES (" . $objCompra->getIdCompra()->getIdCompra() . 
         ", " . $objCompraEstadoTipo->getIdCompraEstadoTipo() . ", '0000-00-00 00:00:00')";
 
         if ($base->Iniciar()) {
@@ -130,7 +130,7 @@ Class CompraEstado {
         public function modificar() {
             $resp = false;
             $base = new BaseDatos();
-            $sql = "UPDATE compraestado SET idcompra= '{$this->getIdCompra()}', idcompraestadotipo= '{$this->getIdCompraEstadoTipo()->getIdCompraEstadoTipo()}',
+            $sql = "UPDATE compraestado SET idcompra= '{$this->getIdCompra()->getIdCompra()}', idcompraestadotipo= '{$this->getIdCompraEstadoTipo()->getIdCompraEstadoTipo()}',
             cefechaini= '{$this->getCeFechaIni()}', cefechafin= '{$this->getCeFechaFin()}' WHERE idcompraestado= '{$this->getIdCompraEstado()}'";
 
             if ($base->Iniciar()) {

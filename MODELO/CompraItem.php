@@ -143,6 +143,7 @@ Class CompraItem {
         if ($param != "") {
             $sql .= 'WHERE ' . $param;
         }
+        echo $sql;
         $resp = $base->Ejecutar($sql);
         if ($resp > 0) {
             while ($row = $base->Registro()) {

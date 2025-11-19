@@ -8,10 +8,11 @@ $abmCompraEstado = new AbmCompraEstado();
 
 $arrayCarrito = ['idcompra' => $datos['idcompraitem'], 'idcompraestadotipo' => 1];
 $exito = $abmCompraEstado->alta($arrayCarrito);
-
 if ($exito) {
     $message = 'Se envio el carrito correctamente';
     header("Location: ../cliente/carrito.php?Message=" . urlencode($message));
+    $compraItem = new CompraItem();
+    $compraItem->eliminar();
     exit;
 } else {
     $message = 'Hubo un error al enviar su carrito';

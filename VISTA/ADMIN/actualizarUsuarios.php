@@ -11,10 +11,9 @@ $arrayBusqueda = ["idusuario" => $datos['idusuario']];
 
 $listaUsuarios = $abmUsuario->buscar($arrayBusqueda);
 $objUsuario = $listaUsuarios[0];
-
 if (isset($listaUsuarios)) {
     $idUsuario = $listaUsuarios[0]->getIdUsuario();
-    include_once '../estructura/header.php';
+ include_once '../ACCION/ESTRUCTURA/reusables/header.php';
 }
 
 ?>
@@ -77,6 +76,7 @@ if (isset($listaUsuarios)) {
             </div>
 
             <input class="form-control" id="idusuario" name="idusuario" type="text" value="<?php echo $objUsuario->getIdUsuario(); ?>" hidden>
+            
             <div class=" mb-3">
                 <div class="d-grid">
                     <button class="btn btn-primary mt-3" type="submit">Modificar</button>
@@ -88,6 +88,5 @@ if (isset($listaUsuarios)) {
 
 <?php
 
-include_once '../estructura/footer.php';
 
 ?>

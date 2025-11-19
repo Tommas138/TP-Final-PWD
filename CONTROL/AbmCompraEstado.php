@@ -50,7 +50,7 @@ Class AbmCompraEstado {
         $abmProducto = new AbmProducto();
 
         $listadoitems = $abmCompraItem->buscar(['idcompra' => $param['idcompra']]);
-        print_r($listadoitems);
+       // print_r($listadoitems);
         $stock = true;
         //busco stock
         foreach ($listadoitems as $item) {
@@ -74,11 +74,9 @@ Class AbmCompraEstado {
                 $producto = $objProducto->listar("idproducto = '" . $item->getIdProducto()->getIdProducto() . "'");
                 $stockActual = $producto[0]->getProCantStock();
                 $stockActualizado = $stockActual - $item->getCiCantidad();
-                $producto[0]->setProStock($stockActualizado);
-                $vecesCompradoActual = $producto[0]->getProVecesComprado();
-                $vecesCompradoAct = $vecesCompradoActual + $item->getCiCantidad();
-                $producto[0]->setProVecesComprado($vecesCompradoAct);
+                $producto[0]->getProcantstock($stockActualizado);
                 $respModificar = $producto[0]->modificar();
+
                 if (!$respModificar) {
                     $exito = false;
                 }
@@ -111,28 +109,41 @@ Class AbmCompraEstado {
     }
 
     public function enviarCompra($param) {
-        $resp = false;
+    $resp = false;
 
-        if ($this->seteadosCamposClaves($param)) {
-            //busco estadoCompra actual
-            $arreglo = ["idcompra" => $param['idcompraestado']];
-            $arrayBusq = ["idcompra" => $arreglo['idcompra']];
-            $objCompraEstadoBusq = $this->buscar($arrayBusq);
-            //busco estadoTipo 'aceptada'
-            $abmEstadoTipo = new AbmCompraEstadoTipo;
-            $objCompraEstadoTipo = $abmEstadoTipo->buscar(['idcompraestadotipo' => 3]);
-            //set compraEstadoTipo 'aceptada'
-            $objCompraEstadoBusq[0]->setIdCompraEstadoTipo($objCompraEstadoTipo[0]);
-            //Si la compra es not null y la fecha  de fin es igual a 0000-00-00 00:00:00 entonces mod el estadoTipo
-            if ($objCompraEstadoBusq != null && $objCompraEstadoBusq[0]->getCeFechaFin() == "0000-00-00 00:00:00") {
-               $objCompraEstadoBusq[0]->setCeFechaFin(date("Y-m-d H:i:s"));
-                if ($objCompraEstadoBusq[0]->modificar()) {
+    if ($this->seteadosCamposClaves($param)) {
+        // NOTA: En tu vista administrarCompras.php, el input hidden envía el idCompra 
+        // bajo el nombre 'idcompraestado'. Por eso usamos ese parametro para buscar.
+        $idCompra = $param['idcompraestado'];
+
+        // 1. Buscamos todos los estados relacionados a esa compra
+        $objCompraEstadoBusq = $this->buscar(['idcompra' => $idCompra]);
+
+        // 2. Buscamos el objeto del Tipo de Estado "Enviada" (ID 3)
+        $abmEstadoTipo = new AbmCompraEstadoTipo;
+        $objCompraEstadoTipo = $abmEstadoTipo->buscar(['idcompraestadotipo' => 3]);
+
+        // 3. Iteramos para encontrar el estado que está ACTIVO (fecha fin nula/ceros)
+        foreach ($objCompraEstadoBusq as $estado) {
+            // Verificamos que sea el estado activo actual
+            if ($estado->getCeFechaFin() == "0000-00-00 00:00:00") {
+                
+                // Asignamos el nuevo tipo (3 - Enviada)
+                $estado->setIdCompraEstadoTipo($objCompraEstadoTipo[0]);
+                
+                // IMPORTANTE: No seteamos fecha fin aquí (setCeFechaFin), 
+                // porque el envío es un proceso activo.
+                
+                if ($estado->modificar()) {
                     $resp = true;
                 }
+                // Salimos del bucle una vez modificado el activo
+                break;
             }
         }
-        return $resp;
     }
+    return $resp;
+}
 
     public function finCompra($param) {
         $resp = false;
@@ -162,12 +173,9 @@ Class AbmCompraEstado {
                     $abmProducto = new AbmProducto();
                     $objProducto = $item->getIdProducto();
                     $producto = $abmProducto->buscar(['idproducto' => $objProducto->getIdProducto()]);
-                    $stockActual = $producto[0]->getProCantStock();
+                    $stockActual = $producto[0]->getProcantstock();
                     $stockAct = $stockActual + $item->getCiCantidad();
-                    $producto[0]->setProStock($stockAct);
-                    $vecesCompradoActual = $producto[0]->getProVecesComprado();
-                    $vecesCompradoAct = $vecesCompradoActual - $item->getCiCantidad();
-                    $producto[0]->setProVecesComprado($vecesCompradoAct);
+                    $producto[0]->setProcantstock($stockAct);
                     $producto[0]->modificar();
                 }
             }
@@ -175,7 +183,33 @@ Class AbmCompraEstado {
         return $resp;
     }
 
+ public function aceptarCompra($param)
+    {
+        $resp = false;
 
+        if ($this->seteadosCamposClaves($param)) {
+            // Busco el estadoCompra actual
+            $arreglo = ["idcompra" => $param['idcompraestado']];
+            $arrayBusqueda = ["idcompra" => $arreglo['idcompra']];
+            $objCompraEstadoBusqueda = $this->buscar($arrayBusqueda);
+            // Busco el estadoTipo de 'aceptada'
+            $abmEstadoTipo = new AbmCompraEstadoTipo;
+            $objCompraEstadoTipo = $abmEstadoTipo->buscar(['idcompraestadotipo' => 2]);
+            // print_r($objCompraEstadoBusqueda);
+            // Seteo el compraEstadoTipo 'aceptada'
+            $objCompraEstadoBusqueda[0]->setIdCompraEstadoTipo($objCompraEstadoTipo[0]);
+            // print_r($objCompraEstadoTipo[0]->getIdCompraEstadoTipo());
+            // Si la compra no es nula y la fecha de fin de la compraEstado es igual a '0000-00-00 00:00:00' entonces hago la modificacion del estadoTipo
+
+            if ($objCompraEstadoBusqueda != null and $objCompraEstadoBusqueda[0]->getCeFechaFin() == "0000-00-00 00:00:00") {
+                if ($objCompraEstadoBusqueda[0]->modificar()) {
+                    $resp = true;
+                }
+            }
+        }
+
+        return $resp;
+    }
     public function buscar($param) {
         $where = " true ";
 

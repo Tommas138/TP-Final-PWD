@@ -54,8 +54,9 @@ class Compra {
     //Definimos la funcion cargar
     public function cargar() {
         $resp = false;
+        //echo $this->getIdCompra();
         $base = new BaseDatos();
-        $sql = "SELECT * FROM compra WHERE idcompra =" . $this->getIdCompra();
+        $sql = "SELECT * FROM compra WHERE idcompra = 1" ;
         if ($base->Iniciar()) {
             $res = $base->Ejecutar($sql);
             if ($res > 0) {

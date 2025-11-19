@@ -2,7 +2,7 @@
 $titulo = 'Confirmación de Eliminación';
 require_once __DIR__ . '/../../UTILS/funciones.php';
 
-include_once '../estructura/header.php';
+ include_once '../ACCION/ESTRUCTURA/reusables/header.php';
 
 $datos = data_submitted();
 $abmUsuario = new AbmUsuario();
@@ -32,6 +32,6 @@ $id = $datos['idusuario'];
 
 <?php
 
-include_once '../estructura/footer.php';
+
 
 ?>

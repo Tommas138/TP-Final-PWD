@@ -1,7 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../../UTILS/funciones.php';
-
+include_once '../ACCION/ESTRUCTURA/reusables/header.php';
 $datos = data_submitted();
 
 if (!isset($datos["verificado"])) {
@@ -117,7 +117,7 @@ $totalFinalCompra = 0;
                                                 <p class="mb-0"><span>Precio x unidad: <strong>$<?php echo $precio ?>.-</strong></span></p>
                                             </div>
                                             <?php
-                                            $stockFinal = $producto->getProCantStock() - $unidades;
+                                            $stockFinal = $producto->getProcantstock() - $unidades;
                                             if ($stockFinal == 0) {
                                             ?>
                                                 <div class='badge rounded-pill bg-danger text-white position-absolute mt-3'><i class="fas fa-box"></i>&nbsp;Último en stock</span></div>
@@ -138,7 +138,7 @@ $totalFinalCompra = 0;
                             }
                         }
                         ?>
-                        <p class="text-primary mb-0"><i class="fas fa-info-circle mr-1"></i>&nbsp;Haga su compra ahora, agregar items al carrito no significa que se reserven.</p>
+                        <p class="text-primary mb-0"><i class="fas fa-info-circle mr-1"></i>&nbsp;Realize su compra para asegurar stock.</p>
                     </div>
                 </div>
             </div>
@@ -185,5 +185,4 @@ $totalFinalCompra = 0;
 </div>
 
 <?php
-include_once("../estructura/footer.php");
 ?>

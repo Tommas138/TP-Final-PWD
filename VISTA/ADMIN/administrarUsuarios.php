@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../../UTILS/funciones.php';
 
-
+include_once '../ACCION/ESTRUCTURA/reusables/header.php';
 $datos = data_submitted();
 
 if (!isset($datos["verificado"])) {
@@ -14,7 +14,7 @@ $titulo = 'Administración de Usuarios';
 $abmUsuario = new AbmUsuario();
 $listadoUsuarios = $abmUsuario->buscar(null);
 
-include_once '../estructura/header.php';
+
 ?>
 
 <header class="bg-dark py-1">
@@ -50,6 +50,7 @@ include_once '../estructura/header.php';
                             $abmUsuarioRol = new AbmUsuarioRol();
                             $datos['idusuario'] = $id;
                             $listaUsuarioRol = $abmUsuarioRol->buscar($datos);
+                            echo $listaUsuarioRol[0]->getObjRol()->getIdRol();
                             $rol = $listaUsuarioRol[0]->getObjRol()->getRolDescripcion(); ?>
                             <tr>
                                 <td scope='row' class='text-center'><?php echo $id ?></td>
@@ -91,7 +92,7 @@ include_once '../estructura/header.php';
                             </tr>
                         <?php
                                 } else { ?>
-                            <form method='post' action='actualizarUsuario.php'>
+                            <form method='post' action='actualizarUsuarios.php'>
                                 <td class='text-center'>
                                     <input name='idusuario' id='idusuario' type='hidden' value='<?php echo $id ?>'>
                                     <button class='btn btn-warning btn-sm' type='submit' role='button'><i class='bi bi-pencil-square'></i>&nbsp;Editar</button>
@@ -134,6 +135,6 @@ include_once '../estructura/header.php';
 
 <?php
 
-include_once '../estructura/footer.php';
+
 
 ?>

@@ -25,6 +25,7 @@ $enlace = "";
         if ($arrUs[0]->getObjRol()->getIdRol() == 1) {
             ?>
             <a class="navbar-brand navbar-logo" href="../../VISTA/acciones/accionActualizarMenu.php">Administrar Menu</a>
+            <a class="navbar-brand navbar-logo" href="../../VISTA/MANAGERDEPOSITO/administrarCompras.php">Administrar Compras</a>
             <?php
         }
         ?>

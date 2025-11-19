@@ -65,14 +65,13 @@ Class AbmRol {
             if (isset($param['id_rol'])) {
                 $where .= " AND idrol = '" . $param['idrol'];
             }
-
-            if (isset($param['roldescripcion'])) {
-                $where .= " and roldescripcion = '" . $param['roldescripcion'] . "'";
+            if (isset($param['rodescripcion'])) {
+                $where .= " and rodescripcion = '" . $param['rodescripcion'] . "'";
             }
         }
 
         $rol = new Rol();
-        $rol->set($param['idrol'], $param['roldescripcion']);
+        $rol->set($param['idrol'], $param['rodescripcion']);
         $arreglo = $rol->listar($where);
         return $arreglo;
     }

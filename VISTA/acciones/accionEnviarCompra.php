@@ -1,17 +1,26 @@
 <?php
 require_once __DIR__ . '/../../UTILS/funciones.php';
 
-
 $datos = data_submitted();
-$abmComprasIniciadas = new AbmCompraEstado();
-$respuestaEnviarCompra = $abmComprasIniciadas->enviarCompra($datos);
 
-if ($respuestaEnviarCompra) {
-    $message = "Compra enviada exitosamente";
-    header('Location: ../managerDeposito/administrarCompras.php?Message=' . urlencode($message));
-    exit;
-} else {
-    $message = "No se pudo enviar la compra";
-    header('Location: ../managerDeposito/administrarCompras.php?Message=' . urlencode($message));
-    exit;
+$resp = false;
+$abmCompraEstado = new AbmCompraEstado();
+
+if (isset($datos['idcompraestado'])) {
+    // Llamamos a la función corregida
+    if ($abmCompraEstado->enviarCompra($datos)) {
+        $resp = true;
+    }
 }
+
+if ($resp) {
+    $mensaje = "La compra pasó a estado Enviada.";
+} else {
+    $mensaje = "Error al cambiar el estado de la compra.";
+}
+
+// Redireccionar de vuelta a la administración
+echo "<script>
+        window.location.href = '../home/index.php?Message=" . urlencode($mensaje) . "';
+      </script>";
+?>

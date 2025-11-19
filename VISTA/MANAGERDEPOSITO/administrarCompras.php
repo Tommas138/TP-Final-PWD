@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../../UTILS/funciones.php';
 
-
+include_once '../ACCION/ESTRUCTURA/reusables/header.php';
 $titulo = 'Administración de Compras';
 
 $datos = data_submitted();
@@ -10,7 +10,6 @@ if (!isset($datos["verificado"])) {
     $controlIngresoManagerDeposito = new ControlIngresoManagerDeposito();
     $controlIngresoManagerDeposito->verificarIngreso("administrarCompras");
 }
-include_once '../estructura/header.php';
 
 $abmComprasIniciadas = new AbmCompraEstado();
 $listaComprasIniciadas = $abmComprasIniciadas->buscar(null);
@@ -127,6 +126,5 @@ $listaComprasIniciadas = $abmComprasIniciadas->buscar(null);
 
 <?php
 
-include_once '../estructura/footer.php';
 
 ?>
