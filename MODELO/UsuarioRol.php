@@ -1,71 +1,82 @@
 <?php
 
-Class UsuarioRol {
+class UsuarioRol
+{
     private $objRol;
     private $objUsuario;
     private $mensajeOperacion;
     private $objID;
 
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->objUsuario = null;
         $this->objRol = null;
         $this->objID = "";
         $this->mensajeOperacion = "";
     }
 
-    public function getObjUsuario() {
+    public function getObjUsuario()
+    {
         return $this->objUsuario;
     }
 
-    public function getObjRol() {
+    public function getObjRol()
+    {
         return $this->objRol;
     }
-    public function getMensajeOperacion() {
+    public function getMensajeOperacion()
+    {
         return $this->mensajeOperacion;
     }
 
-    public function getObjID() {
+    public function getObjID()
+    {
         return $this->objID;
     }
 
-    public function setObjUsuario($objUsuario) {
+    public function setObjUsuario($objUsuario)
+    {
         $this->objUsuario = $objUsuario;
     }
-    public function setObjRol($objRol) {
+    public function setObjRol($objRol)
+    {
         $this->objRol = $objRol;
     }
-    public function setMensajeOperacion($mensajeOperacion) {
+    public function setMensajeOperacion($mensajeOperacion)
+    {
         $this->mensajeOperacion = $mensajeOperacion;
     }
 
-    public function set($objUsuario, $objRol) {
+    public function set($objUsuario, $objRol)
+    {
         $this->setObjUsuario($objUsuario);
         $this->setObjRol($objRol);
     }
 
-    public function cargar() {
+    public function cargar()
+    {
         $resp = false;
         $base = new BaseDatos();
         $sql = "SELECT * FROM usuariorol WHERE idusuario = " . $this->getObjUsuario()->getIdUsuario() . " AND idrol = " . $this->getObjRol()->getIdRol();
 
         if ($base->Iniciar()) {
             $res = $base->Ejecutar($sql);
-                if ($res > 0) {
-                    $row = $base->Registro();
-                    $objUsuario = null;
-                    if ($row['idusuario'] != null) {
-                        $objUsuario = new Usuario();
-                        $objUsuario->setIdUsuario($row['idusuario']);
-                        $objUsuario->cargar();
-                    }
-                    $objRol = null;
-                    if ($row['idrol'] != null) {
-                        $objRol = new Rol();
-                        $objRol->setIdRol($row['idrol']);
-                        $objRol->cargar();
-                    }
-                    $this->set($row['idusuario'], $row['idrol']);;
+            if ($res > 0) {
+                $row = $base->Registro();
+                $objUsuario = null;
+                if ($row['idusuario'] != null) {
+                    $objUsuario = new Usuario();
+                    $objUsuario->setIdUsuario($row['idusuario']);
+                    $objUsuario->cargar();
+                }
+                $objRol = null;
+                if ($row['idrol'] != null) {
+                    $objRol = new Rol();
+                    $objRol->setIdRol($row['idrol']);
+                    $objRol->cargar();
+                }
+                $this->set($row['idusuario'], $row['idrol']);;
             }
         } else {
             $this->setMensajeOperacion("UsuarioRol->Cargar: " . $base->getError());
@@ -73,7 +84,8 @@ Class UsuarioRol {
         return $resp;
     }
 
-    public function insertar() {
+    public function insertar()
+    {
         $resp = false;
         $base = new BaseDatos();
         $objUsuario = $this->getObjUsuario();
@@ -91,7 +103,27 @@ Class UsuarioRol {
         return $resp;
     }
 
-    public function eliminar() {
+    public function eliminarPorID($id)
+    {
+        $resp = false;
+        $base = new BaseDatos();
+        $sql = "DELETE FROM usuariorol WHERE idusuario=" . $id;
+        if ($base->Iniciar()) {
+            if ($base->Ejecutar($sql)) {
+                $resp = true;
+            } else {
+                $this->setMensajeOperacion("usuariorol->eliminar: " . $base->getError());
+            }
+        } else {
+            $this->setMensajeOperacion("usuariorol->eliminar: " . $base->getError());
+        }
+        return $resp;
+    }
+
+
+
+    public function eliminar()
+    {
         $resp = false;
         $base = new BaseDatos();
         // Se corrige DELETE * FROM idusuario... por DELETE FROM usuariorol WHERE...
@@ -108,7 +140,8 @@ Class UsuarioRol {
         return $resp;
     }
 
-    public function listar($param = "") {
+    public function listar($param = "")
+    {
         $arreglo = array();
         $base = new BaseDatos();
         $sql = "SELECT * FROM usuariorol ";
@@ -142,7 +175,8 @@ Class UsuarioRol {
         return $arreglo;
     }
 
-    public function modificar() {
+    public function modificar()
+    {
         $resp = false;
         $base = new BaseDatos();
         $idUsuario = $this->getObjUsuario()->getIdUsuario();

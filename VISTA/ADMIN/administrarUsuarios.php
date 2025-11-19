@@ -15,7 +15,7 @@ $abmUsuario = new AbmUsuario();
 $listadoUsuarios = $abmUsuario->buscar(null);
 $sesionAdministrarUsuarios = new Session();
 
-// print_r($sesionAdministrarUsuarios->getUsRoles()[0]->getObjRol()->getIdRol());
+print_r($sesionAdministrarUsuarios->getUsRoles()[0]->getObjRol()->getIdRol());
 
 ?>
 

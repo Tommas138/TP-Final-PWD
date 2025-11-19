@@ -1,6 +1,7 @@
 <?php
 
 include_once 'conector/BaseDatos.php';
+include_once __DIR__ . '/./Rol.php';
 
 class Usuario {
     private $idusuario;
@@ -84,7 +85,7 @@ class Usuario {
         }
         return $resp;
     }
-
+    
     //Definimos la funcion insertar
     public function insertar() {
         $resp = false;
@@ -140,6 +141,27 @@ class Usuario {
         }
         return $resp;
     }
+
+    public function eliminarPorID($id){
+        $resp = false;
+        $base = new BaseDatos();
+        $usuarioRol = new UsuarioRol();
+        if($usuarioRol->eliminarPorID($id)){
+            $sql = "DELETE FROM usuario WHERE idusuario=" . $id;
+            if($base->Iniciar()) {
+                if($base->Ejecutar($sql)) {
+                    $resp = true;
+                } else {
+                    $this->setMensajeOperacion("usuario->eliminar: " . $base->getError());
+                }
+            } else {
+                $this->setMensajeOperacion("usuario->eliminar: " . $base->getError());
+            }
+        }
+        return $resp;
+    }
+
+
 
     //Definimos la ffuncion eliminar 
     public function eliminar() {

@@ -84,6 +84,13 @@ class AbmUsuario {
         return $resp;
     }
 
+    public function eliminarPorID($id){
+        $usuario = new Usuario();
+        $usuario->eliminarPorID($id);
+    }
+
+
+
     //Definimos la funcion baja
     public function baja($param) {
         $resp = false;
