@@ -175,7 +175,7 @@ $totalFinalCompra = 0;
                                 <div class="text-center">
                                 <a href="compras.php"><button class='btn btn-success m-1' type='submit' role='button'>Volver al historial</button></a>
                                 </div>
-                                    <a href=""> <button class='btn btn-success m-1' type='submit' role='button'>Confirmar Pedido</button>
+                                    <a href="compra.php"> <button class='btn btn-success m-1' type='submit' role='button'>Confirmar Pedido</button>
                                 <?php
                                 } ?>
                             </form>
