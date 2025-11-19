@@ -26,6 +26,7 @@ $enlace = "";
             ?>
             <a class="navbar-brand navbar-logo" href="../../VISTA/acciones/accionActualizarMenu.php">Administrar Menu</a>
             <a class="navbar-brand navbar-logo" href="../../VISTA/MANAGERDEPOSITO/administrarCompras.php">Administrar Compras</a>
+            <a class="navbar-brand navbar-logo" href="../../VISTA/ADMIN/administrarUsuarios.php">Administrar Usuarios</a>
             <?php
         }
         ?>
