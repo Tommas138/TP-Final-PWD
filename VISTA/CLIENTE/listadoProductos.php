@@ -29,6 +29,7 @@ $listaProductos = $abmProductos->buscar(null);
                         $idHashImg = strtolower($idHash);
                         $deshabilitado = isset($producto->proDeshabilitado) ? $producto->proDeshabilitado : '0000-00-00 00:00:00'; //Defino la variable debido a que tira error
                         if ($deshabilitado == "0000-00-00 00:00:00" && $producto->getProCantStock() > 0) { ?>
+                               <form method='post' action='../acciones/accionAgregarItemCarrito.php'>
                             <div class='col mb-5' >
                                 <div class='card shadow h-100' style="background-color: #858c96ff;;">
                                     <?php
@@ -60,7 +61,7 @@ $listaProductos = $abmProductos->buscar(null);
                                     ?>
 
                                     <img class='card-img-top' src='<?php echo $imgSrc ?>' alt='<?php echo htmlspecialchars($producto->getProNombre(), ENT_QUOTES) ?>' />
-
+                                    <input type="hidden" name="idproducto" value="<?php echo $producto->getIdProducto(); ?>">
                                     <div class='card-body p-4' >
                                         <div class='text-center'>
                                             <h5 class='fw-bolder'><?php echo $producto->getProNombre() ?></h5>
@@ -72,9 +73,11 @@ $listaProductos = $abmProductos->buscar(null);
                                     if ($sesion->activa()) {
                                        
                                         ?>
+                                     
                                         <div class='card-footer p-4 pt-0 border-top-0 bg-transparent'>
-                                            <div class='text-center'><a class='btn btn-outline-dark mt-auto' href='../login/login.php'>Agregar al carrito</a></div>
+                                            <div class='text-center'><button class='btn btn-outline-dark mt-auto' type='submit' role='button'>Agregar al carrito</button></div>
                                         </div>
+                                        </form>
                                     <?php
                                     }
                                     ?>

@@ -171,4 +171,22 @@ class Menu {
         }
         return $arreglo;
     }
+
+    public function estado($param = "")
+    {
+        $resp = false;
+        $base = new BaseDatos();
+        $sql = "UPDATE menu SET medeshabilitado='" . $param . "' WHERE idmenu=" . $this->getIdMenu();
+        if ($base->Iniciar()) {
+            if ($base->Ejecutar($sql)) {
+                $resp = true;
+            } else {
+                $this->setMensajeOperacion("usuario->estado: " . $base->getError());
+            }
+        } else {
+            $this->setMensajeOperacion("usuario->estado: " . $base->getError());
+        }
+
+        return $resp;
+    }
 }

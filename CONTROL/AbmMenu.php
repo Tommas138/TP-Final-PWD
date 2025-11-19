@@ -89,4 +89,24 @@ Class AbmMenu {
         return $arreglo;
     }
 
+
+    public function deshabilitarMenu($param)
+    {
+        $resp = false;
+        $objMenu = $this->cargarObjetoConClave($param);
+        $listadoMenus = $objMenu->listar("idmenu=" . $param['idmenu']);
+        if (count($listadoMenus) > 0) {
+            $estadoMenu = $listadoMenus[0]->getMeDeshabilitado();
+            if ($estadoMenu == '0000-00-00 00:00:00') {
+                if ($objMenu->estado(date("Y-m-d H:i:s"))) {
+                    $resp = true;
+                }
+            } else {
+                if ($objMenu->estado()) {
+                    $resp = true;
+                }
+            }
+        }
+        return $resp;
+    }
 }

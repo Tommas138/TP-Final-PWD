@@ -48,30 +48,30 @@ Class AbmCompraItem {
         $resp = false;
         // traigo carritos del us
         $controlVerificarCarrito = new controlVerificarCarritoCliente();
-        $arrayCarritos = $controlVerificarCarrito->verificarCarrito($param['iduser']);
+        $arrayCarritos = $controlVerificarCarrito->verificarCarrito($param['idusuario']);
         // carrito habilitado
         $carrito = $arrayCarritos['carritoHabilitado'];
         // si no existe creo nuevo carrito
         if ($carrito == null || !($carrito instanceof Compra)) {
             $abmCarrito = new AbmCompra();
-            $array = ['idusuario' => $param['iduser']];
+            $array = ['idusuario' => $param['idusuario']];
             // alta de carrito
             $altaCarrito = $abmCarrito->alta($array);
             if ($altaCarrito) {
                 //traigo carrito
-                $arrayCarritos = $controlVerificarCarrito->verificarCarrito($param['iduser']);
+                $arrayCarritos = $controlVerificarCarrito->verificarCarrito($param['idusuario']);
                 $carrito = $arrayCarritos['carritoHabilitado'];
             }
         }
         // validar que carrito existe antes de continuar
         if ($carrito == null) {
-            error_log("AbmCompraItem::alta - No se pudo crear/obtener carrito para usuario " . $param['iduser']);
+            error_log("AbmCompraItem::alta - No se pudo crear/obtener carrito para usuario " . $param['idusuario']);
             return $resp;
         }
         // saco id carrito actual
         $idCarrito = $carrito->getIdCompra();
         //establezco datos de interes, idProducto e idCarrito
-        $arrayCargaItem = ['idproducto' => $param['codigoProducto'], 'idcompra' => $idCarrito];
+        $arrayCargaItem = ['idproducto' => $param['idproducto'], 'idcompra' => $idCarrito];
         $cargado = false;
         // lista de items cargados en el carrito
         $arrayItemsCarrito = $this->buscar(['idcompra' => $carrito->getIdCompra()]);

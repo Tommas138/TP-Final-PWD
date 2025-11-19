@@ -14,7 +14,7 @@ if (!isset($datos["verificado"])) {
 $abmMenu = new AbmMenu();
 $listadoMenus = $abmMenu->buscar(null);
 
-include_once '../estructura/header.php';
+include_once '../ACCION/ESTRUCTURA/reusables/header.php';
 
 ?>
 
@@ -113,6 +113,5 @@ include_once '../estructura/header.php';
 
 <?php
 
-include_once '../estructura/footer.php';
 
 ?>

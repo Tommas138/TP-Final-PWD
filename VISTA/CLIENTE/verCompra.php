@@ -14,10 +14,10 @@ if ($sesion->activa()) {
 
 $titulo = 'Compra';
 
-include_once "../estructura/header.php";
+include_once '../ACCION/ESTRUCTURA/reusables/header.php';
 
 $abmItemsCompra = new AbmCompraItem();
-$compraItems = $abmItemsCompra->buscar(['idcompra' => $datos['idcompra']]);
+$compraItems = $abmItemsCompra->buscar($datos);
 $subTotalCompra = 0;
 $iva = 0;
 $totalFinalCompra = 0;
