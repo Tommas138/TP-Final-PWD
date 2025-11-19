@@ -9,7 +9,7 @@ Class ControlIngresoAdmin {
             exit;
         }
 
-        if ($session->getUsRoles()[0] != 1) {
+        if ($session->getUsRoles()[0]->getObjRol()->getIdRol() != 1) {
             header('Location: ../home/index.php');
             exit;
         } else {
