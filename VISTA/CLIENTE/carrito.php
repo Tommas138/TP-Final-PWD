@@ -51,7 +51,6 @@ $totalFinalCompra = 0;
                         $subTotalCompra = 0;
                         $iva = 0;
                         $totalFinalCompra = 0;
-                        print_r($compraItems);
                         if (count($compraItems)) {
 
 
@@ -172,14 +171,12 @@ $totalFinalCompra = 0;
                         <div class="text-center">
                             <form method='post' action='../acciones/accionEnviarCarrito.php'>
                                 <input name='idcompraitem' id='idcompraitem' type='hidden' value='<?php echo $carrito->getIdCompra(); ?>'>
-                                <?php if (count($compraItems) > 0) {
-                                ?>
-                                <div class="text-center">
-                                <a class='btn btn-success m-1' type='submit' role='button'>Volver al historial</a>
-                                </div>
-                                    <a href="compra.php"> <button class='btn btn-success m-1' type='submit' role='button'>Confirmar Pedido</button>
-                                <?php
-                                } ?>
+                                <?php if (count($compraItems) > 0) { ?>
+                                    <div class="text-center">
+                                        <a class='btn btn-success m-1' href='historial.php' role='button'>Volver al historial</a>
+                                        <button class='btn btn-success m-1' type='submit'>Confirmar Pedido</button>
+                                    </div>
+                                <?php } ?>
                             </form>
                         </div>
                     </div>

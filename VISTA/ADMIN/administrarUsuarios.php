@@ -78,11 +78,11 @@ $sesionAdministrarUsuarios = new Session();
                                 <?php
                                 $estado = $usuario->getUsdeshabilitado();
                                 if ($estado == "0000-00-00 00:00:00") {
-                                    $estado = "";
+                                    $estado = "No está deshabilitado";
                                 }
                                 ?>
 
-                                <td scope='row'><?php echo $estado ?></td>
+                                <td scope='row' class="text-center"><?php echo $estado ?></td>
 
                                 <?php
                                 if ($id == $sesionAdministrarUsuarios->getIdUsuario()) { ?>
