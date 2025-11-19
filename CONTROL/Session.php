@@ -172,22 +172,22 @@ class Session
     //  * Consigue al rol del usuario a loggearse
     //  * @return string $rol
     //  */
-    // public function getRol()
-    // {
-    //     $abmUsuarioRol = new AbmUsuarioRol();
-    //     $usuario = $this->getUsuario();
-    //     $idUsuario = $usuario->getIdUsuario();
-    //     $param = ['idusuario' => $idUsuario];
-    //     $listaRolesUsu = $abmUsuarioRol->buscar($param);
+    //public function getRol()
+    //{
+    //    $abmUsuarioRol = new AbmUsuarioRol();
+    //    $usuario = $this->getUsuario();
+    //    $idUsuario = $usuario->getIdUsuario();
+    //    $param = ['idusuario' => $idUsuario];
+    //    $listaRolesUsu = $abmUsuarioRol->buscar($param);
 
-    //     if ($listaRolesUsu > 1) {
-    //         $rol = $listaRolesUsu;
-    //     } else {
-    //         $rol = $listaRolesUsu[0];
-    //     }
+    //    if ($listaRolesUsu > 1) {
+    //        $rol = $listaRolesUsu;
+    //    } else {
+    //        $rol = $listaRolesUsu[0];
+    //    }
 
-    //     return $rol;
-    // }
+    //    return $rol;
+    //}
 
     /**
      * Destruye la session creada.

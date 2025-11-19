@@ -3,7 +3,7 @@ require_once __DIR__ . '/../../UTILS/funciones.php';
 
 $titulo = 'Confirmación de Eliminación';
 
-include_once '../estructura/header.php';
+include_once '../ACCION/ESTRUCTURA/reusables/header.php';
 
 $datos = data_submitted();
 $abmMenu = new AbmMenu();
@@ -33,6 +33,6 @@ $id = $datos['idmenu'];
 
 <?php
 
-include_once '../estructura/footer.php';
+
 
 ?>

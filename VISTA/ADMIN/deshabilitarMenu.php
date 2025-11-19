@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../../UTILS/funciones.php';
 
-
+include_once '../ACCION/ESTRUCTURA/reusables/header.php';
 $datos = data_submitted();
 $abmMenu = new AbmMenu();
 
@@ -23,6 +23,6 @@ if ($respuestaDeshabilitado) {
 
 <?php
 
-include_once '../estructura/footer.php';
+
 
 ?>
