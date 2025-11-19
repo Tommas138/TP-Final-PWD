@@ -58,7 +58,6 @@ Class Rol {
         return $resp;
     }
 
-
     public function cargar() {
         $resp = false;
         $base = new BaseDatos();
@@ -95,6 +94,25 @@ Class Rol {
         }
         return $resp;
     }
+
+    public function eliminarPorID($id)
+    {
+        $resp = false;
+        $base = new BaseDatos();
+        $sql = "DELETE FROM rol WHERE idrol=" . $id;
+        if ($base->Iniciar()) {
+            if ($base->Ejecutar($sql)) {
+                $resp = true;
+            } else {
+                $this->setMensajeOperacion("usuariorol->eliminar: " . $base->getError());
+            }
+        } else {
+            $this->setMensajeOperacion("usuariorol->eliminar: " . $base->getError());
+        }
+        return $resp;
+    }
+
+
 
     public function eliminar() {
         $resp = false;

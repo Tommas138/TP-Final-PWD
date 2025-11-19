@@ -106,6 +106,7 @@ class UsuarioRol
     public function eliminarPorID($id)
     {
         $resp = false;
+        $rol = new Rol();
         $base = new BaseDatos();
         $sql = "DELETE FROM usuariorol WHERE idusuario=" . $id;
         if ($base->Iniciar()) {

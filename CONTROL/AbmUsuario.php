@@ -2,6 +2,7 @@
 
 include_once __DIR__ . '/../MODELO/Usuario.php';
 include_once __DIR__ . '/../CONTROL/AbmUsuarioRol.php';
+include_once __DIR__ . '/../CONTROL/AbmRol.php';
 
 
 class AbmUsuario {
@@ -84,9 +85,21 @@ class AbmUsuario {
         return $resp;
     }
 
-    public function eliminarPorID($id){
+    public function eliminarUsuarioPorID($id){
+        $resp = false;
+        $abmRol = new AbmUsuarioRol();
+        $rol = new Rol();
         $usuario = new Usuario();
+        $usuarioRol = new UsuarioRol();
+        $arrayIDRol = ["idusuario" => $id];
+
+        $rolUsuarioEliminar = $abmRol->buscar($arrayIDRol)[0]->getObjRol()->getIdRol();
+        
+        $usuarioRol->eliminarPorID($rolUsuarioEliminar);
+        $rol->eliminarPorID($rolUsuarioEliminar); 
         $usuario->eliminarPorID($id);
+
+        return $resp;
     }
 
 

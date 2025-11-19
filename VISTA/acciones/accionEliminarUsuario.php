@@ -13,12 +13,8 @@ if (!$sesion->activa()) {
 }
 $abmUsuario = new AbmUsuario();
 $idUsuarioSesion = $sesion->getIdUsuario();
-print_r($datos);
 if (isset($datos)) {
-    // $datos['idusuariosesion'] = $idUsuarioSesion;
-    // $exito = $abmUsuario->baja($datos);
-    $usuario->eliminarPorID($datos["idusuario"]);
-    
+    $exito = $usuario->eliminarUsuarioPorID($datos["idusuario"]);
     if ($exito) {
         $message = 'Eliminacion exitosa';
         header("Location: ../admin/administrarUsuarios.php?Message=" . urlencode($message));

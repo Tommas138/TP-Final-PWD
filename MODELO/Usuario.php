@@ -85,7 +85,7 @@ class Usuario {
         }
         return $resp;
     }
-    
+
     //Definimos la funcion insertar
     public function insertar() {
         $resp = false;
@@ -145,18 +145,15 @@ class Usuario {
     public function eliminarPorID($id){
         $resp = false;
         $base = new BaseDatos();
-        $usuarioRol = new UsuarioRol();
-        if($usuarioRol->eliminarPorID($id)){
-            $sql = "DELETE FROM usuario WHERE idusuario=" . $id;
-            if($base->Iniciar()) {
-                if($base->Ejecutar($sql)) {
-                    $resp = true;
-                } else {
-                    $this->setMensajeOperacion("usuario->eliminar: " . $base->getError());
-                }
+        $sql = "DELETE FROM usuario WHERE idusuario=" . $id;
+        if($base->Iniciar()) {
+            if($base->Ejecutar($sql)) {
+                $resp = true;
             } else {
                 $this->setMensajeOperacion("usuario->eliminar: " . $base->getError());
             }
+        } else {
+            $this->setMensajeOperacion("usuario->eliminar: " . $base->getError());
         }
         return $resp;
     }
