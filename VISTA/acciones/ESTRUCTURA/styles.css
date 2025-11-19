@@ -75,8 +75,8 @@ nav {
 
 /* animacion del logo  */
 
-a {
-  font-size: 2rem;
+.navbar-button {
+  font-size: 1.5rem;
   margin-left: 10px;
   color:  white;
   text-decoration: none;
@@ -92,7 +92,7 @@ a {
 	    background-position: 100%;
 }
 
-a:hover {
+.navbar-button:hover {
   transition: all 0.3s cubic-bezier(0.000, 0.000, 0.230, 1);
   background-position: 0%;
   -webkit-transition: all 0.3s cubic-bezier(0.000, 0.000, 0.230, 1);
