@@ -62,16 +62,20 @@ Class AbmRol {
     public function buscar($param) {
         $where = " true ";
         if ($param != null) {
-            if (isset($param['id_rol'])) {
-                $where .= " AND idrol = '" . $param['idrol'];
+            if (isset($param['idrol'])) {
+                $where .= " AND idrol = " . $param['idrol'];
             }
             if (isset($param['rodescripcion'])) {
-                $where .= " and rodescripcion = '" . $param['rodescripcion'] . "'";
+                $where .= " AND rodescripcion = '" . $param['rodescripcion'] . "'";
             }
         }
 
         $rol = new Rol();
-        $rol->set($param['idrol'], $param['rodescripcion']);
+        if(isset($param["rodescripcion"])){
+            $rol->set($param['idrol'], $param["rodescripcion"]);
+        } else {
+            $rol->set($param['idrol'], rolDescripcion: null);
+        }
         $arreglo = $rol->listar($where);
         return $arreglo;
     }

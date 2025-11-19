@@ -52,21 +52,21 @@ if (isset($listaUsuarios)) {
                 ?>
                     <div class="col-md-4">
                         <div class="mt-2">
-                            <input class="form-check-input" id="admin" name="idrol" type="radio" value="1" <?php if ($rol == 1) { ?> checked <?php } ?>>
+                            <input class="form-check-input" id="admin" name="idrol" type="radio" value="1">
                             <label for="admin">Administrador</label>
                         </div>
                     </div>
 
                     <div class="col-md-4">
                         <div class="mt-2">
-                            <input class="form-check-input" id="deposito" name="idrol" type="radio" value="2" <?php if ($rol == 2) { ?> checked <?php } ?>>
+                            <input class="form-check-input" id="deposito" name="idrol" type="radio" value="2">
                             <label for="deposito">Depósito</label>
                         </div>
                     </div>
 
                     <div class="col-md-4">
                         <div class="mt-2">
-                            <input class="form-check-input" id="cliente" name="idrol" type="radio" value="3" <?php if ($rol == 3) { ?> checked <?php } ?>>
+                            <input class="form-check-input" id="cliente" name="idrol" type="radio" value="3">
                             <label for="cliente">Cliente</label>
                         </div>
                     </div>

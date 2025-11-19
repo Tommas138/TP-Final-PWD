@@ -72,7 +72,11 @@ class AbmUsuario {
         if ($lista != null) {
             $objUs = new Usuario();
             $pass = md5($param['uspass']);
-            $objUs->set($param['idusuario'], $param['usnombre'], $pass, $param['usmail'], $param['usdeshabilitado']);
+            if(isset($param["usdeshabilitado"])){
+                $objUs->set($param['idusuario'], $param['usnombre'], $pass, $param['usmail'], $param["usdeshabilitado"]);
+            } else {
+                $objUs->set($param['idusuario'], $param['usnombre'], $pass, $param['usmail'], null);
+            }
             if($objUs->modificar()) {
                 $resp = true;
             }
