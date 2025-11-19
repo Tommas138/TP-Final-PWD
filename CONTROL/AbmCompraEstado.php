@@ -2,6 +2,7 @@
 
 include_once __DIR__ . '/../MODELO/CompraEstado.php';
 include_once __DIR__ . '/../MODELO/Compra.php';
+include_once __DIR__ . '/../MODELO/CompraItem.php';
 include_once __DIR__ . '/../MODELO/CompraEstadoTipo.php';
 
 Class AbmCompraEstado {

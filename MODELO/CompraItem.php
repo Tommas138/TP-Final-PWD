@@ -1,5 +1,5 @@
 <?php
-
+include_once __DIR__ . '/conector/BaseDatos.php';
 Class CompraItem {
     private $idcompraitem;
     private $idproducto;
@@ -123,7 +123,7 @@ Class CompraItem {
     public function eliminar() {
         $resp = false;
         $base = new BaseDatos();
-        $sql = "DELETE FROM compraitem WHERE idcompraitem = " . $this->getIdCompraItem();
+        $sql = "DELETE FROM compraitem WHERE idcompra = " . $this->getIdCompra();
         if ($base->Iniciar()) {
             if ($base->Ejecutar($sql)) {
                 $resp = true;
@@ -141,9 +141,9 @@ Class CompraItem {
         $base = new BaseDatos();
         $sql = "SELECT * FROM compraitem ";
         if ($param != "") {
-            $sql .= 'WHERE ' . $param;
+            $sql .= ' WHERE ' . $param;
         }
-        //echo $sql;
+
         $resp = $base->Ejecutar($sql);
         if ($resp > 0) {
             while ($row = $base->Registro()) {
@@ -168,6 +168,7 @@ Class CompraItem {
         } else {
             $this->setMensajeOperacion("CompraItem->Listar: " . $base->getError());
         }
+
         return $arreglo;
     }
 }

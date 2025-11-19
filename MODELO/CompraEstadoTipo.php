@@ -1,5 +1,5 @@
 <?php
-
+include_once __DIR__ . '/conector/BaseDatos.php';
 Class CompraEstadoTipo {
     private $idcompraestadotipo;
     private $cetdescripcion;
