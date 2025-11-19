@@ -11,7 +11,7 @@ $idUser = $user->getIdUsuario();
 
 $abmCompraItem = new AbmCompraItem(); 
 $datos['idusuario'] = $idUser;
-print_r($datos);
+//print_r($datos);
 $exito = $abmCompraItem->alta($datos);
 
 if ($exito) {

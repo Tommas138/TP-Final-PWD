@@ -9,7 +9,6 @@ $sesion = new Session();
 $abmProductos = new AbmProducto();
 $listaProductos = $abmProductos->buscar(null);
 shuffle($listaProductos);
-
 ?>
 <!-- Header-->
 

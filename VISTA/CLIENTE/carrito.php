@@ -172,7 +172,10 @@ $totalFinalCompra = 0;
                                 <input name='idcompraitem' id='idcompraitem' type='hidden' value='<?php echo $carrito->getIdCompra(); ?>'>
                                 <?php if (count($compraItems) > 0) {
                                 ?>
-                                    <button class='btn btn-success m-1' type='submit' role='button'>Confirmar Pedido</button>
+                                <div class="text-center">
+                                <a href="compras.php"><button class='btn btn-success m-1' type='submit' role='button'>Volver al historial</button></a>
+                                </div>
+                                    <a href="compra.php"> <button class='btn btn-success m-1' type='submit' role='button'>Confirmar Pedido</button>
                                 <?php
                                 } ?>
                             </form>

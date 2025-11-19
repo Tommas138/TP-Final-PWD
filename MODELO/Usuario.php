@@ -184,12 +184,13 @@ class Usuario {
         $base = new BaseDatos();
         $sql = "SELECT * FROM usuario ";
         if($condicion != "") {
-            $sql .= 'WHERE ' . $condicion;
+            $sql .= ' WHERE ' . $condicion;
         }
         $res = $base->Ejecutar($sql);
         if($res > 0) {
             while ($fila = $base->Registro()) {
                 $obj = new Usuario();
+              //  print_r($fila['idusuario']);
                 $obj->set($fila['idusuario'], $fila['usnombre'], $fila['uspass'], $fila['usmail'], $fila['usdeshabilitado']);
                 array_push($arreglo, $obj);
             }
