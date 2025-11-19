@@ -52,7 +52,6 @@ print_r($sesionAdministrarUsuarios->getUsRoles()[0]->getObjRol()->getIdRol());
                             $abmUsuarioRol = new AbmUsuarioRol();
                             $datos['idusuario'] = $id;
                             $listaUsuarioRol = $abmUsuarioRol->buscar($datos);
-                            echo $listaUsuarioRol[0]->getObjRol()->getIdRol();
                             $rol = $listaUsuarioRol[0]->getObjRol()->getRolDescripcion(); ?>
                             <tr>
                                 <td scope='row' class='text-center'><?php echo $id ?></td>
