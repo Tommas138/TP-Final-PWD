@@ -170,6 +170,7 @@ $totalFinalCompra = 0;
                         <div class="text-center">
                             <form method='post' action='../acciones/accionEnviarCarrito.php'>
                                 <input name='idcompraitem' id='idcompraitem' type='hidden' value='<?php echo $carrito->getIdCompra(); ?>'>
+                                <input name='idusuario' id='idusuario' type='hidden' value='<?php echo $carrito->getIdUsuario(); ?>'>
                                 <?php if (count($compraItems) > 0) {
                                 ?>
                                     <button class='btn btn-success m-1' type='submit' role='button'>Confirmar Pedido</button>

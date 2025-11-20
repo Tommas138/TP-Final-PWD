@@ -12,6 +12,10 @@ $datos = data_submitted();
 $abmComprasIniciadas = new AbmCompraEstado();
 $respuestaFinCompra = $abmComprasIniciadas->finCompra($datos);
 
+// aca tengo todos los items de la compra $listadoitems = $abmCompraItem->buscar(['idcompra' => $param['idcompra']]);
+if($respuestaFinCompra){
+    
+}
 if ($respuestaFinCompra) {
     $message = "Compra finalizada exitosamente";
     header('Location: ../home/index.php?Message=' . urlencode($message));
