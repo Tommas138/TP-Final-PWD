@@ -16,7 +16,7 @@ $listaProductos = $abmProductos->buscar(null);
         </div>
     </div>
 </header>
-<body style="background-color: #858c96ff;">
+<body style="background-color: white;">
 <div class="container mt-2" >
     <section class="py-2">
         <div class="container px-4 px-lg-5 mt-5">
@@ -29,9 +29,9 @@ $listaProductos = $abmProductos->buscar(null);
                         $idHashImg = strtolower($idHash);
                         $deshabilitado = isset($producto->proDeshabilitado) ? $producto->proDeshabilitado : '0000-00-00 00:00:00'; //Defino la variable debido a que tira error
                         if ($deshabilitado == "0000-00-00 00:00:00" && $producto->getProCantStock() > 0) { ?>
-                               <form method='post' action='../acciones/accionAgregarItemCarrito.php'>
+                               <form id="tarjetaSuplemento" method='post' action='../acciones/accionAgregarItemCarrito.php'>
                             <div class='col mb-5' >
-                                <div class='card shadow h-100' style="background-color: #858c96ff;;">
+                                <div class='card shadow h-100' style="background-color: white;;">
                                     <?php
                                     //Los ifs siguientes son para los carteles avisando de las ultimas unidades
                                     if ($producto->getProCantStock() == 1) { ?>
@@ -59,8 +59,9 @@ $listaProductos = $abmProductos->buscar(null);
                                         }
                                     }
                                     ?>
-
-                                    <img class='card-img-top' src='<?php echo $imgSrc ?>' alt='<?php echo htmlspecialchars($producto->getProNombre(), ENT_QUOTES) ?>' />
+                                    <div id="imagenSuplemento">
+                                        <img class='card-img-top' src='<?php echo $imgSrc ?>' alt='<?php echo htmlspecialchars($producto->getProNombre(), ENT_QUOTES) ?>' />
+                                    </div>
                                     <input type="hidden" name="idproducto" value="<?php echo $producto->getIdProducto(); ?>">
                                     <div class='card-body p-4' >
                                         <div class='text-center'>
