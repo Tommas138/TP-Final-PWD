@@ -8,16 +8,16 @@ $abmCompraEstado = new AbmCompraEstado();
 $arrayCarrito = ['idcompra' => $datos['idcompraitem'], 'idcompraestadotipo' => 1];
 $exito = $abmCompraEstado->alta($arrayCarrito);
 $usuarioAbm = new AbmUsuario();
-$usuario = $usuarioAbm->buscar($datos["idusuario"])[0];
-
+$usuario = $usuarioAbm->buscar($datos)[0];
+print_r($usuario);
 if ($exito) {
     $message = 'Se envio el carrito correctamente';
-    //header("Location: ../cliente/carrito.php?Message=" . urlencode($message));
     $compraItem = new CompraItem();   
     $compraItem->setIdCompra($datos['idcompraitem']); 
     $items = $compraItem->listar("idcompra = ". $datos['idcompraitem']);
     $i = 0;
     $gastoTotal = 0;
+    $productos = array();
     foreach ($items as $item) {
         $objProd = $item->getIdProducto();
         $stock = $item->getCiCantidad();
@@ -28,25 +28,24 @@ if ($exito) {
         $prod->setProcantstock($nuevoStock);
         $prod->modificar();
         $gastoTotal += $prod->getProPrecio();
+        array_push($productos,$prod);
     }
     print_r($gastoTotal);
     // 2. Recopilas los datos para el mail
     $datosParaMail = [
         'id_pedido' => $datos["idcompraitem"], // El ID que acabas de generar
         'total' => $gastoTotal,
-        'items' => $items
+        'items' => $productos
     ];
 
-    // 3. Llamas al MailSender
-    // (Asegúrate de incluir el archivo o usar el namespace correspondiente)
-    //$notificador = new MailSender();
-    //resultadoMail = $notificador->enviarConfirmacionCompra($usuario->getUsMail(), $usuario->getUsNombre(), $datosParaMail);
+    $notificador = new MailSender();
+    $resultadoMail = $notificador->enviarConfirmacionCompra($usuario->getUsMail(), $usuario->getUsNombre(), $datosParaMail);
                 
-   // print_r($producto);
     $compraItem->eliminar();
-    //exit;
+    header("Location: ../cliente/carrito.php?Message=" . urlencode($message));
+    exit;
 } else {
     $message = 'Hubo un error al enviar su carrito';
-    //header("Location: ../cliente/carrito.php?Message=" . urlencode($message));
-    //exit;
+    header("Location: ../cliente/carrito.php?Message=" . urlencode($message));
+    exit;
 }

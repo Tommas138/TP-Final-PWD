@@ -1,4 +1,5 @@
 <?php
+require_once "funciones.php";
 // Ajusta el namespace según tu estructura, por ejemplo:
 // namespace Util; 
 
@@ -29,7 +30,7 @@ class MailSender {
 
             // --- Contenido del Mail ---
             $mail->isHTML(true);
-            $mail->Subject = 'Confirmación de Compra - Pedido #' . $datosCompra['id_pedido'];
+            $mail->Subject = 'Confirmacion de Compra - Pedido #' . $datosCompra['id_pedido'];
             
             // Aquí armas el cuerpo del mail usando los datos
             $cuerpo = "<h1>Hola, {$nombreCliente}!</h1>";
@@ -37,7 +38,7 @@ class MailSender {
             $cuerpo .= "<h3>Detalle:</h3>";
             $cuerpo .= "<ul>";
             foreach ($datosCompra['items'] as $producto) {
-                $cuerpo .= "<li>{$producto['nombre']} - ${$producto['precio']}</li>";
+                $cuerpo .= "<li>{$producto->getProNombre()} - $"."{$producto->getProPrecio()}</li>";
             }
             $cuerpo .= "</ul>";
             $cuerpo .= "<p>Total: $<strong>{$datosCompra['total']}</strong></p>";
