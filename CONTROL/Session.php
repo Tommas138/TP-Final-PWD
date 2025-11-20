@@ -24,7 +24,6 @@ class Session
         return $_SESSION['idrol'] ?? null;
     }
 
-
     public function getUsNombre()
     {
         return $_SESSION['usnombre'] ?? null;

@@ -1,6 +1,10 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <?php
 include_once __DIR__ . '../../../../../UTILS/funciones.php';
+include_once __DIR__ . '/../../../../CONTROL/AbmRol.php';
+include_once __DIR__ . '/../../../../MODELO/UsuarioRol.php';
+include_once __DIR__ . '/../../../../CONTROL/AbmMenuRol.php';
+
 
 $cantidadItemsCarrito = 0;
 $sesion = new Session();
@@ -19,8 +23,7 @@ $enlace = "";
 ?>
 <nav class="navbar navbar-expand-custom navbar-mainbg">
 
-    <a class="navbar-brand navbar-logo navbar-button " href="#">Dunder Mifflin Store</a>
-    <a class="navbar-brand navbar-logo navbar-button" href="../../VISTA/home/index.php">Inicio</a>
+    <a class="navbar-brand navbar-logo navbar-button " href="../../VISTA/home/index.php">Dunder Mifflin Store</a>
     <a class="navbar-brand navbar-logo navbar-button" href="../../VISTA/CLIENTE/listadoProductos.php">Productos</a>
     <?php
     $objUs = new UsuarioRol();
@@ -41,10 +44,13 @@ $enlace = "";
    
      if ($sesion->activa()) {
                         $roles = $sesion->getUsRoles();
+                        // print_r($roles);
+                        print_r($sesion->getIDRol());
                         foreach ($sesion->getUsRoles() as $rol) {
 
                             $abmMenuRol = new AbmMenuRol();
-                            $arrayMenusRol = $abmMenuRol->buscar(['idrol' => $rol->getObjRol()->getIdRol()]);
+                            $arrayMenus = null;
+                            $arrayMenusRol = $abmMenuRol->buscar(['idrol' => $sesion->getIDSesionActual()]);
 
                             if (count($arrayMenusRol) > 0) {
                                 $abmMenu = new AbmMenu();

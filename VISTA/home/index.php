@@ -1,34 +1,10 @@
 <?php
 
-<<<<<<< HEAD
-include_once '../../CONTROL/Session.php';
-
-?>
-
-<?php
-=======
 require_once __DIR__ . '/../../UTILS/funciones.php';
 $titulo = 'Dunder Mifflin Store';
->>>>>>> 559f24ff8b82bcd2aa29371a1d5c238076d7909a
 
 //$sesion = new Session();
 
-<<<<<<< HEAD
-if(!($sesion->getIDSesionActual())){
-    header("Location: ../../index.php");
-}else{
-    include_once '../../CONTROL/AbmProducto.php';
-    require_once __DIR__ . '/../../UTILS/funciones.php';
-    require_once __DIR__ . '../../ACCION/ESTRUCTURA/reusables/header.php';
-}
-
-
-$titulo = 'Dunder Mifflin Store';
-
-$abmProductos = new AbmProducto();
-$listaProductos = $abmProductos->buscar(null);
-shuffle($listaProductos);
-=======
 
 
 require_once __DIR__ . '../../ACCION/ESTRUCTURA/reusables/headerInicio.php';
@@ -36,12 +12,9 @@ $abmProductos = new AbmProducto();
 $listaProductos = $abmProductos->buscar(null);
 shuffle($listaProductos);
 
-?>
-<!-- Header-->
->>>>>>> 559f24ff8b82bcd2aa29371a1d5c238076d7909a
-
 
 // if($sesion->getIDSesionActual()){
+
 
 ?>
 <head>
@@ -56,18 +29,21 @@ shuffle($listaProductos);
         referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="../acciones/ESTRUCTURA/styles.css">
 </head>
-<div class="container mt-2 d-flex justify-content-center">
-    <section class="py-2">
+
+<div class="container mt-5">
+    <section class="py-4">
         <?php
         //print_r($sesion->mostrarDetallesSesion());
         if (count($listaProductos) > 0) {
             $max = min(count($listaProductos), 4);
+            ?>
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+            <?php
             for ($cont_prod = 0; $cont_prod < $max; $cont_prod++) {
                 $producto = $listaProductos[$cont_prod];
         ?>
-
-                <div class='row mb-4 object-fit-contain'>
-                    <div class='card shadow align-items-center'>
+                <div class="col">
+                    <div class="card h-100 shadow-sm border-0 transition-hover">
                         <?php
                         $imgWebBase = '../../uploads/img/';
                         $imgCarpeta = realpath(__DIR__ . '/../../uploads/img/');
@@ -90,27 +66,65 @@ shuffle($listaProductos);
                             }
                         }
                         ?>
-                        <img class='card shadow-sm m-3 ' style="width: 300px; height: 300px;" src='<?php echo $imgSrc ?>' alt='<?php echo htmlspecialchars($producto->getProNombre(), ENT_QUOTES) ?>' />
-
-                        <div class='card-body p-4'>
-                            <div class='text-center'>
-                                <h5 class='fw-bolder'><?php echo $producto->getProNombre() ?></h5>
-                                <p><?php echo $producto->getProDetalle() ?></p>
-                                <span>$<?php echo $producto->getProPrecio() ?></span>
+                        <div class="position-relative overflow-hidden" style="height: 250px;">
+                            <img src="<?php echo $imgSrc ?>" 
+                                 class="card-img-top w-100 h-100 object-fit-cover" 
+                                 alt="<?php echo htmlspecialchars($producto->getProNombre(), ENT_QUOTES) ?>" />
+                        </div>
+                        
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title fw-bold text-center mb-2">
+                                <?php echo htmlspecialchars($producto->getProNombre(), ENT_QUOTES) ?>
+                            </h5>
+                            <p class="card-text text-muted small text-center flex-grow-1">
+                                <?php echo htmlspecialchars($producto->getProDetalle(), ENT_QUOTES) ?>
+                            </p>
+                            <div class="text-center mt-auto">
+                                <span class="fs-4 fw-bold text-primary">
+                                    $<?php echo number_format($producto->getProPrecio(), 2) ?>
+                                </span>
                             </div>
                         </div>
-
+                        
+                        <div class="card-footer bg-transparent border-0 p-3">
+                            <div class="d-grid justify-content-center gap-2">
+                                <form method='post' action='../acciones/accionAgregarItemCarrito.php'>
+                                    <td>
+                                        <input name='idproducto' id='idproducto' type='hidden' value='<?php echo $producto->getIdProducto() ?>'>
+                                        <button class="add-carrito-button" type='submit' role='button'>Agregar al carrito</button>
+                                    </td>
+                                </form>
+                                <a href="#" class="btn btn-outline-secondary btn-sm">
+                                    Ver detalles
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-</div>
-
-</div>
 <?php
             }
+            ?>
+            </div>
+            <?php
         }
     // }else{
     //     header("Location: ../../index.php");
     // }
 ?>
-</section>
+    </section>
 </div>
+
+<style>
+.transition-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.transition-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+}
+
+.object-fit-cover {
+    object-fit: cover;
+}
+</style>

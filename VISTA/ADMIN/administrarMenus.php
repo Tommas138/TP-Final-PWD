@@ -3,9 +3,11 @@
 include_once '../../CONTROL/Session.php';
 
 $session = new Session();
-
-if(!$session->getIDSesionActual() || $session->getIDSesionActual() != 1){
+if(!$session->getIDSesionActual()){
     header("Location: ../../index.php");
+
+}else if($session->getIDSesionActual() != 1 && $session->getIDSesionActual()){
+    header("Location: ../home/index.php");
 }else{
     require_once __DIR__ . '/../../UTILS/funciones.php';
     include_once '../ACCION/ESTRUCTURA/reusables/header.php';
