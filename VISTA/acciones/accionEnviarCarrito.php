@@ -7,7 +7,7 @@ $exito = false;
 $abmCompraEstado = new AbmCompraEstado();
 $arrayCarrito = ['idcompra' => $datos['idcompraitem'], 'idcompraestadotipo' => 1];
 $exito = $abmCompraEstado->alta($arrayCarrito);
-$usuarioAbm = new $abmUsuario();
+$usuarioAbm = new AbmUsuario();
 $usuario = $usuarioAbm->buscar($datos["idusuario"])[0];
 
 if ($compraExitosa) {

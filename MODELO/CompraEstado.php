@@ -111,7 +111,11 @@ Class CompraEstado {
         $objCompraEstadoTipo = new CompraEstadoTipo();
         $objCompraEstadoTipo->setIdCompraEstadoTipo($this->getIdCompraEstadoTipo()->getIdCompraEstadoTipo());
         $objCompraEstadoTipo->cargar();
-        $sql = "INSERT INTO compraestado (idcompra, idcompraestadotipo, cefechafin) VALUES (" . $objCompra->getIdCompra()->getIdCompra() . 
+        $idCompra = $objCompra->getIdCompra();
+        if (!(is_int($idCompra))) {
+            $idCompra = $objCompra->getIdCompra()->getIdCompra();
+        }
+        $sql = "INSERT INTO compraestado (idcompra, idcompraestadotipo, cefechafin) VALUES (" . $idCompra . 
         ", " . $objCompraEstadoTipo->getIdCompraEstadoTipo() . ", '0000-00-00 00:00:00')";
 
         if ($base->Iniciar()) {
