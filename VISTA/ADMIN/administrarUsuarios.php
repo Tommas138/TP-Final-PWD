@@ -24,6 +24,7 @@ $titulo = 'Administración de Usuarios';
 
 $abmUsuario = new AbmUsuario();
 $listadoUsuarios = $abmUsuario->buscar(null);
+
 $sesionAdministrarUsuarios = new Session();
 
 if($sesionAdministrarUsuarios->getIDSesionActual()){
@@ -62,7 +63,8 @@ if($sesionAdministrarUsuarios->getIDSesionActual()){
                             $id = $usuario->getIdUsuario();
                             $abmUsuarioRol = new AbmUsuarioRol();
                             $datos['idusuario'] = $id;
-                            $listaUsuarioRol = $abmUsuarioRol->buscar($datos);
+                            
+                            $listaUsuarioRol = $abmUsuarioRol->buscar([]);
                             $rol = $listaUsuarioRol[0]->getObjRol()->getRolDescripcion(); ?>
                             <tr>
                                 <td scope='row' class='text-center'><?php echo $id ?></td>
