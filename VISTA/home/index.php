@@ -1,14 +1,17 @@
 <?php
-require_once __DIR__ . '/../../UTILS/funciones.php';
-require_once __DIR__ . '../../ACCION/ESTRUCTURA/reusables/header.php';
 
+require_once __DIR__ . '/../../UTILS/funciones.php';
 $titulo = 'Dunder Mifflin Store';
 
-$sesion = new Session();
+//$sesion = new Session();
 
+
+
+require_once __DIR__ . '../../ACCION/ESTRUCTURA/reusables/headerInicio.php';
 $abmProductos = new AbmProducto();
 $listaProductos = $abmProductos->buscar(null);
 shuffle($listaProductos);
+
 ?>
 <!-- Header-->
 
@@ -66,31 +69,8 @@ shuffle($listaProductos);
                                 <h5 class='fw-bolder'><?php echo $producto->getProNombre() ?></h5>
                                 <p><?php echo $producto->getProDetalle() ?></p>
                                 <span>$<?php echo $producto->getProPrecio() ?></span>
-                                <form method='post' action='../acciones/accionAgregarItemCarrito.php'>
-                                    <td class='text-center'>
-                                        <input name='idproducto' id='idproducto' type='hidden' value='<?php echo $producto->getIdProducto() ?>'>
-                                        <button class="add-carrito-button m-5" type='submit' role='button'>Agregar al carrito</button>
-                                    </td>
-                                </form>
                             </div>
                         </div>
-                        <?php
-                        if ($sesion->activa() && $sesion->getIDRol() == 1) {
-                            // foreach ($sesion->getUsRoles() as $rol) {
-                        ?>
-                        <div class="container mt-2 d-flex justify-content-center"></
-
-                            <div class='pt-0 border bg-transparent'>
-                                    <form method='post' action='../acciones/accionAgregarItemCarrito.php'>
-                                        <td class='text-center'>
-                                            <input name='idproducto' id='idproducto' type='hidden' value='<?php echo $producto->getIdProducto() ?>'>
-                                            <button type='submit' role='button'>Agregar al carrito</button>
-                                        </td>
-                                    </form>
-                            </div>
-                        <?php
-                        }
-                        ?>
 
                     </div>
                 </div>

@@ -2,8 +2,13 @@
 require_once __DIR__ . '/../../UTILS/funciones.php';
 
 $titulo = 'Listado de Productos';
-include_once '../ACCION/ESTRUCTURA/reusables/header.php';
 $sesion = new Session();
+if (!$sesion->activa()) {
+    header("Location: ../../index.php?message=Debe iniciar sesión para acceder a los productos");
+    exit();
+}
+include_once '../ACCION/ESTRUCTURA/reusables/header.php';
+
 $abmProductos = new AbmProducto();
 $listaProductos = $abmProductos->buscar(null);
 ?>

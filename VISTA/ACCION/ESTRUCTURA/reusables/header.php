@@ -65,12 +65,12 @@ $enlace = "";
             } elseif (is_array($rol) && isset($rol['idrol'])) {
                 $roleId = $rol['idrol'];
             } else {
-                // assume scalar (id) value
+          
                 $roleId = $rol;
             }
 
             if ($roleId === null) {
-                continue; // skip if we couldn't determine a role id
+                continue; 
             }
 
             $abmMenuRol = new AbmMenuRol();
@@ -87,36 +87,36 @@ $enlace = "";
             }
 
             foreach ($arrayMenus as $menu) {
-                if ($menu->getMeDeshabilitado() == "0000-00-00 00:00:00") {
     ?>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"><?php echo $menu->getMeNombre(); ?></a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <?php
+
                             foreach ($arraySubMenus as $subMenu) {
-                                if ($subMenu->getMeDeshabilitado() == "0000-00-00 00:00:00") {
                                     switch ($roleId) {
                                         case '1':
-                                            $enlace .= "../admin/";
+                                            $enlace .= "../../../ADMIN/";
                                             break;
                                         case '2':
-                                            $enlace .= "../managerDeposito/";
+                                            $enlace .= "../../../MANAGERDEPOSITO/";
                                             break;
                                         case '3':
-                                            $enlace .= "../cliente/";
+                                            $enlace .= "../../../CLIENTE/";
                                             break;
                                     }
                             ?>
-                                    <li><a class="dropdown-item" href="<?php echo $enlace .= $subMenu->getMeDescripcion() . '.php' ?>"><?php echo $subMenu->getMeNombre(); ?></a></li>
+                                    <li><a class="dropdown-item" href="<?php echo $enlace .= $subMenu->getMedescripcion() . '.php' ?>"><?php echo $subMenu->getMeNombre(); ?></a></li>
+                            <?php echo $enlace;?>
                             <?php
                                     $enlace = "";
-                                }
+
                             }
                             ?>
                         </ul>
                     </li>
     <?php
-                }
+                
             }
         }
     }
