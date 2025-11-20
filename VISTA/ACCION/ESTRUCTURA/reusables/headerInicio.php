@@ -28,6 +28,7 @@ $enlace = "";
     <a class="navbar-brand navbar-logo navbar-button " href="../../VISTA/home/index.php">Dunder Mifflin Store</a>
     <a class="navbar-brand navbar-logo navbar-button" href="../../VISTA/CLIENTE/listadoProductos.php">Productos</a>
    <?php
+   if ($sesion->activa()) {
     $objUs = new UsuarioRol();
     
     $arrUs = $objUs->listar("idusuario = $idUser");
@@ -160,6 +161,7 @@ $enlace = "";
                 </ul>
             </div>
         </div>
+                    <?php   }?>
    <?php if (!$sesion->activa()) { ?>
     <div class="bg-primary text-white p-2 rounded">
         <form action="../../index.php">
