@@ -1,13 +1,14 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <?php
-include_once __DIR__ . '../../../UTILS/funciones.php';
-include_once '../ACCION/ESTRUCTURA/reusables/header.php';
+include_once '../../CONTROL/Session.php';
 
-$sesion = new Session();
+$session = new Session();
+if(!$session->getIDSesionActual()){
+    header("Location: ../../index.php");
 
-if (!$sesion->activa()) {
-    header('Location: ../home/index.php');
-    exit;
+}else{
+    require_once __DIR__ . '/../../UTILS/funciones.php';
+    include_once '../ACCION/ESTRUCTURA/reusables/header.php';
 }
 
 $titulo = 'Actualizar Usuario';

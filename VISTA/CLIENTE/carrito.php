@@ -1,20 +1,22 @@
 <?php
 
-require_once __DIR__ . '/../../UTILS/funciones.php';
-include_once '../ACCION/ESTRUCTURA/reusables/header.php';
-$datos = data_submitted();
 
-if (!isset($datos["verificado"])) {
-    $controlIngresoCarrito = new ControlIngresoCliente();
-    $controlIngresoCarrito->verificarIngreso("carrito");
-}
+include_once '../../CONTROL/Session.php';
 
 $session = new Session();
+if(!$session->getIDSesionActual()){
+    header("Location: ../../index.php");
+
+}else{
+    require_once __DIR__ . '/../../UTILS/funciones.php';
+    include_once '../ACCION/ESTRUCTURA/reusables/header.php';
+}
 
 if ($session->activa()) {
     $user = $session->getUsuario();
     $idUser = $session->getIdUsuario();
 }
+$datos = data_submitted();
 
 $titulo = 'Carrito de compras';
 

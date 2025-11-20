@@ -1,23 +1,27 @@
 <style>
     body {
-    display: flex; /* Habilita Flexbox */
-    flex-direction: column; /* Organiza los elementos verticalmente */
-    min-height: 100vh; /* Asegura que el body ocupe al menos la altura de la ventana */
-    margin-bottom: 0; /* Asegura que no haya margen extra abajo */
-}
+        display: flex; /* Habilita Flexbox */
+        flex-direction: column; /* Organiza los elementos verticalmente */
+        min-height: 100vh; /* Asegura que el body ocupe al menos la altura de la ventana */
+        margin-bottom: 0; /* Asegura que no haya margen extra abajo */
+    }
 </style>
 <?php
-require_once __DIR__ . '/../../UTILS/funciones.php';
+include_once '../../CONTROL/Session.php';
+
+$session = new Session();
+if(!$session->getIDSesionActual()){
+    header("Location: ../../index.php");
+
+}else{
+    require_once __DIR__ . '/../../UTILS/funciones.php';
+    include_once '../ACCION/ESTRUCTURA/reusables/header.php';
+}
 
 $datos = data_submitted();
 
-if (!isset($datos["verificado"])) {
-    $controlIngresoCarrito = new ControlIngresoCliente();
-    $controlIngresoCarrito->verificarIngreso("compras");
-}
 
 $titulo = 'Historial de Compras';
-include_once '../ACCION/ESTRUCTURA/reusables/header.php';
 
 
 $sesion = new Session();

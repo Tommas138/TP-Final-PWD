@@ -1,16 +1,18 @@
 <?php
-require_once __DIR__ . '/../../UTILS/funciones.php';
-include_once '../ACCION/ESTRUCTURA/reusables/header.php';
+include_once '../../CONTROL/Session.php';
 
-$titulo = 'Listado de Productos';
-$sesion = new Session();
-if (!$sesion->activa()) {
-    header("Location: ../../index.php?message=Debe iniciar sesión para acceder a los productos");
-    exit();
+$session = new Session();
+if(!$session->getIDSesionActual()){
+    header("Location: ../../index.php");
+
+}else{
+    require_once __DIR__ . '/../../UTILS/funciones.php';
+    include_once '../ACCION/ESTRUCTURA/reusables/header.php';
 }
 
 $abmProductos = new AbmProducto();
 $listaProductos = $abmProductos->buscar(null);
+$titulo = 'Listado de Productos';
 ?>
 
 <br>

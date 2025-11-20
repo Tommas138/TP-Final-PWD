@@ -5,7 +5,16 @@ require_once __DIR__ . '/../../UTILS/funciones.php';
 
 $datos = data_submitted();
 
-$sesion = new Session();
+include_once '../../CONTROL/Session.php';
+
+$session = new Session();
+if(!$session->getIDSesionActual()){
+    header("Location: ../../index.php");
+
+}else{
+    require_once __DIR__ . '/../../UTILS/funciones.php';
+    include_once '../ACCION/ESTRUCTURA/reusables/header.php';
+}
 
 if ($sesion->activa()) {
     $user = $sesion->getUsuario();
