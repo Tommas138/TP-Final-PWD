@@ -13,7 +13,7 @@ $session = new Session();
 
 if ($session->activa()) {
     $user = $session->getUsuario();
-    $idUser = $user->getIdUsuario();
+    $idUser = $session->getIdUsuario();
 }
 
 $titulo = 'Carrito de compras';
@@ -52,6 +52,7 @@ $totalFinalCompra = 0;
                         $iva = 0;
                         $totalFinalCompra = 0;
                         if (count($compraItems)) {
+
 
                             foreach ($compraItems as $compraItem) {
                                 $producto = $compraItem->getIdProducto();

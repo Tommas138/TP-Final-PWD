@@ -15,7 +15,6 @@ $abmUsuario = new AbmUsuario();
 $listadoUsuarios = $abmUsuario->buscar(null);
 $sesionAdministrarUsuarios = new Session();
 
-print_r($sesionAdministrarUsuarios->getUsRoles()[0]->getObjRol()->getIdRol());
 
 ?>
 
@@ -79,11 +78,11 @@ print_r($sesionAdministrarUsuarios->getUsRoles()[0]->getObjRol()->getIdRol());
                                 <?php
                                 $estado = $usuario->getUsdeshabilitado();
                                 if ($estado == "0000-00-00 00:00:00") {
-                                    $estado = "";
+                                    $estado = "No está deshabilitado";
                                 }
                                 ?>
 
-                                <td scope='row'><?php echo $estado ?></td>
+                                <td scope='row' class="text-center"><?php echo $estado ?></td>
 
                                 <?php
                                 if ($id == $sesionAdministrarUsuarios->getIdUsuario()) { ?>

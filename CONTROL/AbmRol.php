@@ -36,7 +36,7 @@ Class AbmRol {
         }
         return $resp;
     }
-
+    
     public function baja($param) {
         $resp = false;
         if ($this->seteadosCamposClaves($param)) {
@@ -58,6 +58,7 @@ Class AbmRol {
         }
         return $resp;
     }
+
 
     public function buscar($param) {
         $where = " true ";

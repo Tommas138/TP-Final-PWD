@@ -6,11 +6,12 @@ $datos = data_submitted();
 $abmCompraItem = new AbmCompraItem();
 
 $restado = $abmCompraItem->restarItem($datos);
+print_r($datos);
 
 if ($restado) {
     $message = "Item modificado";
     header('Location: ../cliente/carrito.php?Message=' . urlencode($message));
-    exit;
+   exit;
 } else {
     $message = "Error al modificar el item";
     header('Location: ../cliente/carrito.php?Message=' . urlencode($message));
