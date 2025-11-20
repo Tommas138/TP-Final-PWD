@@ -1,3 +1,6 @@
+<style>
+    
+</style>
 <?php
 require_once __DIR__ . '/../../UTILS/funciones.php';
 include_once '../ACCION/ESTRUCTURA/reusables/header.php';
@@ -179,3 +182,6 @@ foreach ($displayItems as $it) {
     </script>
 </body>
 </html>
+
+<?php
+include_once '../../VISTA/ACCION/ESTRUCTURA/reusables/footer.php';

@@ -160,5 +160,5 @@ if($sesionAdministrarUsuarios->getIDSesionActual()){
 }else{
     header("Location: ../../index.php");
 }
-
+include_once '../../VISTA/ACCION/ESTRUCTURA/reusables/footer.php';
 ?>

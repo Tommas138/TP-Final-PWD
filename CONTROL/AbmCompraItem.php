@@ -155,6 +155,7 @@ Class AbmCompraItem {
     }
 
     public function buscar($param) {
+        
         $where = " true ";
         if ($param <> null) {
             if (isset($param['idcompraitem']))
@@ -166,10 +167,12 @@ Class AbmCompraItem {
             if (isset($param['cicantidad']))
                 $where .= " AND cicantidad = '" . $param['cicantidad'] . "'";
         }
+
         $compraItem = new CompraItem();
-        $idcompraitem = isset($param['idcompraitem']) ? $param['idcompraitem'] : null;
-        $compraItem->set($idcompraitem, null, null, null);
+        $idcompraitem = isset($param['idcompra']) ? $param['idcompra'] : null;
+        $compraItem->set( null, null,$idcompraitem, null);
         $arreglo = $compraItem->listar($where);
+        
         return $arreglo;
     }
 }

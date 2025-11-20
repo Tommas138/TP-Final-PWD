@@ -15,7 +15,6 @@ if ($sesion->activa()) {
 $titulo = 'Compra';
 
 include_once '../ACCION/ESTRUCTURA/reusables/header.php';
-
 $abmItemsCompra = new AbmCompraItem();
 $compraItems = $abmItemsCompra->buscar($datos);
 $subTotalCompra = 0;
@@ -33,6 +32,7 @@ $totalFinalCompra = 0;
                         $subTotalCompra = 0;
                         $iva = 0;
                         $totalFinalCompra = 0;
+                       
                          if (count($compraItems)) {
 
                             foreach ($compraItems as $compraItem) {
@@ -144,4 +144,5 @@ $totalFinalCompra = 0;
 </div>
 
 <?php
+include_once '../../VISTA/ACCION/ESTRUCTURA/reusables/footer.php';
 ?>

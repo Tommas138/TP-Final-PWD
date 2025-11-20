@@ -13,7 +13,7 @@ $abmProductos = new AbmProducto();
 $listaProductos = $abmProductos->buscar(null);
 ?>
 
-
+<br>
 <header class="bg-dark py-1">
     <div class="container px-4 px-lg-5 my-2">
         <div class="text-center text-white">
@@ -100,6 +100,6 @@ $listaProductos = $abmProductos->buscar(null);
 </body>
 <?php
 
-//include_once '../estructura/footer.php';
+include_once '../ACCION/ESTRUCTURA/reusables/footer.php';
 
 ?>

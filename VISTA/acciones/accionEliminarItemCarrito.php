@@ -4,7 +4,6 @@ require_once __DIR__ . '/../../UTILS/funciones.php';
 
 $datos = data_submitted();
 $abmItemCarrito = new AbmCompraItem();
-
 $exito = $abmItemCarrito->baja($datos);
 
 if ($exito) {

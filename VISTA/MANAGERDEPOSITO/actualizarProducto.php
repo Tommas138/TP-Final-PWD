@@ -74,5 +74,5 @@ $objProducto = $listaProductos[0];
 <?php
 
 
-
+include_once '../../VISTA/ACCION/ESTRUCTURA/reusables/footer.php';
 ?>

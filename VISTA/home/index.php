@@ -1,34 +1,10 @@
 <?php
 
-<<<<<<< HEAD
-include_once '../../CONTROL/Session.php';
-
-?>
-
-<?php
-=======
 require_once __DIR__ . '/../../UTILS/funciones.php';
 $titulo = 'Dunder Mifflin Store';
->>>>>>> 559f24ff8b82bcd2aa29371a1d5c238076d7909a
 
 //$sesion = new Session();
 
-<<<<<<< HEAD
-if(!($sesion->getIDSesionActual())){
-    header("Location: ../../index.php");
-}else{
-    include_once '../../CONTROL/AbmProducto.php';
-    require_once __DIR__ . '/../../UTILS/funciones.php';
-    require_once __DIR__ . '../../ACCION/ESTRUCTURA/reusables/header.php';
-}
-
-
-$titulo = 'Dunder Mifflin Store';
-
-$abmProductos = new AbmProducto();
-$listaProductos = $abmProductos->buscar(null);
-shuffle($listaProductos);
-=======
 
 
 require_once __DIR__ . '../../ACCION/ESTRUCTURA/reusables/headerInicio.php';
@@ -38,9 +14,8 @@ shuffle($listaProductos);
 
 ?>
 <!-- Header-->
->>>>>>> 559f24ff8b82bcd2aa29371a1d5c238076d7909a
 
-
+<?php
 // if($sesion->getIDSesionActual()){
 
 ?>
@@ -108,9 +83,7 @@ shuffle($listaProductos);
 <?php
             }
         }
-    // }else{
-    //     header("Location: ../../index.php");
-    // }
+include_once '../../VISTA/ACCION/ESTRUCTURA/reusables/footer.php';
 ?>
 </section>
 </div>

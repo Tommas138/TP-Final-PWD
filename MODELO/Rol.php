@@ -43,7 +43,7 @@ Class Rol {
     public function alta() {
         $resp = false;
         $base = new BaseDatos();
-        $sql = "INSERT INTO rol (rodescripcion) VALUES ('" . $this->getRolDescripcion() . "')";
+        $sql = "INSERT INTO rol (rodescripcion) VALUES ('Cliente')";
         if ($base->Iniciar()) {
             if ($elid = $base->Ejecutar($sql)) {
                 $this->setIdRol($elid);
@@ -157,7 +157,7 @@ Class Rol {
     public function insertar() {
         $resp = false;
         $base = new BaseDatos();
-        $sql = "INSERT INTO rol (rodescripcion) VALUES ('" . $this->getRolDescripcion() . "'";
+        $sql = "INSERT INTO rol (rodescripcion) VALUES ('Cliente')";
         if ($base->Iniciar()) {
             if ($elid = $base->Ejecutar($sql)) {
                 $this->setIdRol($elid);
