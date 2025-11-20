@@ -1,20 +1,24 @@
 <?php
-require_once __DIR__ . '/../../UTILS/funciones.php';
+
+include_once '../../CONTROL/Session.php';
+
+$session = new Session();
+
+if(!$session->getIDSesionActual() || $session->getIDSesionActual() != 1){
+    header("Location: ../../index.php");
+}else{
+    require_once __DIR__ . '/../../UTILS/funciones.php';
+    include_once '../ACCION/ESTRUCTURA/reusables/header.php';
+}
+
 
 $titulo = 'Actualizar Menú';
-
-include_once '../ACCION/ESTRUCTURA/reusables/header.php';
-
 $datos = data_submitted();
 $abmMenu = new AbmMenu();
 $objMenu = $abmMenu->buscar(["idmenu" => $datos['idmenu']]);
-$id = $datos['idmenu'];
 
 $listaMenus = $abmMenu->buscar();
-//$objMenu = $listaMenus[0];
-
 ?>
-
 <div class="container mt-3">
     <h4 class="text-center">Actualizar Menú</h4>
     <div class="col-md-4"></div>
@@ -52,8 +56,6 @@ $listaMenus = $abmMenu->buscar();
         </form>
     </div>
 </div>
-
 <?php
-
-
+    
 ?>

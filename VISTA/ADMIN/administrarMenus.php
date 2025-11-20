@@ -1,6 +1,15 @@
 <?php
-require_once __DIR__ . '/../../UTILS/funciones.php';
 
+include_once '../../CONTROL/Session.php';
+
+$session = new Session();
+
+if(!$session->getIDSesionActual() || $session->getIDSesionActual() != 1){
+    header("Location: ../../index.php");
+}else{
+    require_once __DIR__ . '/../../UTILS/funciones.php';
+    include_once '../ACCION/ESTRUCTURA/reusables/header.php';
+}
 
 $titulo = 'Administración de Menus';
 
@@ -14,7 +23,7 @@ if (!isset($datos["verificado"])) {
 $abmMenu = new AbmMenu();
 $listadoMenus = $abmMenu->buscar(null);
 
-include_once '../ACCION/ESTRUCTURA/reusables/header.php';
+
 
 ?>
 
@@ -78,7 +87,7 @@ include_once '../ACCION/ESTRUCTURA/reusables/header.php';
                                 </td>
                             </form>
 
-                            <form method='post' action='eliminarMenu.php'>
+                            <form method='post' action='../acciones/eliminarMenu.php'>
                                 <td class='text-center'>
                                     <input name='idmenu' id='idmenu' type='hidden' value='<?php echo $id ?>'>
                                     <button class='btn btn-danger btn-sm' type='submit' value='<?php $id ?>' role='button'><i class='bi bi-trash'></i>&nbsp;Eliminar</button>
@@ -86,7 +95,7 @@ include_once '../ACCION/ESTRUCTURA/reusables/header.php';
                             </form>
 
 
-                            <form method='post' action='deshabilitarMenu.php'>
+                            <form method='post' action='../acciones/accionDeshabilitarMenu.php'>
                                 <td class='text-center'>
                                     <input name='idmenu' id='idmenu' type='hidden' value='<?php echo $id ?>'>
                                     <?php
@@ -101,7 +110,7 @@ include_once '../ACCION/ESTRUCTURA/reusables/header.php';
                                 </td>
                             </form>
                             </tr>
-                    <?php
+                             <?php
                                 }
                             } ?>
                     </tbody>
@@ -110,8 +119,6 @@ include_once '../ACCION/ESTRUCTURA/reusables/header.php';
         </div>
     </section>
 </div>
-
 <?php
-
 
 ?>

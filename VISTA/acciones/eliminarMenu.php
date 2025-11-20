@@ -22,9 +22,9 @@ $id = $datos['idmenu'];
             <p class="card-text">Nombre del menú: <?php echo $objMenu[0]->getMeNombre() ?></p>
             <p class="card-text">Descripción: <?php echo $objMenu[0]->getMeDescripcion() ?></p>
 
-            <form action='../acciones/accionEliminarMenu.php' method='post'>
+            <form action='./accionEliminarMenu.php' method='post'>
                 <input name='idmenu' id='idmenu' type='hidden' value='<?php echo $id ?>'>
-                <button class='btn btn-danger btn-sm' type='submit' value='<?php echo $id ?>' name='idmenu' id='idmenu' role='button' formaction='../acciones/accionEliminarMenu.php'>Eliminar</button>
+                <button class='btn btn-danger btn-sm' type='submit' value='<?php echo $id ?>' name='idmenu' id='idmenu' role='button' formaction='' action='./accionEliminarMenu.php'>Eliminar</button>
             </form>
 
         </div>

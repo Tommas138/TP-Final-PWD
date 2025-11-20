@@ -1,5 +1,8 @@
 <?php
 
+include_once __DIR__ . '/../MODELO/UsuarioRol.php';
+include_once __DIR__ . '/../MODELO/Usuario.php';
+
 class Session
 {
     // Constructor
@@ -25,6 +28,11 @@ class Session
     public function getUsNombre()
     {
         return $_SESSION['usnombre'] ?? null;
+    }
+
+    public function getIDSesionActual()
+    {
+        return $this->getUsRoles() ? $this->getUsRoles()[0]->getObjRol()->getIdRol() : null;
     }
 
     public function getUsPass()
@@ -80,15 +88,14 @@ class Session
 
         $this->setUsNombre($nombre);
         $this->setUsPass(md5($pass));
-        
+
         $idRol = $abmUsuarioRol->buscar(['idusuario' => $id]);
-        
+
         //print_r($idRol);
-            $this->setIdUsuario($id);
-            
-            // Obtener roles del usuario
-            $this->setUsRoles($idRol);
- 
+        $this->setIdUsuario($id);
+
+        // Obtener roles del usuario
+        $this->setUsRoles($idRol);
     }
 
     /**

@@ -1,6 +1,16 @@
 <?php
-require_once __DIR__ . '/../../UTILS/funciones.php';
 
+include_once '../../CONTROL/Session.php';
+
+
+$session = new Session();
+
+if(!$session->getIDSesionActual() || $session->getIDSesionActual() != 1){
+    header("Location: ../../index.php");
+}else{
+    require_once __DIR__ . '/../../UTILS/funciones.php';
+    include_once '../ACCION/ESTRUCTURA/reusables/header.php';
+}
 
 $titulo = 'Nuevo Menu';
 
@@ -10,7 +20,6 @@ if (!isset($datos["verificado"])) {
     $controlIngresoManagerDeposito = new ControlIngresoAdmin();
     $controlIngresoManagerDeposito->verificarIngreso("nuevoUsuario");
 }
-include_once '../estructura/header.php';
 
 ?>
 <header class="bg-dark py-1">

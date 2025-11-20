@@ -1,7 +1,7 @@
 
 <?php
 require_once __DIR__ . '/../../UTILS/funciones.php';
-
+include_once '../../CONTROL/AbmProducto.php';
 
 $titulo = 'Deshabilitación de Productos';
 

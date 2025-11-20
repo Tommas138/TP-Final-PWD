@@ -1,7 +1,16 @@
 <?php
-require_once __DIR__ . '/../../UTILS/funciones.php';
 
-include_once '../ACCION/ESTRUCTURA/reusables/header.php';
+include_once '../../CONTROL/Session.php';
+
+$session = new Session();
+
+if(!$session->getIDSesionActual() || $session->getIDSesionActual() != 1){
+    header("Location: ../../index.php");
+}else{
+    require_once __DIR__ . '/../../UTILS/funciones.php';
+    include_once '../ACCION/ESTRUCTURA/reusables/header.php';
+}
+
 $datos = data_submitted();
 
 if (!isset($datos["verificado"])) {
@@ -15,6 +24,7 @@ $abmUsuario = new AbmUsuario();
 $listadoUsuarios = $abmUsuario->buscar(null);
 $sesionAdministrarUsuarios = new Session();
 
+if($sesionAdministrarUsuarios->getIDSesionActual()){
 
 ?>
 
@@ -117,7 +127,7 @@ $sesionAdministrarUsuarios = new Session();
                             }
                             ?>
 
-                            <form method='post' action='deshabilitarUsuario.php'>
+                            <form method='post' action='../acciones/accionDeshabilitarUsuario.php'>
                                 <td class='text-center'>
                                     <input name='idusuario' id='idusuario' type='hidden' value='<?php echo $id ?>'>
                                     <?php
@@ -147,6 +157,8 @@ $sesionAdministrarUsuarios = new Session();
 
 <?php
 
-
+}else{
+    header("Location: ../../index.php");
+}
 
 ?>

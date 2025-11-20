@@ -1,5 +1,13 @@
 <?php
-require_once __DIR__ . '/../../UTILS/funciones.php';
+
+$session = new Session();
+
+if(!$session->getIDSesionActual() || $session->getIDSesionActual() != 1){
+    header("Location: ../../index.php");
+}else{
+    require_once __DIR__ . '/../../UTILS/funciones.php';
+    include_once '../ACCION/ESTRUCTURA/reusables/header.php';
+}
 
 
 $titulo = 'Nuevo Menú';

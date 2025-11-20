@@ -1,17 +1,32 @@
 <?php
-require_once __DIR__ . '/../../UTILS/funciones.php';
-require_once __DIR__ . '../../ACCION/ESTRUCTURA/reusables/header.php';
 
-$titulo = 'Dunder Mifflin Store';
+include_once '../../CONTROL/Session.php';
+
+?>
+
+<?php
 
 $sesion = new Session();
+
+if(!($sesion->getIDSesionActual())){
+    header("Location: ../../index.php");
+}else{
+    include_once '../../CONTROL/AbmProducto.php';
+    require_once __DIR__ . '/../../UTILS/funciones.php';
+    require_once __DIR__ . '../../ACCION/ESTRUCTURA/reusables/header.php';
+}
+
+
+$titulo = 'Dunder Mifflin Store';
 
 $abmProductos = new AbmProducto();
 $listaProductos = $abmProductos->buscar(null);
 shuffle($listaProductos);
-?>
-<!-- Header-->
 
+
+// if($sesion->getIDSesionActual()){
+
+?>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -24,7 +39,6 @@ shuffle($listaProductos);
         referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="../acciones/ESTRUCTURA/styles.css">
 </head>
-<!-- Section-->
 <div class="container mt-2 d-flex justify-content-center">
     <section class="py-2">
         <?php
@@ -100,12 +114,9 @@ shuffle($listaProductos);
 <?php
             }
         }
+    // }else{
+    //     header("Location: ../../index.php");
+    // }
 ?>
 </section>
 </div>
-
-<?php
-
-//include_once '../estructura/footer.php';
-
-?>

@@ -1,9 +1,19 @@
 <?php
-require_once __DIR__ . '/../../UTILS/funciones.php';
+
+include_once '../../CONTROL/Session.php';
+
+$session = new Session();
+
+if(!$session->getIDSesionActual() || $session->getIDSesionActual() != 1){
+    header("Location: ../../index.php");
+}else{
+    require_once __DIR__ . '/../../UTILS/funciones.php';
+    include_once '../ACCION/ESTRUCTURA/reusables/header.php';
+}
 
 
 $titulo = 'Actualizar Usuario';
-
+$sesion = new Session();
 $datos = data_submitted();
 $abmUsuario = new AbmUsuario();
 
@@ -13,9 +23,8 @@ $listaUsuarios = $abmUsuario->buscar($arrayBusqueda);
 $objUsuario = $listaUsuarios[0];
 if (isset($listaUsuarios)) {
     $idUsuario = $listaUsuarios[0]->getIdUsuario();
- include_once '../ACCION/ESTRUCTURA/reusables/header.php';
 }
-
+if($session->getIDSesionActual()){
 ?>
 
 <div class="container mt-3">
@@ -85,8 +94,7 @@ if (isset($listaUsuarios)) {
         </form>
     </div>
 </div>
-
 <?php
-
+}
 
 ?>
