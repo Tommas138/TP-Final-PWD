@@ -1,13 +1,19 @@
 <?php
 
+<<<<<<< HEAD
 include_once '../../CONTROL/Session.php';
 
 ?>
 
 <?php
+=======
+require_once __DIR__ . '/../../UTILS/funciones.php';
+$titulo = 'Dunder Mifflin Store';
+>>>>>>> 559f24ff8b82bcd2aa29371a1d5c238076d7909a
 
-$sesion = new Session();
+//$sesion = new Session();
 
+<<<<<<< HEAD
 if(!($sesion->getIDSesionActual())){
     header("Location: ../../index.php");
 }else{
@@ -22,6 +28,17 @@ $titulo = 'Dunder Mifflin Store';
 $abmProductos = new AbmProducto();
 $listaProductos = $abmProductos->buscar(null);
 shuffle($listaProductos);
+=======
+
+
+require_once __DIR__ . '../../ACCION/ESTRUCTURA/reusables/headerInicio.php';
+$abmProductos = new AbmProducto();
+$listaProductos = $abmProductos->buscar(null);
+shuffle($listaProductos);
+
+?>
+<!-- Header-->
+>>>>>>> 559f24ff8b82bcd2aa29371a1d5c238076d7909a
 
 
 // if($sesion->getIDSesionActual()){
@@ -80,31 +97,8 @@ shuffle($listaProductos);
                                 <h5 class='fw-bolder'><?php echo $producto->getProNombre() ?></h5>
                                 <p><?php echo $producto->getProDetalle() ?></p>
                                 <span>$<?php echo $producto->getProPrecio() ?></span>
-                                <form method='post' action='../acciones/accionAgregarItemCarrito.php'>
-                                    <td class='text-center'>
-                                        <input name='idproducto' id='idproducto' type='hidden' value='<?php echo $producto->getIdProducto() ?>'>
-                                        <button class="add-carrito-button m-5" type='submit' role='button'>Agregar al carrito</button>
-                                    </td>
-                                </form>
                             </div>
                         </div>
-                        <?php
-                        if ($sesion->activa() && $sesion->getIDRol() == 1) {
-                            // foreach ($sesion->getUsRoles() as $rol) {
-                        ?>
-                        <div class="container mt-2 d-flex justify-content-center"></
-
-                            <div class='pt-0 border bg-transparent'>
-                                    <form method='post' action='../acciones/accionAgregarItemCarrito.php'>
-                                        <td class='text-center'>
-                                            <input name='idproducto' id='idproducto' type='hidden' value='<?php echo $producto->getIdProducto() ?>'>
-                                            <button type='submit' role='button'>Agregar al carrito</button>
-                                        </td>
-                                    </form>
-                            </div>
-                        <?php
-                        }
-                        ?>
 
                     </div>
                 </div>

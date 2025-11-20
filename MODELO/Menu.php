@@ -39,9 +39,7 @@ class Menu {
         $this->menombre = $menombre;
     }
 
-    public function setMeUrl($menurl) {
-        $this->menurl = $menurl;
-    }
+
 
     public function setIdPadre($idPadre) {
         $this->idpadre = $idPadre;
@@ -59,9 +57,7 @@ class Menu {
         return $this->medescripcion;
     }
 
-    public function getMeUrl() {
-        return $this->menurl;
-    }
+
 
     public function getIdPadre() {
         return $this->idpadre;

@@ -169,14 +169,12 @@ $totalFinalCompra = 0;
                             </li>
                         </ul>
                         <div class="text-center">
-                            <form method='post' action='../acciones/accionEnviarCarrito.php'>
-                                <input name='idcompraitem' id='idcompraitem' type='hidden' value='<?php echo $carrito->getIdCompra(); ?>'>
-                                <input name='idusuario' id='idusuario' type='hidden' value='<?php echo $idUser; ?>'>
-                                <?php if (count($compraItems) > 0) {
-                                ?>
-                                    <button class='btn btn-success m-1' type='submit' role='button'>Confirmar Pedido</button>
-                                <?php
-                                } ?>
+                            <!-- Enviar el id del carrito a compra.php para crear la preferencia desde el carrito -->
+                            <form method="post" action="compra.php">
+                                <input name="idcompra" type="hidden" value="<?php echo intval($carrito->getIdCompra()); ?>">
+                                <?php if (count($compraItems) > 0): ?>
+                                    <button class="btn btn-success m-1" type="submit" role="button" style="color:#000 !important">Comprar Con Mercado Pago</button>
+                                <?php endif; ?>
                             </form>
                         </div>
                     </div>

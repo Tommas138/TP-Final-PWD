@@ -97,10 +97,10 @@ Class MenuRol {
         $base = new BaseDatos();
         $sql = "SELECT * FROM menurol ";
 
+
         if ($param != "") {
             $sql .= ' WHERE ' . $param;
         }
-
         $res = $base->Ejecutar($sql);
         if ($res > 0) {
             while ($row = $base->Registro()) {
@@ -118,7 +118,6 @@ Class MenuRol {
                     $objRol->setIdRol($row['idrol']);
                     $objRol->cargar();
                 }
-
                 $obj->set($objMenu, $objRol);
                 array_push($arreglo, $obj);
             }

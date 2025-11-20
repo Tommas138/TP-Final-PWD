@@ -75,6 +75,7 @@ Class AbmMenuRol {
         $objMenuRol = new MenuRol();
         $arreglo = $objMenuRol->listar($where);
         return $arreglo;
+        
     }
 
     public function buscarRolesMenu($obj) {
