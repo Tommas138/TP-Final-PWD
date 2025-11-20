@@ -3,7 +3,7 @@ require_once __DIR__ . '/../../UTILS/funciones.php';
 
 $titulo = 'Eliminación de Producto';
 
-include_once '../estructura/header.php';
+include_once '../ACCION/ESTRUCTURA/reusables/header.php';
 
 $datos = data_submitted();
 
@@ -31,6 +31,6 @@ $id = $datos['idproducto'];
 
 <?php
 
-include_once '../estructura/footer.php';
+
 
 ?>

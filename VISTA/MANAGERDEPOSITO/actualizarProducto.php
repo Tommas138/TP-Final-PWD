@@ -3,7 +3,7 @@ require_once __DIR__ . '/../../UTILS/funciones.php';
 
 $titulo = 'Actualizacion de Productos';
 
-include_once '../estructura/header.php';
+include_once '../ACCION/ESTRUCTURA/reusables/header.php';
 
 $datos = data_submitted();
 $abmProducto = new AbmProducto();
@@ -44,12 +44,17 @@ $objProducto = $listaProductos[0];
 
             <div class="">
                 <div class="form-floating mb-3">
-                    <input class="form-control" id="procantstock" name="procantstock" type="text" placeholder="Stock producto" value="<?php echo $objProducto->getProCantStock() ?>" required>
+                    <input class="form-control" id="procantstock" name="procantstock" type="text" placeholder="Stock producto" value="<?php echo $objProducto->getProcantstock() ?>" required>
                     <label for="procantstock">Stock del producto: </label>
                 </div>
             </div>
 
-
+<div class="">
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="proprecio" name="proprecio" type="text" placeholder="Precio producto" value="<?php echo $objProducto->getProPrecio() ?>" required>
+                    <label for="proprecio">Precio del producto: </label>
+                </div>
+            </div>
             <div class="col-md-6">
                 <div class="mt-3">
                     <label class="mb-2" for="imagen">Imagen de producto</label>
@@ -68,6 +73,6 @@ $objProducto = $listaProductos[0];
 
 <?php
 
-include_once '../estructura/footer.php';
+
 
 ?>

@@ -10,9 +10,9 @@ Class ControlIngresoManagerDeposito {
             exit;
         }
 
-        if ($session->getUsRoles()[0] != 2) {
+        if ($session->getUsRoles()[0]->getObjRol()->getIdRol() != 1 ) {
             if (isset($session->getUsRoles()[1])) {
-                if ($session->getUsRoles()[1] != 2) {
+                if ($session->getUsRoles()[1]->getObjRol()->getIdRol() != 1) {
                     header('Location: ../home/index.php');
                     exit;
                 }

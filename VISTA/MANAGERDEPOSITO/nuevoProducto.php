@@ -11,7 +11,7 @@ if (!isset($datos["verificado"])) {
     $controlIngresoManagerDeposito = new ControlIngresoManagerDeposito();
     $controlIngresoManagerDeposito->verificarIngreso("nuevoProducto");
 }
-include_once '../estructura/header.php';
+include_once '../ACCION/ESTRUCTURA/reusables/header.php';
 
 ?>
 <header class="bg-dark py-1">
@@ -55,6 +55,13 @@ include_once '../estructura/header.php';
                 </div>
             </div>
 
+            <div class="">
+                <div class="form-floating mb-3">
+                    <input class="form-control" id="proprecio" name="proprecio" type="text" placeholder="Precio producto" required>
+                    <label for="proprecio">Precio del producto: </label>
+                </div>
+            </div>
+
             <div class="col-md-6">
                 <div class="mt-3">
                     <label class="mb-2" for="imagen">Imagen de producto</label>
@@ -73,6 +80,6 @@ include_once '../estructura/header.php';
 
 <?php
 
-include_once '../estructura/footer.php';
+
 
 ?>
