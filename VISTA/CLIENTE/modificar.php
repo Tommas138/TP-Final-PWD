@@ -15,7 +15,6 @@ $titulo = 'Actualizar Usuario';
 $datos = data_submitted();
 $abmUsuario = new AbmUsuario();
 $idUsuario = $sesion->getIdUsuario();
-
 $arrayBusqueda = ["idusuario" => $idUsuario];
 
 $listaUsuarios = $abmUsuario->buscar($arrayBusqueda);
@@ -24,6 +23,7 @@ $objUsuario = $listaUsuarios[0];
 if (isset($listaUsuarios)) {
     $idUsuario = $listaUsuarios[0]->getIdUsuario();
 }
+
 
 
 

@@ -399,8 +399,6 @@ ALTER TABLE `producto`
 ALTER TABLE `rol`
   MODIFY `idrol` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
-ALTER TABLE `rol`
-MODIFY COLUMN `rodescripcion` varchar(50)  DEFAULT 'Cliente';
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
