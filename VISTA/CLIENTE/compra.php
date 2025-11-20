@@ -9,8 +9,11 @@ use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Client\Preference\PreferenceClient;
 require __DIR__ . '/../../vendor/autoload.php';
 
-// Set access token (server-side)
-MercadoPagoConfig::setAccessToken("APP_USR-2331238961937089-111917-a69aa1e19611c49ec6c811a883136dac-3001373608");
+// Set access token (server-side). Prefer environment variables `MP_ACCESS_TOKEN` and `MP_PUBLIC_KEY`.
+$mpAccessToken = getenv('MP_ACCESS_TOKEN') ?: 'APP_USR-2331238961937089-111917-a69aa1e19611c49ec6c811a883136dac-3001373608';
+MercadoPagoConfig::setAccessToken($mpAccessToken);
+// Public key for the client-side MercadoPago SDK
+$mpPublicKey = getenv('MP_PUBLIC_KEY') ?: 'APP_USR-d6361bb6-836a-48d3-8faa-21744020faf9';
 
 // Cargar controladores locales (funciones.php ya incluye muchos, esto asegura disponibilidad)
 require_once __DIR__ . '/../../CONTROL/AbmProducto.php';
@@ -103,6 +106,17 @@ foreach ($displayItems as $it) {
     $q = (int)$it['quantity'];
     $totalAmount += ((float)$p->getProPrecio()) * $q;
 }
+// Detectar entorno según token/public key (heurística simple)
+$isTokenSandbox = stripos($mpAccessToken, 'TEST-') !== false || stripos($mpAccessToken, 'test_') !== false;
+$isPublicSandbox = stripos($mpPublicKey, 'TEST-') !== false || stripos($mpPublicKey, 'test_') !== false;
+$envMismatch = ($isTokenSandbox !== $isPublicSandbox);
+// Determinar URL de checkout que servirá como fallback (sandbox o producción)
+$checkoutUrl = '';
+if (!empty($preference->sandbox_init_point)) {
+    $checkoutUrl = $preference->sandbox_init_point;
+} elseif (!empty($preference->init_point)) {
+    $checkoutUrl = $preference->init_point;
+}
 ?>
 
 <!DOCTYPE html>
@@ -158,13 +172,24 @@ foreach ($displayItems as $it) {
             </div>
 
             <div class="mt-3" id="wallet_container"></div>
+            <?php if (!empty($envMismatch) && $envMismatch): ?>
+                <div class="alert alert-warning mt-3">
+                    <strong>Atención:</strong> Las credenciales de MercadoPago parecen pertenecer a distintos entornos (producción vs prueba). Si estás probando con tarjetas de prueba, asegúrate de usar el <em>access token</em> y la <em>public key</em> de sandbox (ambas). Revisa las variables de entorno `MP_ACCESS_TOKEN` y `MP_PUBLIC_KEY`.
+                </div>
+            <?php endif; ?>
+            <?php if (!empty($checkoutUrl)): ?>
+                <div class="mt-3">
+                    <a class="btn btn-primary" href="<?php echo htmlspecialchars($checkoutUrl, ENT_QUOTES); ?>" target="_blank">Pagar (checkout redir)</a>
+                    <small class="form-text text-muted">Usar este botón como alternativa si el widget falla.</small>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
 </div>
 
     <script>
-        // Inicializa el objeto MercadoPago con el PUBLIC_KEY
-        const mp = new MercadoPago('APP_USR-d6361bb6-836a-48d3-8faa-21744020faf9');
+        // Inicializa el objeto MercadoPago con la PUBLIC_KEY provista por el servidor
+        const mp = new MercadoPago('<?php echo htmlspecialchars($mpPublicKey, ENT_QUOTES); ?>');
 
         // Crea un componente de billetera de MercadoPago en el contenedor con id "wallet_container"
         mp.bricks().create("wallet", "wallet_container", {
