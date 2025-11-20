@@ -20,9 +20,6 @@ Class ControlIngresoManagerDeposito {
                 exit;
             }
            
-        } else {
-            header('Location: ../managerDeposito/' . $pagina . '.php?verificado=1');
-            exit;
         }
     }
 }

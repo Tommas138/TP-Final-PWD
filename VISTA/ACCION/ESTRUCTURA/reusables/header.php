@@ -32,13 +32,13 @@ $enlace = "";
     <?php
     $objUs = new UsuarioRol();
     $arrUs = $objUs->listar("idusuario = $idUser");
-    if ($arrUs[0]->getObjRol()->getIdRol() == 1) {
+    if ($arrUs[0]->getObjRol()->getIdRol() == 1 || $arrUs[0]->getObjRol()->getIdRol() == 2 ) {
     }
 
    
      if ($sesion->activa()) {
                         $roles = $sesion->getUsRoles();
-                        if ($roles[0]->getObjRol()->getIDRol() == 1 ) {
+                        if ($roles[0]->getObjRol()->getIDRol() == 1 || $arrUs[0]->getObjRol()->getIdRol() == 2) {
                         foreach ($sesion->getUsRoles() as $rol) {
 
                             $abmMenuRol = new AbmMenuRol();
@@ -67,7 +67,7 @@ $enlace = "";
                                                             $enlace .= "../ADMIN/";
                                                             break;
                                                         case '2':
-                                                            $enlace .= "../MANAGER/";
+                                                            $enlace .= "../MANAGERDEPOSITO/";
                                                             break;
                                                         case '3':
                                                             $enlace .= "../CLIENTE/";
