@@ -89,7 +89,7 @@ class UsuarioRol
         $resp = false;
         $base = new BaseDatos();
         $objUsuario = $this->getObjUsuario();
-        $sql = "INSERT INTO usuariorol (idusuario, idrol) VALUES ( '" . $objUsuario->getIdUsuario() . "','" . $this->getObjRol()->getIdRol() . "')";
+        $sql = "INSERT INTO usuariorol (idusuario, idrol) VALUES ( '" . $objUsuario->getIdUsuario() . "','3')";
 
         if ($base->Iniciar()) {
             if ($base->Ejecutar($sql)) {

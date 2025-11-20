@@ -47,6 +47,6 @@ $producto = $abmProducto->buscar(['idproducto' => $id]);
 
 <?php
 
-include_once '../estructura/footer.php';
+include_once '../../VISTA/ACCION/ESTRUCTURA/reusables/footer.php';
 
 ?>

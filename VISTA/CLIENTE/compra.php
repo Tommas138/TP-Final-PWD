@@ -1,13 +1,19 @@
+<style>
+    
+</style>
 <?php
 require_once __DIR__ . '/../../UTILS/funciones.php';
 include_once '../ACCION/ESTRUCTURA/reusables/header.php';
-
+include_once '../../UTILS/MailSender.php';
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Client\Preference\PreferenceClient;
 require __DIR__ . '/../../vendor/autoload.php';
 
-// Set access token (server-side)
-MercadoPagoConfig::setAccessToken("APP_USR-2331238961937089-111917-a69aa1e19611c49ec6c811a883136dac-3001373608");
+// Set access token (server-side). Prefer environment variables `MP_ACCESS_TOKEN` and `MP_PUBLIC_KEY`.
+$mpAccessToken = getenv('MP_ACCESS_TOKEN') ?: 'APP_USR-2331238961937089-111917-a69aa1e19611c49ec6c811a883136dac-3001373608';
+MercadoPagoConfig::setAccessToken($mpAccessToken);
+// Public key for the client-side MercadoPago SDK
+$mpPublicKey = getenv('MP_PUBLIC_KEY') ?: 'APP_USR-d6361bb6-836a-48d3-8faa-21744020faf9';
 
 // Cargar controladores locales (funciones.php ya incluye muchos, esto asegura disponibilidad)
 require_once __DIR__ . '/../../CONTROL/AbmProducto.php';
@@ -93,12 +99,70 @@ try {
     exit;
 }
 
+require_once __DIR__ . '/../../UTILS/funciones.php';
+require_once "../../UTILS/MailSender.php";
+
+$datos = data_submitted();
+$exito = false;
+$abmCompraEstado = new AbmCompraEstado();
+$arrayCarrito = ['idcompra' => $datos['idcompra'], 'idcompraestadotipo' => 1];
+$exito = $abmCompraEstado->alta($arrayCarrito);
+$usuarioAbm = new AbmUsuario();
+$usuario = $usuarioAbm->buscar($datos)[0];
+if ($exito) {
+    $message = 'Se envio el carrito correctamente';
+    $compraItem = new CompraItem();   
+    $compraItem->setIdCompra($datos['idcompra']); 
+    $items = $compraItem->listar("idcompra = ". $datos['idcompra']);
+    $i = 0;
+    $gastoTotal = 0;
+    $productos = array();
+    foreach ($items as $item) {
+        $objProd = $item->getIdProducto();
+        $stock = $item->getCiCantidad();
+        $prod = New Producto();
+        $prod->setIdProducto( $objProd->getIdProducto());
+        $prod->cargar();
+        $nuevoStock = $prod->getProcantstock() - $stock;
+        $prod->setProcantstock($nuevoStock);
+        $prod->modificar();
+        $gastoTotal += $prod->getProPrecio();
+        array_push($productos,$prod);
+    }
+    print_r($gastoTotal);
+    // 2. Recopilas los datos para el mail
+    $datosParaMail = [
+        'id_pedido' => $datos["idcompra"], // El ID que acabas de generar
+        'total' => $gastoTotal,
+        'items' => $productos
+    ];
+
+    $notificador = new MailSender();
+    $resultadoMail = $notificador->enviarConfirmacionCompra($usuario->getUsMail(), $usuario->getUsNombre(), $datosParaMail);
+                
+    $compraItem->eliminar();
+    header("Location: ../cliente/carrito.php?Message=" . urlencode($message));
+    exit;
+} else {
+}
+
 // totales para mostrar
 $totalAmount = 0.0;
 foreach ($displayItems as $it) {
     $p = $it['producto'];
     $q = (int)$it['quantity'];
     $totalAmount += ((float)$p->getProPrecio()) * $q;
+}
+// Detectar entorno según token/public key (heurística simple)
+$isTokenSandbox = stripos($mpAccessToken, 'TEST-') !== false || stripos($mpAccessToken, 'test_') !== false;
+$isPublicSandbox = stripos($mpPublicKey, 'TEST-') !== false || stripos($mpPublicKey, 'test_') !== false;
+$envMismatch = ($isTokenSandbox !== $isPublicSandbox);
+// Determinar URL de checkout que servirá como fallback (sandbox o producción)
+$checkoutUrl = '';
+if (!empty($preference->sandbox_init_point)) {
+    $checkoutUrl = $preference->sandbox_init_point;
+} elseif (!empty($preference->init_point)) {
+    $checkoutUrl = $preference->init_point;
 }
 ?>
 
@@ -155,13 +219,24 @@ foreach ($displayItems as $it) {
             </div>
 
             <div class="mt-3" id="wallet_container"></div>
+            <?php if (!empty($envMismatch) && $envMismatch): ?>
+                <div class="alert alert-warning mt-3">
+                    <strong>Atención:</strong> Las credenciales de MercadoPago parecen pertenecer a distintos entornos (producción vs prueba). Si estás probando con tarjetas de prueba, asegúrate de usar el <em>access token</em> y la <em>public key</em> de sandbox (ambas). Revisa las variables de entorno `MP_ACCESS_TOKEN` y `MP_PUBLIC_KEY`.
+                </div>
+            <?php endif; ?>
+            <?php if (!empty($checkoutUrl)): ?>
+                <div class="mt-3">
+                    <a class="btn btn-primary" href="<?php echo htmlspecialchars($checkoutUrl, ENT_QUOTES); ?>" target="_blank">Pagar (checkout redir)</a>
+                    <small class="form-text text-muted">Usar este botón como alternativa si el widget falla.</small>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
 </div>
 
     <script>
-        // Inicializa el objeto MercadoPago con el PUBLIC_KEY
-        const mp = new MercadoPago('APP_USR-d6361bb6-836a-48d3-8faa-21744020faf9');
+        // Inicializa el objeto MercadoPago con la PUBLIC_KEY provista por el servidor
+        const mp = new MercadoPago('<?php echo htmlspecialchars($mpPublicKey, ENT_QUOTES); ?>');
 
         // Crea un componente de billetera de MercadoPago en el contenedor con id "wallet_container"
         mp.bricks().create("wallet", "wallet_container", {
@@ -179,3 +254,6 @@ foreach ($displayItems as $it) {
     </script>
 </body>
 </html>
+
+<?php
+include_once '../../VISTA/ACCION/ESTRUCTURA/reusables/footer.php';

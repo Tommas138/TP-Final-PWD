@@ -32,5 +32,5 @@ $id = $datos['idproducto'];
 <?php
 
 
-
+include_once '../../VISTA/ACCION/ESTRUCTURA/reusables/footer.php';
 ?>

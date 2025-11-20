@@ -165,6 +165,7 @@ class Menu {
         } else {
             $this->setMensajeOperacion("Menu->Listar: " . $base->getError());
         }
+        
         return $arreglo;
     }
 

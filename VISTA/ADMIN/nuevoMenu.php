@@ -9,7 +9,7 @@ if(!$session->getIDSesionActual()){
 }else if($session->getIDSesionActual() != 1 && $session->getIDSesionActual()){
     header("Location: ../home/index.php");
 }else{
-    require_once __DIR__ . '/../../UTILS/funciones.php';
+    
     include_once '../ACCION/ESTRUCTURA/reusables/header.php';
 }
 
@@ -83,5 +83,5 @@ include_once '../ACCION/ESTRUCTURA/reusables/header.php';
 <?php
 
 
-
+include_once '../../VISTA/ACCION/ESTRUCTURA/reusables/footer.php';
 ?>

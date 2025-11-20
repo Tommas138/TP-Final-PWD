@@ -76,6 +76,7 @@ $listaProductos = $abmProductos->buscar(null);
                         <?php
                             }
                         }
+                        
                         ?>
                     </tbody>
                 </table>
@@ -85,7 +86,7 @@ $listaProductos = $abmProductos->buscar(null);
 </div>
 
 <?php
-
+include_once '../../VISTA/ACCION/ESTRUCTURA/reusables/footer.php';
 
 
 ?>

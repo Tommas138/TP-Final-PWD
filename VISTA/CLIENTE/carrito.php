@@ -42,10 +42,10 @@ $totalFinalCompra = 0;
                     <div class="card-body">
                         <?php
                         if (count($compraItems) == 0) { ?>
-                            <h5 class="text-center mb-4">Estoy vacío, llename porfis <i class="far fa-sad-tear"></i></h5>
+                            <h5 class="text-center mb-4">Agrega items al carrito para continuar <i class="far fa-sad-tear"></i></h5>
                         <?php
                         } else { ?>
-                            <h5 class="mb-4"><a href="listadoProductos.php"><i class="fas fa-arrow-left"></i>&nbsp;Continuar Comprando</button></a></h5>
+                            <h5 class="mb-4"><a href="listadoProductos.php"><i class="bi bi-arrow-90deg-left"></i>&nbsp;Seguir Comprando</button></a></h5>
                             <?php
                         }
                         $subTotalCompra = 0;
@@ -100,12 +100,12 @@ $totalFinalCompra = 0;
                                                     <div class="btn-group" role="group" aria-label="Basic example">
                                                         <form method='post' action='../acciones/accionRestarCantidadCompra.php'>
                                                             <input name='idcompraitem' id='idcompraitem' type='hidden' value='<?php echo $compraItem->getIdCompraItem() ?>'>
-                                                            <button class='btn btn-dark mx-1' type='submit' role='button'><i class='fas fa-minus'></i></button>
+                                                            <button class='btn btn-dark mx-1' type='submit' role='button'><i class='bi bi-dash'></i></button>
                                                         </form>
                                                         <span class="input-group-text" id="basic-addon1"><?php echo $unidades ?></span>
                                                         <form method='post' action='../acciones/accionSumarCantidadCompra.php'>
                                                             <input name='idcompraitem' id='idcompraitem' type='hidden' value='<?php echo $compraItem->getIdCompraItem() ?>'>
-                                                            <button class='btn btn-dark mx-1' type='submit' role='button'><i class='fas fa-plus'></i></button>
+                                                            <button class='btn btn-dark mx-1' type='submit' role='button'><i class='bi bi-plus-lg'></i></button>
                                                         </form>
                                                     </div>
                                                 </div>
@@ -113,7 +113,7 @@ $totalFinalCompra = 0;
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <form method='post' action='../acciones/accionEliminarItemCarrito.php'>
                                                     <input name='idcompraitem' id='idcompraitem' type='hidden' value='<?php echo $compraItem->getIdCompraItem() ?>'>
-                                                    <button class='btn btn-danger btn-sm' type='submit' role='button'><i class="fas fa-trash"></i></button>
+                                                    <button class='btn btn-danger btn-sm' type='submit' role='button'><i class="bi bi-trash"></i></button>
                                                 </form>
                                                 <p class="mb-0"><span>Precio x unidad: <strong>$<?php echo $precio ?>.-</strong></span></p>
                                             </div>
@@ -185,4 +185,5 @@ $totalFinalCompra = 0;
 </div>
 
 <?php
+include_once '../../VISTA/ACCION/ESTRUCTURA/reusables/footer.php';
 ?>

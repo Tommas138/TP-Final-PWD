@@ -88,7 +88,6 @@ if (!isset($datos["verificado"])) {
 </div>
 
 <?php
-
-include_once '../estructura/footer.php';
+include_once '../../VISTA/ACCION/ESTRUCTURA/reusables/footer.php';
 
 ?>

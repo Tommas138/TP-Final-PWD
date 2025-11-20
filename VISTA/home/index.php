@@ -94,9 +94,6 @@ shuffle($listaProductos);
                                         <button class="add-carrito-button" type='submit' role='button'>Agregar al carrito</button>
                                     </td>
                                 </form>
-                                <a href="#" class="btn btn-outline-secondary btn-sm">
-                                    Ver detalles
-                                </a>
                             </div>
                         </div>
                     </div>
@@ -113,18 +110,3 @@ shuffle($listaProductos);
 ?>
     </section>
 </div>
-
-<style>
-.transition-hover {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.transition-hover:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
-}
-
-.object-fit-cover {
-    object-fit: cover;
-}
-</style>

@@ -86,6 +86,7 @@ Class AbmMenu {
         }
         $menu = new Menu();
         $arreglo = $menu->listar($where);
+        
         return $arreglo;
     }
 

@@ -98,5 +98,5 @@ if($session->getIDSesionActual()){
 </div>
 <?php
 }
-
+include_once '../../VISTA/ACCION/ESTRUCTURA/reusables/footer.php';
 ?>

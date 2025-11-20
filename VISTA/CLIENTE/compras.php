@@ -1,3 +1,11 @@
+<style>
+    body {
+    display: flex; /* Habilita Flexbox */
+    flex-direction: column; /* Organiza los elementos verticalmente */
+    min-height: 100vh; /* Asegura que el body ocupe al menos la altura de la ventana */
+    margin-bottom: 0; /* Asegura que no haya margen extra abajo */
+}
+</style>
 <?php
 require_once __DIR__ . '/../../UTILS/funciones.php';
 
@@ -24,6 +32,7 @@ $arrayCarritos = $controlVerificarCarrito->verificarCarrito($idUser);
 $compras = $arrayCarritos['arrayCompras'];
 
 ?>
+<body style="display:flex;">
 <header class="bg-dark py-1">
     <div class="container px-4 px-lg-5 my-2">
         <div class="text-center text-white">
@@ -119,9 +128,9 @@ $compras = $arrayCarritos['arrayCompras'];
         </div>
     </section>
 </div>
-
+</body>
 <?php
 
-
+include_once '../../VISTA/ACCION/ESTRUCTURA/reusables/footer.php';
 
 ?>
