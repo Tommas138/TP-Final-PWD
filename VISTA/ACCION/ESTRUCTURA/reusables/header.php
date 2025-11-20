@@ -8,6 +8,10 @@
 </style>
 <?php
 include_once __DIR__ . '../../../../../UTILS/funciones.php';
+include_once __DIR__ . '/../../../../CONTROL/AbmRol.php';
+include_once __DIR__ . '/../../../../MODELO/UsuarioRol.php';
+include_once __DIR__ . '/../../../../CONTROL/AbmMenuRol.php';
+
 
 $cantidadItemsCarrito = 0;
 $sesion = new Session();
@@ -26,8 +30,7 @@ $enlace = "";
 ?>
 <nav class="navbar navbar-expand-custom navbar-mainbg">
 
-    <a class="navbar-brand navbar-logo navbar-button " href="#">Dunder Mifflin Store</a>
-    <a class="navbar-brand navbar-logo navbar-button" href="../../VISTA/home/index.php">Inicio</a>
+    <a class="navbar-brand navbar-logo navbar-button " href="../../VISTA/home/index.php">Dunder Mifflin Store</a>
     <a class="navbar-brand navbar-logo navbar-button" href="../../VISTA/CLIENTE/listadoProductos.php">Productos</a>
     <?php
     $objUs = new UsuarioRol();

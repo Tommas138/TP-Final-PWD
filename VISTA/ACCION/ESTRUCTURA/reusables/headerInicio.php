@@ -25,8 +25,7 @@ $enlace = "";
 ?>
 <nav class="navbar navbar-expand-custom navbar-mainbg">
 
-    <a class="navbar-brand navbar-logo navbar-button " href="#">Dunder Mifflin Store</a>
-    <a class="navbar-brand navbar-logo navbar-button" href="../../VISTA/home/index.php">Inicio</a>
+    <a class="navbar-brand navbar-logo navbar-button " href="../../VISTA/home/index.php">Dunder Mifflin Store</a>
     <a class="navbar-brand navbar-logo navbar-button" href="../../VISTA/CLIENTE/listadoProductos.php">Productos</a>
    <?php
     $objUs = new UsuarioRol();
