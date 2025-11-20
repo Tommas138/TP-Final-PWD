@@ -125,6 +125,7 @@ Class CompraItem {
         $base = new BaseDatos();
         $sql = "DELETE FROM compraitem WHERE idcompraitem = " . $this->getIdCompraItem();
         echo $this->getIdCompra();
+
         if ($base->Iniciar()) {
             if ($base->Ejecutar($sql)) {
                 $resp = true;

@@ -32,13 +32,14 @@ $enlace = "";
     <?php
     $objUs = new UsuarioRol();
     $arrUs = $objUs->listar("idusuario = $idUser");
+    $roles = $sesion->getUsRoles();
     if ($arrUs[0]->getObjRol()->getIdRol() == 1 || $arrUs[0]->getObjRol()->getIdRol() == 2 ) {
-    }
-
+   
+    
    
      if ($sesion->activa()) {
-                        $roles = $sesion->getUsRoles();
                         
+                       
                         foreach ($sesion->getUsRoles() as $rol) {
 
                             $abmMenuRol = new AbmMenuRol();
@@ -84,22 +85,19 @@ $enlace = "";
                     <?php
                                 
                             }
-                        
+       }                  }
+                      
                     }
-                    }
+                    
                     ?>
                 </ul>
                 <ul class="navbar-nav d-flex">
                     <!-- Icon carrito -->
                     <?php
-                    if (($sesion->activa())) {
-                        $clienteActivo = false;
+                    if ($sesion->activa()) {
+                        $clienteActivo = true;
 
-                        foreach ($roles as $rol) {                     
-                                $clienteActivo = true;
-
-                        }
-
+                       
                         if ($clienteActivo) {
                             $controlVerificarCarrito = new ControlVerificarCarritoCliente();
                             $arrayCarritos = $controlVerificarCarrito->verificarCarrito($idUser);

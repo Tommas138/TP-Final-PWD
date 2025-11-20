@@ -22,7 +22,7 @@ require_once __DIR__ . '/../../CONTROL/ControlVerificarCarritoCliente.php';
 require_once __DIR__ . '/../../CONTROL/Session.php';
 
 // Preparar variables comunes
-$imgWebBase = '/pwd2025/TP-Final-PWD/uploads/img/';
+$imgWebBase = '../../uploads/img/';
 $defaultImg = $imgWebBase . 'default.jpg';
 
 // aceptar idproducto (GET/POST) o idcompra (POST)
@@ -82,8 +82,6 @@ if ($idCompra) {
     $displayItems[] = ['producto' => $producto, 'quantity' => 1];
     $externalRef = 'CDP' . $producto->getIdProducto();
 } else {
-    header('Location: carrito.php?message=' . urlencode('Seleccione productos en el carrito o pase ?id=ID en la URL.'));
-    exit;
 }
 
 // crear preferencia
@@ -129,7 +127,6 @@ if ($exito) {
         $gastoTotal += $prod->getProPrecio();
         array_push($productos,$prod);
     }
-    print_r($gastoTotal);
     // 2. Recopilas los datos para el mail
     $datosParaMail = [
         'id_pedido' => $datos["idcompra"], // El ID que acabas de generar
@@ -140,9 +137,6 @@ if ($exito) {
     $notificador = new MailSender();
     $resultadoMail = $notificador->enviarConfirmacionCompra($usuario->getUsMail(), $usuario->getUsNombre(), $datosParaMail);
                 
-    $compraItem->eliminar();
-    header("Location: ../cliente/carrito.php?Message=" . urlencode($message));
-    exit;
 } else {
 }
 
