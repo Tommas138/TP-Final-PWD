@@ -1,7 +1,7 @@
 <?php
 
-include_once '../../CONTROL/Session.php';
 
+include_once '../../CONTROL/Session.php';
 $session = new Session();
 if(!$session->getIDSesionActual()){
     header("Location: ../../index.php");
