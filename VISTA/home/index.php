@@ -1,3 +1,18 @@
+<style>
+    nav {
+        position:absolute;
+    }
+    body {
+        position: relative;
+    }
+    #footer {
+        height: 100px;
+        left: 0px;
+    }
+    #small {
+        font-size:1.2rem;
+    }
+</style>
 <?php
 
 require_once __DIR__ . '/../../UTILS/funciones.php';
@@ -29,7 +44,7 @@ shuffle($listaProductos);
         referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="../acciones/ESTRUCTURA/styles.css">
 </head>
-
+<body>
 <div class="container mt-5">
     <section class="py-4">
         <?php
@@ -101,12 +116,10 @@ shuffle($listaProductos);
 <?php
             }
             ?>
-            </div>
+            </div></body>
             <?php
         }
-    // }else{
-    //     header("Location: ../../index.php");
-    // }
+require_once __DIR__ . '../../ACCION/ESTRUCTURA/reusables/footer.php';
 ?>
     </section>
 </div>

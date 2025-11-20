@@ -394,10 +394,6 @@ ALTER TABLE `menu`
 --
 ALTER TABLE `producto`
   MODIFY `idproducto` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
-<<<<<<< HEAD
-=======
-
->>>>>>> bb3b0f36750ba0b67e0dd71aeb68d38d85006869
 
 ALTER TABLE `rol`
   MODIFY `idrol` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;

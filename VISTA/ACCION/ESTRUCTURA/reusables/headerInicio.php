@@ -29,11 +29,13 @@ $enlace = "";
     <a class="navbar-brand navbar-logo navbar-button" href="../../VISTA/CLIENTE/listadoProductos.php">Productos</a>
    <?php
     $objUs = new UsuarioRol();
+    
     $arrUs = $objUs->listar("idusuario = $idUser");
+    $roles = $sesion->getUsRoles();
     if ($arrUs[0]->getObjRol()->getIdRol() == 1 || $arrUs[0]->getObjRol()->getIdRol() == 2 ) {
-    } 
+    
          if ($sesion->activa()) {
-                        $roles = $sesion->getUsRoles();
+                        
                         if ($roles[0]->getObjRol()->getIDRol() == 1 || $arrUs[0]->getObjRol()->getIdRol() == 2) {
                         foreach ($sesion->getUsRoles() as $rol) {
 
@@ -83,7 +85,7 @@ $enlace = "";
                             }
                         }
                     }
-                  
+                   }
                     ?>
                 </ul>
                 <ul class="navbar-nav d-flex">
