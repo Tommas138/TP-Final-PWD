@@ -8,6 +8,15 @@ include_once '../ACCION/ESTRUCTURA/reusables/header.php';
 $datos = data_submitted();
 $abmProducto = new AbmProducto();
 
+$sesion = new Session();
+$rol = $sesion->getUsRoles();
+
+
+
+if ($rol[0]->getObjRol()->getIdRol() != 2 || $rol[0]->getObjRol()->getIdRol() != 1) {
+    header('Location: ../home/index.php');
+    exit();
+}
 $arrayBusqueda = ["idproducto" => $datos['idproducto']];
 
 $listaProductos = $abmProducto->buscar($arrayBusqueda);

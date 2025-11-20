@@ -2,10 +2,13 @@
 
 require_once __DIR__ . '/../../UTILS/funciones.php';
 
+$sesion = new Session();
 
 $titulo = 'Nuevo Producto';
 
 $datos = data_submitted();
+
+$rol = $sesion->getUsRoles();
 
 if (!isset($datos["verificado"])) {
     $controlIngresoManagerDeposito = new ControlIngresoManagerDeposito();
