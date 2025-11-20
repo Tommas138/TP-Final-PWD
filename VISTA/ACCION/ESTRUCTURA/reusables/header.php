@@ -38,22 +38,21 @@ $enlace = "";
    
      if ($sesion->activa()) {
                         $roles = $sesion->getUsRoles();
-                        if ($roles[0]->getObjRol()->getIDRol() == 1 || $arrUs[0]->getObjRol()->getIdRol() == 2) {
+                        
                         foreach ($sesion->getUsRoles() as $rol) {
 
                             $abmMenuRol = new AbmMenuRol();
                             $arrayMenusRol = $abmMenuRol->buscar(['idrol' => $rol->getObjRol()->getIdRol()]);
-
                             if (count($arrayMenusRol) > 0) {
                                 $abmMenu = new AbmMenu();
                                 $idMenu = $arrayMenusRol[0]->getObjMenu()->getIdMenu();
-                              
                                 $arrayMenus = $abmMenu->buscar(["idmenu" => $idMenu]);
                                 if (count($arrayMenus) > 0) {
                                     $idPadre = $arrayMenus[0]->getIdMenu();
                                     $arraySubMenus = $abmMenu->buscar(["idpadre" => $idPadre]);
                                 }
                             }
+                            
                             foreach ($arrayMenus as $menu) {
                                
                     ?>
@@ -85,7 +84,7 @@ $enlace = "";
                     <?php
                                 
                             }
-                        }
+                        
                     }
                     }
                     ?>
