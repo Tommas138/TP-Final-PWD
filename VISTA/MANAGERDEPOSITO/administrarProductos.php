@@ -1,6 +1,6 @@
 <?php
-include_once '../../configuracion.php';
-
+require_once __DIR__ . '/../../UTILS/funciones.php';
+include_once '../ACCION/ESTRUCTURA/reusables/header.php';
 $titulo = 'Administración de Productos';
 
 $datos = data_submitted();
@@ -9,7 +9,6 @@ if (!isset($datos["verificado"])) {
     $controlIngresoManagerDeposito = new ControlIngresoManagerDeposito();
     $controlIngresoManagerDeposito->verificarIngreso("administrarProductos");
 }
-include_once '../estructura/header.php';
 
 $abmProductos = new AbmProducto();
 $listaProductos = $abmProductos->buscar(null);
@@ -46,16 +45,17 @@ $listaProductos = $abmProductos->buscar(null);
                         if (count($listaProductos) > 0) {
                             foreach ($listaProductos as $producto) {
                                 $id = $producto->getIdProducto(); ?>
+                                
                                 <tr>
                                     <td class='text-center'><?php echo $id ?></td>
                                     <td class='text-center'><?php echo $producto->getProNombre() ?></td>
                                     <td class='text-center'><?php echo $producto->getProDetalle() ?></td>  
-                                    <td class='text-center'><?php echo $producto->getProCantStock() ?></td>
+                                    <td class='text-center'><?php echo $producto->getProcantstock() ?></td>
 
 
                                     
                                     <?php
-                                    }
+                                    
                                     ?>
                                     <form method='post' action='actualizarProducto.php'>
                                         <td class='text-center'>
@@ -70,11 +70,12 @@ $listaProductos = $abmProductos->buscar(null);
                                             <button class='btn btn-danger btn-sm' type='submit' value='<?php $id ?>' role='button'><i class='bi bi-trash'></i>&nbsp;Eliminar</button>
                                         </td>
                                     </form>
-
+                                
 
                                 </tr>
                         <?php
                             }
+                        }
                         ?>
                     </tbody>
                 </table>
@@ -85,6 +86,6 @@ $listaProductos = $abmProductos->buscar(null);
 
 <?php
 
-include_once '../estructura/footer.php';
+
 
 ?>

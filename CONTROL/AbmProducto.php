@@ -3,8 +3,7 @@ require_once __DIR__ . '../../MODELO/Producto.php';
 Class AbmProducto {
 
     private function cargarObjeto($param) {
-        if (array_key_exists('idproducto', $param) && array_key_exists('proprecio', $param) && array_key_exists('prodescuento', $param)
-            && array_key_exists('pronombre', $param) && array_key_exists('prodetalle', $param) && array_key_exists('procantstock', $param)) {
+        
         $obj = new Producto();
         $obj->set(
             $param['idproducto'],
@@ -13,7 +12,7 @@ Class AbmProducto {
             $param['procantstock'],
             $param['proprecio']
         );
-        }
+        
         return $obj;
     }
 
@@ -69,8 +68,10 @@ Class AbmProducto {
        // print_r($param);
         if ($this->seteadosCamposClaves($param)) {
             $listaProductos = $this->buscar(['idproducto'=> $param['idproducto']]);
+              print_r($listaProductos);  
             if ($listaProductos != null) {
                 $objProducto = $this->cargarObjeto($param);
+
                 if ($objProducto->modificar()) {
                     $resp = true;
                     $controlCargaImagen = new ControlCargaImagenes();

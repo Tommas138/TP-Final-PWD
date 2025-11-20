@@ -29,6 +29,8 @@ $enlace = "";
         <a class="navbar-brand navbar-logo navbar-button" href="../../VISTA/acciones/accionActualizarMenu.php">Administrar Menu</a>
         <a class="navbar-brand navbar-logo navbar-button" href="../../VISTA/MANAGERDEPOSITO/administrarCompras.php">Administrar Compras</a>
         <a class="navbar-brand navbar-logo navbar-button" href="../../VISTA/ADMIN/administrarUsuarios.php">Administrar Usuarios</a>
+        <a class="navbar-brand navbar-logo navbar-button" href="../../VISTA/MANAGERDEPOSITO/AdministrarProductos.php">Actualizar Productos</a>
+        <a class="navbar-brand navbar-logo navbar-button" href="../../VISTA/MANAGERDEPOSITO/nuevoProducto.php">Añadir Productos</a>
     <?php
     }
     ?>

@@ -6,6 +6,8 @@ $datos = data_submitted();
 
 $abmProducto = new AbmProducto();
 $datos['files'] = $_FILES;
+
+//print_r($datos);
 $exito = $abmProducto->modificacion($datos);
 
 if ($exito) {
