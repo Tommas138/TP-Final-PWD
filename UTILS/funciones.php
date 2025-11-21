@@ -1,7 +1,7 @@
     <head> 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="../../VISTA/acciones/ESTRUCTURA/styles.css">
+    <link rel="stylesheet" href="../VISTA/acciones/ESTRUCTURA/styles.css">
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 
 </head>
@@ -69,8 +69,8 @@ function mostrarUsuarios($arregloUsuarios)
             '<td>' . $objUsuario->getUsNombre() . '</td>' .
             '<td>' . $objUsuario->getUsMail() . '</td>' .
             '<td>
-            <a href="../../VISTA/ACCION/actualizarLogin.php">Editar</a>
-            <a href="../../VISTA/ACCION/eliminarLogin.php">Borrar</a>
+            <a href="../VISTA/ACCION/actualizarLogin.php">Editar</a>
+            <a href="../VISTA/ACCION/eliminarLogin.php">Borrar</a>
             </td></tr>';
         }else{
             $tabla .= '<tr>' .

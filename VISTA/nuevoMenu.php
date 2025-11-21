@@ -1,16 +1,16 @@
 <?php
 
 
-include_once '../../CONTROL/Session.php';
+include_once '../CONTROL/Session.php';
 $session = new Session();
 if(!$session->getIDSesionActual()){
-    header("Location: ../../index.php");
+    header("Location: ../index.php");
 
 }else if($session->getIDSesionActual() != 1 && $session->getIDSesionActual()){
-    header("Location: ../home/index.php");
+    header("Location: index.php");
 }else{
     
-    include_once '../ACCION/ESTRUCTURA/reusables/header.php';
+    include_once 'ACCION/ESTRUCTURA/reusables/header.php';
 }
 
 
@@ -22,7 +22,7 @@ if (!isset($datos["verificado"])) {
     $controlIngresoManagerDeposito = new ControlIngresoAdmin();
     $controlIngresoManagerDeposito->verificarIngreso("nuevoMenu");
 }
-include_once '../ACCION/ESTRUCTURA/reusables/header.php';
+include_once 'ACCION/ESTRUCTURA/reusables/header.php';
 
 ?>
 <header class="bg-dark py-1">
@@ -36,7 +36,7 @@ include_once '../ACCION/ESTRUCTURA/reusables/header.php';
 <div class="container mt-3">
     <div class="col-md-4"></div>
     <div class="offset-md-4">
-        <form action="../acciones/accionNuevoMenu.php" method="post" class="col-md-6 mt-3 " id="menuNuevo" name="menuNuevo">
+        <form action="acciones/accionNuevoMenu.php" method="post" class="col-md-6 mt-3 " id="menuNuevo" name="menuNuevo">
             <div class="">
                 <div class="form-floating mt-3">
                     <input class="form-control" id="menombre" name="menombre" type="text" placeholder="Nombre" required>
@@ -83,5 +83,5 @@ include_once '../ACCION/ESTRUCTURA/reusables/header.php';
 <?php
 
 
-include_once '../../VISTA/ACCION/ESTRUCTURA/reusables/footer.php';
+include_once '../VISTA/ACCION/ESTRUCTURA/reusables/footer.php';
 ?>

@@ -21,6 +21,6 @@ if ($resp) {
 
 // Redireccionar de vuelta a la administración
 echo "<script>
-        window.location.href = '../home/index.php?Message=" . urlencode($mensaje) . "';
+        window.location.href = '../index.php?Message=" . urlencode($mensaje) . "';
       </script>";
 ?>

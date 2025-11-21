@@ -1,16 +1,16 @@
 <?php
 
-include_once '../../CONTROL/Session.php';
+include_once '../CONTROL/Session.php';
 
 $session = new Session();
 if(!$session->getIDSesionActual()){
-    header("Location: ../../index.php");
+    header("Location: ../index.php");
 
 }else if($session->getIDSesionActual() != 1 && $session->getIDSesionActual()){
-    header("Location: ../home/index.php");
+    header("Location: index.php");
 }else{
-    require_once __DIR__ . '/../../UTILS/funciones.php';
-    include_once '../ACCION/ESTRUCTURA/reusables/header.php';
+    require_once __DIR__ . '/../UTILS/funciones.php';
+    include_once 'ACCION/ESTRUCTURA/reusables/header.php';
 }
 
 $datos = data_submitted();
@@ -131,7 +131,7 @@ if($sesionAdministrarUsuarios->getIDSesionActual()){
                             }
                             ?>
 
-                            <form method='post' action='../acciones/accionDeshabilitarUsuario.php'>
+                            <form method='post' action='acciones/accionDeshabilitarUsuario.php'>
                                 <td class='text-center'>
                                     <input name='idusuario' id='idusuario' type='hidden' value='<?php echo $id ?>'>
                                     <?php
@@ -162,7 +162,7 @@ if($sesionAdministrarUsuarios->getIDSesionActual()){
 <?php
 
 }else{
-    header("Location: ../../index.php");
+    header("Location: ../index.php");
 }
-include_once '../../VISTA/ACCION/ESTRUCTURA/reusables/footer.php';
+include_once '../VISTA/ACCION/ESTRUCTURA/reusables/footer.php';
 ?>

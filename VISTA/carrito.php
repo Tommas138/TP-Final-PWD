@@ -1,15 +1,15 @@
 <?php
 
 
-include_once '../../CONTROL/Session.php';
+include_once '../CONTROL/Session.php';
 
 $session = new Session();
 if(!$session->getIDSesionActual()){
-    header("Location: ../../index.php");
+    header("Location: ../index.php");
 
 }else{
-    require_once __DIR__ . '/../../UTILS/funciones.php';
-    include_once '../ACCION/ESTRUCTURA/reusables/header.php';
+    require_once __DIR__ . '/../UTILS/funciones.php';
+    include_once 'ACCION/ESTRUCTURA/reusables/header.php';
 }
 
 if ($session->activa()) {
@@ -63,11 +63,11 @@ $totalFinalCompra = 0;
                                 $unidades = $compraItem->getCiCantidad();
                                 $subTotalProducto = ($precio * $unidades) - ((($precio * $unidades)) / 100);
                                 $subTotalCompra = $subTotalCompra + $subTotalProducto;
-                                $imgCarpeta = realpath(__DIR__ . '/../../uploads/img/');
+                                $imgCarpeta = realpath(__DIR__ . '/../uploads/img/');
                                 $idHash = md5($producto->getIdProducto());
                                 $idHashImg = strtolower($idHash);
                                 $idPlain = 'producto' . intval($producto->getIdProducto());
-                                $imgWebBase = '../../uploads/img/';
+                                $imgWebBase = '../uploads/img/';
                                 if ($imgCarpeta) {
                                     $exts = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
                                     foreach ($exts as $ext) {
@@ -88,7 +88,7 @@ $totalFinalCompra = 0;
                                 <div class="row mb-4">
                                     <div class="col-md-5 col-lg-3 col-xl-3">
                                         <div>
-                                            <img class='card-img-top img-producto-listado' src='../../uploads/img/<?php echo $imgSrc . ""; ?>' alt='Imagen de suplemento' />
+                                            <img class='card-img-top img-producto-listado' src='<?php echo $imgSrc . ""; ?>' alt='Imagen de suplemento' />
                                         </div>
                                     </div>
                                     <div class="col-md-7 col-lg-9 col-xl-9">
@@ -100,12 +100,12 @@ $totalFinalCompra = 0;
                                                 </div>
                                                 <div class='text-center'>
                                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                                        <form method='post' action='../acciones/accionRestarCantidadCompra.php'>
+                                                        <form method='post' action='acciones/accionRestarCantidadCompra.php'>
                                                             <input name='idcompraitem' id='idcompraitem' type='hidden' value='<?php echo $compraItem->getIdCompraItem() ?>'>
                                                             <button class='btn btn-dark mx-1' type='submit' role='button'><i class='bi bi-dash'></i></button>
                                                         </form>
                                                         <span class="input-group-text" id="basic-addon1"><?php echo $unidades ?></span>
-                                                        <form method='post' action='../acciones/accionSumarCantidadCompra.php'>
+                                                        <form method='post' action='acciones/accionSumarCantidadCompra.php'>
                                                             <input name='idcompraitem' id='idcompraitem' type='hidden' value='<?php echo $compraItem->getIdCompraItem() ?>'>
                                                             <button class='btn btn-dark mx-1' type='submit' role='button'><i class='bi bi-plus-lg'></i></button>
                                                         </form>
@@ -113,7 +113,7 @@ $totalFinalCompra = 0;
                                                 </div>
                                             </div>
                                             <div class="d-flex justify-content-between align-items-center">
-                                                <form method='post' action='../acciones/accionEliminarItemCarrito.php'>
+                                                <form method='post' action='acciones/accionEliminarItemCarrito.php'>
                                                     <input name='idcompraitem' id='idcompraitem' type='hidden' value='<?php echo $compraItem->getIdCompraItem() ?>'>
                                                     <button class='btn btn-danger btn-sm' type='submit' role='button'><i class="bi bi-trash"></i></button>
                                                 </form>
@@ -188,5 +188,5 @@ $totalFinalCompra = 0;
 </div>
 
 <?php
-include_once '../../VISTA/ACCION/ESTRUCTURA/reusables/footer.php';
+include_once '../VISTA/ACCION/ESTRUCTURA/reusables/footer.php';
 ?>

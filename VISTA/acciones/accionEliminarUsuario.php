@@ -17,11 +17,11 @@ if (isset($datos)) {
     $exito = $usuario->eliminarUsuarioPorID($datos["idusuario"]);
     if ($exito) {
         $message = 'Eliminacion exitosa';
-        header("Location: ../admin/administrarUsuarios.php?Message=" . urlencode($message));
+        header("Location: ../administrarUsuarios.php?Message=" . urlencode($message));
         exit;
     } else {
         $message = 'Eliminacion erronea';
-        header("Location: ../admin/administrarUsuarios.php?Message=" . urlencode($message));
+        header("Location: ../administrarUsuarios.php?Message=" . urlencode($message));
         exit;
     }
 }

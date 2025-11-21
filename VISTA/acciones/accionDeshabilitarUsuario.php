@@ -23,16 +23,16 @@ $idUsuarioSesion = $sesion->getIdUsuario();
 if (isset($datos)) {
     if ($datos['idusuario'] == $idUsuarioSesion) {
         $message = "No se puede deshabilitar a si mismo";
-        header('Location: ../admin/administrarUsuarios.php?Message=' . urlencode($message));
+        header('Location: ../administrarUsuarios.php?Message=' . urlencode($message));
         exit;
     }
     $respuestaDeshabilitado = $abmUsuario->deshabilitarUsuario($arrayBusqueda);
     if ($respuestaDeshabilitado) {
         $message = "Deshabilitacion exitosa";
-        header('Location: ../admin/administrarUsuarios.php?Message=' . urlencode($message));
+        header('Location: ../administrarUsuarios.php?Message=' . urlencode($message));
     } else {
         $message = "Deshabilitacion erronea";
-        header('Location: ../admin/administrarUsuarios.php?Message=' . urlencode($message));
+        header('Location: ../administrarUsuarios.php?Message=' . urlencode($message));
     }
 }
 ?>

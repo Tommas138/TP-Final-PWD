@@ -20,7 +20,7 @@
 
 
     if($respuesta){
-        header("Location: ../home/index.php");
+        header("Location: ../index.php");
         exit;
     }else{
         echo "Error al registrar usuario";

@@ -1,7 +1,7 @@
 <?php
-require_once __DIR__ . '/../../UTILS/funciones.php';
+require_once __DIR__ . '/../UTILS/funciones.php';
 
-include_once '../ACCION/ESTRUCTURA/reusables/header.php';
+include_once 'ACCION/ESTRUCTURA/reusables/header.php';
 $titulo = 'Administración de Compras';
 
 $datos = data_submitted();
@@ -81,7 +81,7 @@ $listaComprasIniciadas = $abmComprasIniciadas->buscar(null);
                                     <?php
                                     if ($idEstadoCompraTipo == 1) {
                                     ?>
-                                        <form method='post' action='../acciones/accionAceptarCompra.php'>
+                                        <form method='post' action='acciones/accionAceptarCompra.php'>
                                             <td class='text-center'>
                                                 <input name='idcompraestado' id='idcompraestado' type='hidden' value='<?php echo $idCompra ?>'>
                                                 <button class='btn btn-warning btn-sm' type='submit' role='button'><i class='bi bi-cart-check-fill'></i>&nbsp;Aceptar</button>
@@ -90,7 +90,7 @@ $listaComprasIniciadas = $abmComprasIniciadas->buscar(null);
                                     <?php
                                     } else if ($idEstadoCompraTipo == 2) {
                                     ?>
-                                        <form method='post' action='../acciones/accionEnviarCompra.php'>
+                                        <form method='post' action='acciones/accionEnviarCompra.php'>
                                             <td class='text-center'>
                                                 <input name='idcompraestado' id='idcompraestado' type='hidden' value='<?php echo $idCompra ?>'>
                                                 <button class='btn btn-warning btn-sm' type='submit' role='button'><i class='fas fa-shipping-fast'></i>&nbsp;Enviar</button>
@@ -103,7 +103,7 @@ $listaComprasIniciadas = $abmComprasIniciadas->buscar(null);
                                     }
 
                                     if ($idEstadoCompraTipo <= 3) { ?>
-                                        <form method='post' action='../acciones/accionFinCompra.php'>
+                                        <form method='post' action='acciones/accionFinCompra.php'>
                                             <td class='text-center'>
                                                 <input name='idcompraestado' id='idcompraestado' type='hidden' value='<?php echo $idCompraEstado ?>'>
                                                 <button class='btn btn-danger btn-sm' type='submit' role='button'><i class='bi bi-cart-x'></i>&nbsp;Cancelar</button>
@@ -125,6 +125,6 @@ $listaComprasIniciadas = $abmComprasIniciadas->buscar(null);
 </div>
 
 <?php
-include_once '../../VISTA/ACCION/ESTRUCTURA/reusables/footer.php';
+include_once '../VISTA/ACCION/ESTRUCTURA/reusables/footer.php';
 
 ?>

@@ -9,10 +9,10 @@ $exito = $abmMenu->alta($datos);
 
 if ($exito) {
     $message = "Menu cargado correctamente";
-    header('Location: ../admin/administrarMenus.php?messageOk=' . urlencode($message)); 
+    header('Location: ../administrarMenus.php?messageOk=' . urlencode($message)); 
     exit;
 } else {
     $message = "Error carga menú";
-    header('Location: ../admin/nuevoMenu.php?messageErr=' . urlencode($message));
+    header('Location: ../nuevoMenu.php?messageErr=' . urlencode($message));
     exit;
 }

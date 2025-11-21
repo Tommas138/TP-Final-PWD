@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '/../../UTILS/funciones.php';
-include_once '../ACCION/ESTRUCTURA/reusables/header.php';
+require_once __DIR__ . '/../UTILS/funciones.php';
+include_once 'ACCION/ESTRUCTURA/reusables/header.php';
 $titulo = 'Administración de Productos';
 
 $datos = data_submitted();
@@ -86,7 +86,7 @@ $listaProductos = $abmProductos->buscar(null);
 </div>
 
 <?php
-include_once '../../VISTA/ACCION/ESTRUCTURA/reusables/footer.php';
+include_once '../VISTA/ACCION/ESTRUCTURA/reusables/footer.php';
 
 
 ?>

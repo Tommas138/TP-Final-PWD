@@ -10,7 +10,7 @@ $exito = $abmUsuario->alta($datos);
 
 if ($exito) {
     $message = 'Se cargo correctamente el usuario y el rol';
-    header("Location: ../home/index.php?Message=" . urlencode($message));
+    header("Location: ../index.php?Message=" . urlencode($message));
     exit;
 } else {
     $message = 'Hubo un error al registrar el usuario';

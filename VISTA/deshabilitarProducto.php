@@ -1,8 +1,8 @@
 <?php
 $titulo = 'Deshabilitación de Producto';
 
-require_once __DIR__ . '/../../UTILS/funciones.php';
-include_once '../ACCION/ESTRUCTURA/reusables/header.php';
+require_once __DIR__ . '/../UTILS/funciones.php';
+include_once 'ACCION/ESTRUCTURA/reusables/header.php';
 
 $datos = data_submitted();
 
@@ -14,7 +14,7 @@ $rol = $sesion->getUsRoles();
 
 
 if ($rol[0]->getObjRol()->getIdRol() != 2 || $rol[0]->getObjRol()->getIdRol() != 1) {
-    header('Location: ../home/index.php');
+    header('Location: index.php');
     exit();
 }
 $id = $datos['idproducto'];
@@ -38,7 +38,7 @@ $producto = $abmProducto->buscar(['idproducto' => $id]);
             }
             ?>
             <p class="card-text">Código: <?php echo $id ?></p>
-            <form action='../acciones/accionDeshabilitarProducto.php' method='post'>
+            <form action='acciones/accionDeshabilitarProducto.php' method='post'>
                 <input name='idproducto' id='idproducto' type='hidden' value='<?php echo $id ?>'>
                 <?php
                 if ($producto[0]->getProDeshabilitado() == "0000-00-00 00:00:00") { ?>
@@ -56,6 +56,6 @@ $producto = $abmProducto->buscar(['idproducto' => $id]);
 
 <?php
 
-include_once '../../VISTA/ACCION/ESTRUCTURA/reusables/footer.php';
+include_once '../VISTA/ACCION/ESTRUCTURA/reusables/footer.php';
 
 ?>

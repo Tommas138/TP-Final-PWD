@@ -1,32 +1,32 @@
 <?php
 
-include_once '../../CONTROL/Session.php';
-require_once "../../UTILS/MailSender.php";
+include_once '../CONTROL/Session.php';
+require_once "../UTILS/MailSender.php";
 
 $session = new Session();
 if(!$session->getIDSesionActual()){
-    header("Location: ../../index.php");
+    header("Location: ../index.php");
 
 }else{
-    require_once __DIR__ . '/../../UTILS/funciones.php';
-    include_once '../ACCION/ESTRUCTURA/reusables/header.php';
+    require_once __DIR__ . '/../UTILS/funciones.php';
+    include_once 'ACCION/ESTRUCTURA/reusables/header.php';
 }
 $datos = data_submitted();
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Client\Preference\PreferenceClient;
-require __DIR__ . '/../../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 // Set access token (server-side)
 MercadoPagoConfig::setAccessToken("APP_USR-2331238961937089-111917-a69aa1e19611c49ec6c811a883136dac-3001373608");
 
 // Cargar controladores locales (funciones.php ya incluye muchos, esto asegura disponibilidad)
-require_once __DIR__ . '/../../CONTROL/AbmProducto.php';
-require_once __DIR__ . '/../../CONTROL/AbmCompraItem.php';
-require_once __DIR__ . '/../../CONTROL/ControlVerificarCarritoCliente.php';
-require_once __DIR__ . '/../../CONTROL/Session.php';
+require_once __DIR__ . '/../CONTROL/AbmProducto.php';
+require_once __DIR__ . '/../CONTROL/AbmCompraItem.php';
+require_once __DIR__ . '/../CONTROL/ControlVerificarCarritoCliente.php';
+require_once __DIR__ . '/../CONTROL/Session.php';
 
 // Preparar variables comunes
-$imgWebBase = '../../uploads/img/';
+$imgWebBase = '../uploads/img/';
 $defaultImg = $imgWebBase . 'default.jpg';
 
 
@@ -170,7 +170,7 @@ if ($exito) {
                 $subtotal = (float)$prod->getProPrecio() * $qty;
 
                 // intentar detectar imagen (md5 o producto{id})
-                $imgFolder = realpath(__DIR__ . '/../../uploads/img/');
+                $imgFolder = realpath(__DIR__ . '/../uploads/img/');
                 $imgFile = null;
                 $idHashImg = strtolower(md5($prod->getIdProducto()));
                 $idPlain = 'producto' . intval($prod->getIdProducto());

@@ -10,9 +10,9 @@ $abmUsuarioRol = new AbmUsuarioRol();
 $exitoModificacionUsuario = $abmUsuario->modificacion($datos);
 $exitoModificacionUsuarioRol = $abmUsuarioRol->modificacion($datos);
 if ($exitoModificacionUsuario || $exitoModificacionUsuarioRol) {
-    header('Location: ../admin/administrarUsuarios.php?messageOk=' . urlencode("Usuario modificado correctamente"));
+    header('Location: ../administrarUsuarios.php?messageOk=' . urlencode("Usuario modificado correctamente"));
     exit;
 } else {
-    header('Location: ../admin/administrarUsuarios.php?messageErr=' . urlencode("Error en la modificación"));
+    header('Location: ../administrarUsuarios.php?messageErr=' . urlencode("Error en la modificación"));
     exit;
 }

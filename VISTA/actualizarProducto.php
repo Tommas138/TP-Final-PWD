@@ -14,7 +14,7 @@ $rol = $sesion->getUsRoles();
 
 
 if ($rol[0]->getObjRol()->getIdRol() != 2 || $rol[0]->getObjRol()->getIdRol() != 1) {
-    header('Location: ../home/index.php');
+    header('Location: index.php');
     exit();
 }
 $arrayBusqueda = ["idproducto" => $datos['idproducto']];
@@ -28,7 +28,7 @@ $objProducto = $listaProductos[0];
     <h1 class="text-center">Actualizar producto</h1>
     <div class="col-md-4"></div>
     <div class="offset-md-4">
-        <form action="../acciones/accionActualizarProducto.php" method="post" enctype="multipart/form-data" class="col-md-6 mt-3 " id="actualizarProducto" name="actualizarProducto">
+        <form action="acciones/accionActualizarProducto.php" method="post" enctype="multipart/form-data" class="col-md-6 mt-3 " id="actualizarProducto" name="actualizarProducto">
             <div class="">
                 <div class="form-floating mb-3">
                     <input class="form-control" id="idproducto" name="idproducto" type="text" placeholder="Codigo producto" value="<?php echo $objProducto->getIdProducto() ?>" hidden>
@@ -83,5 +83,5 @@ $objProducto = $listaProductos[0];
 <?php
 
 
-include_once '../../VISTA/ACCION/ESTRUCTURA/reusables/footer.php';
+include_once '../VISTA/ACCION/ESTRUCTURA/reusables/footer.php';
 ?>

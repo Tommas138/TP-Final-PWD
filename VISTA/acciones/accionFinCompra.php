@@ -18,10 +18,10 @@ if($respuestaFinCompra){
 }
 if ($respuestaFinCompra) {
     $message = "Compra finalizada exitosamente";
-    header('Location: ../home/index.php?Message=' . urlencode($message));
+    header('Location: ../index.php?Message=' . urlencode($message));
     exit;
 } else {
     $message = "No se pudo finalizar la compra";
-    header('Location: ../home/index.php?Message=' . urlencode($message));
+    header('Location: ../index.php?Message=' . urlencode($message));
     exit;
 }

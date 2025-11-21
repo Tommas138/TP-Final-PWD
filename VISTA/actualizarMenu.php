@@ -1,16 +1,16 @@
 <?php
 
-include_once '../../CONTROL/Session.php';
+include_once '../CONTROL/Session.php';
 
 $session = new Session();
 if(!$session->getIDSesionActual()){
-    header("Location: ../../index.php");
+    header("Location: ../index.php");
 
 }else if($session->getIDSesionActual() != 1 && $session->getIDSesionActual()){
-    header("Location: ../home/index.php");
+    header("Location: /index.php");
 }else{
-    require_once __DIR__ . '/../../UTILS/funciones.php';
-    include_once '../ACCION/ESTRUCTURA/reusables/header.php';
+    require_once __DIR__ . '/../UTILS/funciones.php';
+    include_once 'ACCION/ESTRUCTURA/reusables/header.php';
 }
 
 
@@ -25,7 +25,7 @@ $listaMenus = $abmMenu->buscar();
     <h4 class="text-center">Actualizar Menú</h4>
     <div class="col-md-4"></div>
     <div class="offset-md-4">
-        <form action="../acciones/accionActualizarMenu.php" method="post" class="col-md-6 mt-3 " id="actualizarMenu" name="actualizarMenu">
+        <form action="acciones/accionActualizarMenu.php" method="post" class="col-md-6 mt-3 " id="actualizarMenu" name="actualizarMenu">
             <div class="">
                 <div class="form-floating mb-3">
                     <input class="form-control" id="idmenu" name="idmenu" type="text" placeholder="ID Menu" value="<?php echo $objMenu[0]->getIdMenu() ?>" hidden>
@@ -59,5 +59,5 @@ $listaMenus = $abmMenu->buscar();
     </div>
 </div>
 <?php
-    include_once '../../VISTA/ACCION/ESTRUCTURA/reusables/footer.php';
+    include_once '../VISTA/ACCION/ESTRUCTURA/reusables/footer.php';
 ?>

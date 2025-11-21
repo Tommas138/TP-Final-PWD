@@ -42,10 +42,10 @@ if ($exito) {
     $resultadoMail = $notificador->enviarConfirmacionCompra($usuario->getUsMail(), $usuario->getUsNombre(), $datosParaMail);
                 
     $compraItem->eliminar();
-    header("Location: ../cliente/carrito.php?Message=" . urlencode($message));
+    header("Location: ../carrito.php?Message=" . urlencode($message));
     exit;
 } else {
     $message = 'Hubo un error al enviar su carrito';
-    header("Location: ../cliente/carrito.php?Message=" . urlencode($message));
+    header("Location: ../carrito.php?Message=" . urlencode($message));
     exit;
 }

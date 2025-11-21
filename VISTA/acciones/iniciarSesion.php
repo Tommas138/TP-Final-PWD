@@ -21,7 +21,7 @@
 
     if($respuesta){
         $sesion->iniciar($respuesta[0]->getIdUsuario(), $respuesta[0]->getUsNombre(), $respuesta[0]->getUsPass()); 
-        header("Location: ../home/index.php");
+        header("Location: ../index.php");
     }else{
         header("Location: ../../index.php");
     }

@@ -1,9 +1,9 @@
 <?php
-require_once __DIR__ . '/../../UTILS/funciones.php';
+require_once __DIR__ . '/../UTILS/funciones.php';
 
 $titulo = 'Eliminación de Producto';
 
-include_once '../ACCION/ESTRUCTURA/reusables/header.php';
+include_once 'ACCION/ESTRUCTURA/reusables/header.php';
 
 
 
@@ -15,7 +15,7 @@ $rol = $sesion->getUsRoles();
 
 
 if ($rol[0]->getObjRol()->getIdRol() != 2 || $rol[0]->getObjRol()->getIdRol() != 1) {
-    header('Location: ../home/index.php');
+    header('Location: index.php');
     exit();
 }
 $abmProducto = new AbmProducto();
@@ -31,7 +31,7 @@ $id = $datos['idproducto'];
         <div class="card-body">
             <h5 class="card-title">¿Desea eliminar de forma permanente el producto?</h5>
             <p class="card-text">Código: <?php echo $id ?></p>
-            <form action='../acciones/accionEliminarProducto.php' method='post'>
+            <form action='acciones/accionEliminarProducto.php' method='post'>
                 <input name='idproducto' id='idproducto' type='hidden' value='<?php echo $id ?>'>
                 <button class='btn btn-danger btn-sm' type='submit' value='<?php $id ?>' role='button'>Eliminar</button>
             </form>
@@ -42,5 +42,5 @@ $id = $datos['idproducto'];
 <?php
 
 
-include_once '../../VISTA/ACCION/ESTRUCTURA/reusables/footer.php';
+include_once '../VISTA/ACCION/ESTRUCTURA/reusables/footer.php';
 ?>

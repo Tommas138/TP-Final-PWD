@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../../UTILS/funciones.php';
+require_once __DIR__ . '/../UTILS/funciones.php';
 
 $sesion = new Session();
 
@@ -14,7 +14,7 @@ if (!isset($datos["verificado"])) {
     $controlIngresoManagerDeposito = new ControlIngresoManagerDeposito();
     $controlIngresoManagerDeposito->verificarIngreso("nuevoProducto");
 }
-include_once '../ACCION/ESTRUCTURA/reusables/header.php';
+include_once 'ACCION/ESTRUCTURA/reusables/header.php';
 
 ?>
 <header class="bg-dark py-1">
@@ -28,7 +28,7 @@ include_once '../ACCION/ESTRUCTURA/reusables/header.php';
 <div class="container mt-3">
     <div class="col-md-4"></div>
     <div class="offset-md-4">
-        <form action="../acciones/accionNuevoProducto.php" method="post" enctype="multipart/form-data" class="col-md-6 mt-3 " id="productoNuevo" name="productoNuevo">
+        <form action="acciones/accionNuevoProducto.php" method="post" enctype="multipart/form-data" class="col-md-6 mt-3 " id="productoNuevo" name="productoNuevo">
             <div class="">
                 <div class="form-floating mb-3">
                     <input class="form-control" id="idproducto" name="idproducto" type="text" placeholder="Codigo producto" required>
@@ -82,7 +82,7 @@ include_once '../ACCION/ESTRUCTURA/reusables/header.php';
 </div>
 
 <?php
-include_once '../../VISTA/ACCION/ESTRUCTURA/reusables/footer.php';
+include_once '../VISTA/ACCION/ESTRUCTURA/reusables/footer.php';
 
 
 ?>

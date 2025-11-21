@@ -15,14 +15,14 @@
 </style>
 <?php
 
-require_once __DIR__ . '/../../UTILS/funciones.php';
+require_once __DIR__ . '/../UTILS/funciones.php';
 $titulo = 'Dunder Mifflin Store';
 
 //$sesion = new Session();
 
 
 
-require_once __DIR__ . '../../ACCION/ESTRUCTURA/reusables/headerInicio.php';
+require_once __DIR__ . '../ACCION/ESTRUCTURA/reusables/headerInicio.php';
 $abmProductos = new AbmProducto();
 $listaProductos = $abmProductos->buscar(null);
 shuffle($listaProductos);
@@ -42,7 +42,7 @@ shuffle($listaProductos);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZmCNUxC+GQYUQDFN1VqM7uH60lZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous"
         referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="../acciones/ESTRUCTURA/styles.css">
+    <link rel="stylesheet" href="acciones/ESTRUCTURA/styles.css">
 </head>
 <body>
 <div class="container mt-5">
@@ -60,8 +60,8 @@ shuffle($listaProductos);
                 <div class="col">
                     <div class="card h-100 shadow-sm border-0 transition-hover">
                         <?php
-                        $imgWebBase = '../../uploads/img/';
-                        $imgCarpeta = realpath(__DIR__ . '/../../uploads/img/');
+                        $imgWebBase = '../uploads/img/';
+                        $imgCarpeta = realpath(__DIR__ . '/../uploads/img/');
                         $imgSrc = $imgWebBase . 'default.jpg';
                         $idPlain = 'producto' . intval($producto->getIdProducto());
                         $idHashImg = strtolower(md5($producto->getIdProducto()));
@@ -103,7 +103,7 @@ shuffle($listaProductos);
                         
                         <div class="card-footer bg-transparent border-0 p-3">
                             <div class="d-grid justify-content-center gap-2">
-                                <form method='post' action='../acciones/accionAgregarItemCarrito.php'>
+                                <form method='post' action='acciones/accionAgregarItemCarrito.php'>
                                     <td>
                                         <input name='idproducto' id='idproducto' type='hidden' value='<?php echo $producto->getIdProducto() ?>'>
                                         <button class="add-carrito-button" type='submit' role='button'>Agregar al carrito</button>
@@ -119,7 +119,7 @@ shuffle($listaProductos);
             </div></body>
             <?php
         }
-require_once __DIR__ . '../../ACCION/ESTRUCTURA/reusables/footer.php';
+require_once __DIR__ . '../ACCION/ESTRUCTURA/reusables/footer.php';
 ?>
     </section>
 </div>

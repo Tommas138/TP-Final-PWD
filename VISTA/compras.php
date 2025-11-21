@@ -7,15 +7,15 @@
     }
 </style>
 <?php
-include_once '../../CONTROL/Session.php';
+include_once '../CONTROL/Session.php';
 
 $session = new Session();
 if(!$session->getIDSesionActual()){
-    header("Location: ../../index.php");
+    header("Location: ../index.php");
 
 }else{
-    require_once __DIR__ . '/../../UTILS/funciones.php';
-    include_once '../ACCION/ESTRUCTURA/reusables/header.php';
+    require_once __DIR__ . '/../UTILS/funciones.php';
+    include_once 'ACCION/ESTRUCTURA/reusables/header.php';
 }
 
 $datos = data_submitted();
@@ -107,7 +107,7 @@ $compras = $arrayCarritos['arrayCompras'];
                                     <?php
                                     if ($idEstadoCompraTipo == 1) {
                                     ?>
-                                        <form method='post' action='../acciones/accionFinCompra.php'>
+                                        <form method='post' action='acciones/accionFinCompra.php'>
                                             <td class='text-center'>
                                                 <input name='idcompraestado' id='idcompraestado' type='hidden' value='<?php echo $idCompraEstado ?>'>
                                                 <button class='btn btn-danger btn-sm' type='submit' role='button'><i class='bi bi-cart-x'></i>&nbsp;Cancelar</button>
@@ -135,6 +135,6 @@ $compras = $arrayCarritos['arrayCompras'];
 </body>
 <?php
 
-include_once '../../VISTA/ACCION/ESTRUCTURA/reusables/footer.php';
+include_once '../VISTA/ACCION/ESTRUCTURA/reusables/footer.php';
 
 ?>

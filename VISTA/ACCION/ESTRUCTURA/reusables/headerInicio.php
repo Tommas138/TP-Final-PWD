@@ -25,19 +25,19 @@ $enlace = "";
 ?>
 <nav class="navbar navbar-expand-custom navbar-mainbg">
 
-    <a class="navbar-brand navbar-logo navbar-button " href="../../VISTA/home/index.php">Dunder Mifflin Store</a>
-    <a class="navbar-brand navbar-logo navbar-button" href="../../VISTA/CLIENTE/listadoProductos.php">Productos</a>
+    <a class="navbar-brand navbar-logo navbar-button " href="../../VISTA/index.php">Dunder Mifflin Store</a>
+    <a class="navbar-brand navbar-logo navbar-button" href="../../VISTA/listadoProductos.php">Productos</a>
    <?php
    if ($sesion->activa()) {
     $objUs = new UsuarioRol();
     
     $arrUs = $objUs->listar("idusuario = $idUser");
     $roles = $sesion->getUsRoles();
-    if ($arrUs[0]->getObjRol()->getIdRol() == 1 || $arrUs[0]->getObjRol()->getIdRol() == 2 ) {
+    if ($roles[0]->getObjRol()->getIdRol() == 1 || $roles[0]->getObjRol()->getIdRol() == 2 ) {
     
          if ($sesion->activa()) {
                         
-                        if ($roles[0]->getObjRol()->getIDRol() == 1 || $arrUs[0]->getObjRol()->getIdRol() == 2) {
+                        if ($roles[0]->getObjRol()->getIDRol() == 1 || $roles[0]->getObjRol()->getIdRol() == 2) {
                         foreach ($sesion->getUsRoles() as $rol) {
 
                             $abmMenuRol = new AbmMenuRol();
@@ -49,7 +49,7 @@ $enlace = "";
                               
                                 $arrayMenus = $abmMenu->buscar(["idmenu" => $idMenu]);
                                 if (count($arrayMenus) > 0) {
-                                    $idPadre = $arrayMenus[0]->getIdMenu();
+                                    $idPadre = $arrayMenus[0]->getIdPadre();
                                     $arraySubMenus = $abmMenu->buscar(["idpadre" => $idPadre]);
                                 }
                             }
@@ -63,17 +63,17 @@ $enlace = "";
                                             foreach ($arraySubMenus as $subMenu) {
                                                     switch ($rol->getObjRol()->getIdRol()) {
                                                         case '1':
-                                                            $enlace .= "../ADMIN/";
+                                                            $enlace .= $subMenu->getMedescripcion() . '.php';
                                                             break;
                                                         case '2':
-                                                            $enlace .= "../MANAGERDEPOSITO/";
+                                                            $enlace .= $subMenu->getMedescripcion() . '.php';
                                                             break;
                                                         case '3':
-                                                            $enlace .= "../CLIENTE/";
+                                                            $enlace .=  $subMenu->getMedescripcion() . '.php';
                                                             break;
                                                     }
                                             ?>
-                                                    <li><a class="dropdown-item" href="<?php echo $enlace .= $subMenu->getMedescripcion() . '.php' ?>"><?php echo $subMenu->getMeNombre(); ?></a></li>
+                                                    <li><a class="dropdown-item" href="<?php echo $enlace ?>"><?php echo $subMenu->getMeNombre(); ?></a></li>
                                             <?php
                                                     $enlace = "";
                                                 }
@@ -115,7 +115,7 @@ $enlace = "";
 
                         ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="../cliente/carrito.php" role="button" aria-haspopup="true" aria-expanded="false">
+                                <a class="nav-link" href="carrito.php" role="button" aria-haspopup="true" aria-expanded="false">
                                     
                                     <i class="bi bi-minecart"></i> <span class="d-lg-none">Carrito</span><span class="badge bg-dark text-white ms-1 rounded-pill"><?php echo $cantidadItemsCarrito; ?></span>
                                 </a>
@@ -149,8 +149,8 @@ $enlace = "";
                                 }
                                 ?>
 
-                                <a class="dropdown-item" href="../../VISTA/CLIENTE/modificar.php"><i class="fas fa-user-cog"></i>&nbsp;Editar Perfil</a>
-                                <a class="dropdown-item" href="../../VISTA/CLIENTE/compras.php"><i class="fas fa-user-cog"></i>&nbsp;Mis Compras</a>
+                                <a class="dropdown-item" href="../../VISTA/modificar.php"><i class="fas fa-user-cog"></i>&nbsp;Editar Perfil</a>
+                                <a class="dropdown-item" href="../../VISTA/compras.php"><i class="fas fa-user-cog"></i>&nbsp;Mis Compras</a>
                             </div>
                         </li>
                         <?php

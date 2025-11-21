@@ -1,17 +1,17 @@
 <?php
 
-include_once '../../CONTROL/Session.php';
+include_once '../CONTROL/Session.php';
 
 
 $session = new Session();
 if(!$session->getIDSesionActual()){
-    header("Location: ../../index.php");
+    header("Location: ../index.php");
 
 }else if($session->getIDSesionActual() != 1 && $session->getIDSesionActual()){
-    header("Location: ../home/index.php");
+    header("Location: index.php");
 }else{
-    require_once __DIR__ . '/../../UTILS/funciones.php';
-    include_once '../ACCION/ESTRUCTURA/reusables/header.php';
+    require_once __DIR__ . '/../UTILS/funciones.php';
+    include_once 'ACCION/ESTRUCTURA/reusables/header.php';
 }
 
 $titulo = 'Nuevo Menu';
@@ -34,7 +34,7 @@ if (!isset($datos["verificado"])) {
 
 <div class="container mt-3">
     <div class="offset-md-4">
-        <form action="../acciones/accionNuevoUsuario.php" method="post" class="col-md-6 mt-3 " id="usuarioNuevo" name="usuarioNuevo">
+        <form action="acciones/accionNuevoUsuario.php" method="post" class="col-md-6 mt-3 " id="usuarioNuevo" name="usuarioNuevo">
             <div class="">
                 <div class="form-floating mt-3">
                     <input class="form-control" id="usnombre" name="usnombre" type="text" placeholder="Nombre" required>
@@ -88,6 +88,6 @@ if (!isset($datos["verificado"])) {
 </div>
 
 <?php
-include_once '../../VISTA/ACCION/ESTRUCTURA/reusables/footer.php';
+include_once '../VISTA/ACCION/ESTRUCTURA/reusables/footer.php';
 
 ?>

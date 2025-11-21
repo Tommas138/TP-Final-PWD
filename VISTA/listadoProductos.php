@@ -1,13 +1,13 @@
 <?php
-include_once '../../CONTROL/Session.php';
+include_once '../CONTROL/Session.php';
 
 $session = new Session();
 if(!$session->getIDSesionActual()){
-    header("Location: ../../index.php");
+    header("Location: ../index.php");
 
 }else{
-    require_once __DIR__ . '/../../UTILS/funciones.php';
-    include_once '../ACCION/ESTRUCTURA/reusables/header.php';
+    require_once __DIR__ . '/../UTILS/funciones.php';
+    include_once 'ACCION/ESTRUCTURA/reusables/header.php';
 }
 
 $abmProductos = new AbmProducto();
@@ -36,7 +36,7 @@ $titulo = 'Listado de Productos';
                         $idHashImg = strtolower($idHash);
                         $deshabilitado = isset($producto->proDeshabilitado) ? $producto->proDeshabilitado : '0000-00-00 00:00:00'; //Defino la variable debido a que tira error
                         if ($deshabilitado == "0000-00-00 00:00:00" && $producto->getProCantStock() > 0) { ?>
-                               <form id="tarjetaSuplemento" method='post' action='../acciones/accionAgregarItemCarrito.php'>
+                               <form id="tarjetaSuplemento" method='post' action='acciones/accionAgregarItemCarrito.php'>
                             <div class='col mb-5' >
                                 <div class='card shadow h-100' style="background-color: white;;">
                                     <?php
@@ -51,8 +51,8 @@ $titulo = 'Listado de Productos';
                                     ?>
 
                                     <?php
-                                    $imgWebBase = '../../uploads/img/'; //cargamos la ruta general de la imagen
-                                    $imgCarpeta = realpath(__DIR__ . '/../../uploads/img/'); //Convertimos la ruta en una absoluta y la devolvemos como cadena
+                                    $imgWebBase = '../uploads/img/'; //cargamos la ruta general de la imagen
+                                    $imgCarpeta = realpath(__DIR__ . '/../uploads/img/'); //Convertimos la ruta en una absoluta y la devolvemos como cadena
                                     $imgSrc = $imgWebBase . 'default.jpg'; //Asignamos la ruta por defecto que usara si no encuentra la imagen especifica
                                     $idProd= 'producto' . $producto->getIdProducto(); //obtenemos el id para que coincida la imagen con producto
                                     if ($imgCarpeta) {
@@ -102,6 +102,6 @@ $titulo = 'Listado de Productos';
 </body>
 <?php
 
-include_once '../ACCION/ESTRUCTURA/reusables/footer.php';
+include_once 'ACCION/ESTRUCTURA/reusables/footer.php';
 
 ?>

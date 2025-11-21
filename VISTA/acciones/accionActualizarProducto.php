@@ -11,9 +11,9 @@ $datos['files'] = $_FILES;
 $exito = $abmProducto->modificacion($datos);
 
 if ($exito) {
-    header('Location: ../managerDeposito/administrarProductos.php?message=' . urlencode("Producto modificado"));
+    header('Location: ../administrarProductos.php?message=' . urlencode("Producto modificado"));
     exit;
 } else {
-    header('Location: ../managerDeposito/administrarProductos.php?message=' . urlencode("Error en la modificacion"));
+    header('Location: ../administrarProductos.php?message=' . urlencode("Error en la modificacion"));
     exit;
 }

@@ -1,19 +1,19 @@
 
 <?php
-require_once __DIR__ . '/../../UTILS/funciones.php';
+require_once __DIR__ . '/../UTILS/funciones.php';
 
 
 $datos = data_submitted();
 
-include_once '../../CONTROL/Session.php';
+include_once '../CONTROL/Session.php';
 
 $session = new Session();
 if(!$session->getIDSesionActual()){
-    header("Location: ../../index.php");
+    header("Location: ../index.php");
 
 }else{
-    require_once __DIR__ . '/../../UTILS/funciones.php';
-    include_once '../ACCION/ESTRUCTURA/reusables/header.php';
+    require_once __DIR__ . '/../UTILS/funciones.php';
+    include_once 'ACCION/ESTRUCTURA/reusables/header.php';
 }
 
 if ($sesion->activa()) {
@@ -23,7 +23,7 @@ if ($sesion->activa()) {
 
 $titulo = 'Compra';
 
-include_once '../ACCION/ESTRUCTURA/reusables/header.php';
+include_once 'ACCION/ESTRUCTURA/reusables/header.php';
 $abmItemsCompra = new AbmCompraItem();
 $compraItems = $abmItemsCompra->buscar($datos);
 $subTotalCompra = 0;
@@ -51,11 +51,11 @@ $totalFinalCompra = 0;
                                 $unidades = $compraItem->getCiCantidad();
                                 $subTotalProducto = ($precio * $unidades) - ((($precio * $unidades)) / 100);
                                 $subTotalCompra = $subTotalCompra + $subTotalProducto;
-                                $imgCarpeta = realpath(__DIR__ . '/../../uploads/img/');
+                                $imgCarpeta = realpath(__DIR__ . '/../uploads/img/');
                                 $idHash = md5($producto->getIdProducto());
                                 $idHashImg = strtolower($idHash);
                                 $idPlain = 'producto' . intval($producto->getIdProducto());
-                                $imgWebBase = '../../uploads/img/';
+                                $imgWebBase = '../uploads/img/';
                                 if ($imgCarpeta) {
                                     $exts = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
                                     foreach ($exts as $ext) {
@@ -71,12 +71,13 @@ $totalFinalCompra = 0;
                                         }
                                     }
                                 }
+                               
 
                         ?>
                                 <div class="row mb-4">
                                     <div class="col-md-5 col-lg-3 col-xl-3">
                                         <div>
-                                            <img class='card-img-top img-producto-listado' src='../../uploads/img/<?php echo $imgSrc; ?>' alt='Imagen de un suplemento' />
+                                            <img class='card-img-top img-producto-listado' src='<?php echo $imgSrc; ?>' alt='Imagen de un suplemento' />
                                         </div>
                                     </div>
                                     <div class="col-md-7 col-lg-9 col-xl-9">
@@ -153,5 +154,5 @@ $totalFinalCompra = 0;
 </div>
 
 <?php
-include_once '../../VISTA/ACCION/ESTRUCTURA/reusables/footer.php';
+include_once '../VISTA/ACCION/ESTRUCTURA/reusables/footer.php';
 ?>

@@ -1,14 +1,22 @@
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+<style>
+    body {
+        display: flex; /* Habilita Flexbox */
+        flex-direction: column; /* Organiza los elementos verticalmente */
+        min-height: 100vh; /* Asegura que el body ocupe al menos la altura de la ventana */
+        margin-bottom: 0; /* Asegura que no haya margen extra abajo */
+    }
+</style>
 <?php
-include_once '../../CONTROL/Session.php';
+include_once '../CONTROL/Session.php';
 
 $session = new Session();
 if(!$session->getIDSesionActual()){
-    header("Location: ../../index.php");
+    header("Location: ../index.php");
 
 }else{
-    require_once __DIR__ . '/../../UTILS/funciones.php';
-    include_once '../ACCION/ESTRUCTURA/reusables/header.php';
+    require_once __DIR__ . '/../UTILS/funciones.php';
+    include_once 'ACCION/ESTRUCTURA/reusables/header.php';
 }
 
 $titulo = 'Actualizar Usuario';
@@ -33,7 +41,7 @@ if (isset($listaUsuarios)) {
     <h1 class="text-center">Modificación de Usuario</h1>
     <div class="col-md-4"></div>
     <div class="offset-md-4">
-        <form action="../acciones/accionActualizarUsuario.php" method="post" class="col-md-6 mt-3 " id="actualizarUsuario" name="actualizarUsuario">
+        <form action="acciones/accionActualizarUsuario.php" method="post" class="col-md-6 mt-3 " id="actualizarUsuario" name="actualizarUsuario">
             <div class="">
                 <div class="form-floating mb-3">
                     <input class="form-control" id="usnombre" name="usnombre" type="text" placeholder="Nombre de usuario" value="<?php echo $objUsuario->getUsnombre(); ?>">
@@ -64,5 +72,5 @@ if (isset($listaUsuarios)) {
 </div>
 
 <?php
-include_once '../../VISTA/ACCION/ESTRUCTURA/reusables/footer.php';
+include_once '../VISTA/ACCION/ESTRUCTURA/reusables/footer.php';
 ?>

@@ -1,16 +1,16 @@
 <?php
 
-include_once '../../CONTROL/Session.php';
+include_once '../CONTROL/Session.php';
 
 $session = new Session();
 if(!$session->getIDSesionActual()){
-    header("Location: ../../index.php");
+    header("Location: ../index.php");
 
 }else if($session->getIDSesionActual() != 1 && $session->getIDSesionActual()){
-    header("Location: ../home/index.php");
+    header("Location: index.php");
 }else{
     
-    include_once '../ACCION/ESTRUCTURA/reusables/header.php';
+    include_once 'ACCION/ESTRUCTURA/reusables/header.php';
 }
 
 $titulo = 'Confirmación de Eliminación';
@@ -32,9 +32,9 @@ $id = $datos['idusuario'];
             <p class="card-text">Nombre del usuario: <?php echo $objUsuario[0]->getUsnombre() ?></p>
             <p class="card-text">Correo electronico del usuario: <?php echo $objUsuario[0]->getUsmail() ?></p>
 
-            <form action='../acciones/accionEliminarUsuario.php' method='post'>
+            <form action='acciones/accionEliminarUsuario.php' method='post'>
                 <input name='idusuario' id='idusuario' type='hidden' value='<?php echo $id ?>'>
-                <button class='btn btn-danger btn-sm' type='submit' value='<?php echo $id ?>' name='idusuario' id='idusuario' role='button' formaction='../acciones/accionEliminarUsuario.php'>Eliminar</button>
+                <button class='btn btn-danger btn-sm' type='submit' value='<?php echo $id ?>' name='idusuario' id='idusuario' role='button' formaction='acciones/accionEliminarUsuario.php'>Eliminar</button>
             </form>
 
         </div>
@@ -44,5 +44,5 @@ $id = $datos['idusuario'];
 <?php
 
 
-include_once '../../VISTA/ACCION/ESTRUCTURA/reusables/footer.php';
+include_once '../VISTA/ACCION/ESTRUCTURA/reusables/footer.php';
 ?>

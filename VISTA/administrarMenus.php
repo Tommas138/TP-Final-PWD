@@ -1,16 +1,16 @@
 <?php
 
-include_once '../../CONTROL/Session.php';
+include_once '../CONTROL/Session.php';
 
 $session = new Session();
 if(!$session->getIDSesionActual()){
-    header("Location: ../../index.php");
+    header("Location: ../index.php");
 
 }else if($session->getIDSesionActual() != 1 && $session->getIDSesionActual()){
-    header("Location: ../home/index.php");
+    header("Location: index.php");
 }else{
-    require_once __DIR__ . '/../../UTILS/funciones.php';
-    include_once '../ACCION/ESTRUCTURA/reusables/header.php';
+    require_once __DIR__ . '/../UTILS/funciones.php';
+    include_once 'ACCION/ESTRUCTURA/reusables/header.php';
 }
 
 $titulo = 'Administración de Menus';
@@ -89,7 +89,7 @@ $listadoMenus = $abmMenu->buscar(null);
                                 </td>
                             </form>
 
-                            <form method='post' action='../acciones/eliminarMenu.php'>
+                            <form method='post' action='acciones/eliminarMenu.php'>
                                 <td class='text-center'>
                                     <input name='idmenu' id='idmenu' type='hidden' value='<?php echo $id ?>'>
                                     <button class='btn btn-danger btn-sm' type='submit' value='<?php $id ?>' role='button'><i class='bi bi-trash'></i>&nbsp;Eliminar</button>
@@ -97,7 +97,7 @@ $listadoMenus = $abmMenu->buscar(null);
                             </form>
 
 
-                            <form method='post' action='../acciones/accionDeshabilitarMenu.php'>
+                            <form method='post' action='acciones/accionDeshabilitarMenu.php'>
                                 <td class='text-center'>
                                     <input name='idmenu' id='idmenu' type='hidden' value='<?php echo $id ?>'>
                                     <?php
@@ -122,5 +122,5 @@ $listadoMenus = $abmMenu->buscar(null);
     </section>
 </div>
 <?php
-include_once '../../VISTA/ACCION/ESTRUCTURA/reusables/footer.php';
+include_once '../VISTA/ACCION/ESTRUCTURA/reusables/footer.php';
 ?>
