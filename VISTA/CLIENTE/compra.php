@@ -1,6 +1,7 @@
 <?php
 
 include_once '../../CONTROL/Session.php';
+require_once "../../UTILS/MailSender.php";
 
 $session = new Session();
 if(!$session->getIDSesionActual()){
@@ -10,7 +11,7 @@ if(!$session->getIDSesionActual()){
     require_once __DIR__ . '/../../UTILS/funciones.php';
     include_once '../ACCION/ESTRUCTURA/reusables/header.php';
 }
-
+$datos = data_submitted();
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Client\Preference\PreferenceClient;
 require __DIR__ . '/../../vendor/autoload.php';
@@ -25,7 +26,7 @@ require_once __DIR__ . '/../../CONTROL/ControlVerificarCarritoCliente.php';
 require_once __DIR__ . '/../../CONTROL/Session.php';
 
 // Preparar variables comunes
-$imgWebBase = '/pwd2025/TP-Final-PWD/uploads/img/';
+$imgWebBase = '../../uploads/img/';
 $defaultImg = $imgWebBase . 'default.jpg';
 
 
@@ -110,6 +111,43 @@ foreach ($displayItems as $it) {
     $q = (int)$it['quantity'];
     $totalAmount += ((float)$p->getProPrecio()) * $q;
 }
+$exito = false;
+$abmCompraEstado = new AbmCompraEstado();
+$arrayCarrito = ['idcompra' => $datos['idcompra'], 'idcompraestadotipo' => 1];
+$exito = $abmCompraEstado->alta($arrayCarrito);
+$usuarioAbm = new AbmUsuario();
+$usuario = $usuarioAbm->buscar($datos)[0];
+if ($exito) {
+    $message = 'Se envio el carrito correctamente';
+    $compraItem = new CompraItem();   
+    $compraItem->setIdCompra($datos['idcompra']); 
+    $items = $compraItem->listar("idcompra = ". $datos['idcompra']);
+    $i = 0;
+    $gastoTotal = 0;
+    $productos = array();
+    foreach ($items as $item) {
+        $objProd = $item->getIdProducto();
+        $stock = $item->getCiCantidad();
+        $prod = New Producto();
+        $prod->setIdProducto( $objProd->getIdProducto());
+        $prod->cargar();
+        $nuevoStock = $prod->getProcantstock() - $stock;
+        $prod->setProcantstock($nuevoStock);
+        $prod->modificar();
+        $gastoTotal += $prod->getProPrecio();
+        array_push($productos,$prod);
+    }
+
+    // 2. Recopilas los datos para el mail
+    $datosParaMail = [
+        'id_pedido' => $datos["idcompra"], // El ID que acabas de generar
+        'total' => $gastoTotal,
+        'items' => $productos
+    ];
+}
+    $notificador = new MailSender();
+    $resultadoMail = $notificador->enviarConfirmacionCompra($usuario->getUsMail(), $usuario->getUsNombre(), $datosParaMail);
+                
 ?>
 
 <!DOCTYPE html>

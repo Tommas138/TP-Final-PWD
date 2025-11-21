@@ -58,7 +58,6 @@ $enlace = "";
                             }
                             
                             foreach ($arrayMenus as $menu) {
-                               
                     ?>
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"><?php echo $menu->getMeNombre(); ?></a>

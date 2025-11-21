@@ -12,12 +12,13 @@ class Menu {
     public function __construct() {
     }
 
-    public function set($idmenu, $menombre, $idpadre,$medescripcion,$medeshabilitado) {
+    public function set($idmenu, $menombre, $idpadre,$medescripcion,$medeshabilitado, $menurl) {
         $this->setIdMenu($idmenu);
         $this->setMenombre($menombre);
         $this->setIdPadre($idpadre);
         $this->setMedescripcion($medescripcion);
         $this->setMedeshabilitado($medeshabilitado);
+        $this->setMenUrl($menurl);
     }
 
     public function setMedescripcion($medescripcion){
@@ -39,6 +40,12 @@ class Menu {
         $this->menombre = $menombre;
     }
 
+    public function setMenUrl($menurl){
+        $this->menurl = $menurl;
+    }
+    public function getMenUrl(){
+        return $this->menurl;
+    }
 
 
     public function setIdPadre($idPadre) {
@@ -78,7 +85,7 @@ class Menu {
         $idPadreSql = ($idPadreVal === null || $idPadreVal === "" ) ? "NULL" : "'" . $idPadreVal . "'";
 
         // Use correct getter for nombre and close the VALUES parenthesis
-        $sql = "INSERT INTO menu (idmenu, menombre, medescripcion, idpadre, medeshabilitado) VALUES ('" . $this->getIdMenu() . "','" . $this->getMeNombre() . "','" . $this->getMedescripcion() . "'," . $idPadreSql . ",'" . $this->getMedeshabilitado() . "')";
+        $sql = "INSERT INTO menu (idmenu, menombre, medescripcion, idpadre, medeshabilitado, menurl) VALUES ('" . $this->getIdMenu() . "','" . $this->getMeNombre() . "','" . $this->getMedescripcion() . "'," . $idPadreSql . ",'" . $this->getMedeshabilitado() . "', " . $this->getMenUrl() . "')";
         if($base->Iniciar()) {
             if($elid = $base->Ejecutar($sql)) {
                 $this->setIdMenu($elid);
@@ -103,7 +110,7 @@ class Menu {
         $idPadreSql = ($idPadreVal === null || $idPadreVal === "") ? "NULL" : "'" . $idPadreVal . "'";
 
         // Build a proper UPDATE statement and use WHERE to target this menu
-        $sql = "UPDATE menu SET menombre='" . $this->getMeNombre() . "', medescripcion='" . $this->getMedescripcion() . "', idpadre=" . $idPadreSql . ", medeshabilitado='" . $this->getMedeshabilitado() . "' WHERE idmenu = '" . $this->getIdMenu() . "'";
+        $sql = "UPDATE menu SET menombre='" . $this->getMeNombre() . "', medescripcion='" . $this->getMedescripcion() . "', idpadre=" . $idPadreSql . ", medeshabilitado='" . $this->getMedeshabilitado() . "', menurl = " . $this->getMenUrl() . "' WHERE idmenu = '" . $this->getIdMenu() . "'";
         if($base->Iniciar()) {
             if ($base->Ejecutar($sql)) {
                 $resp = true;
@@ -140,7 +147,7 @@ class Menu {
             $res = $base->Ejecutar($sql);
             if ($res > 0) {
                 $fila = $base->Registro();
-                $this->set($fila['idmenu'], $fila['menombre'], $fila['idpadre'], $fila['medescripcion'], $fila["medeshabilitado"]);
+                $this->set($fila['idmenu'], $fila['menombre'], $fila['idpadre'], $fila['medescripcion'], $fila["medeshabilitado"], $fila['menurl']);
             }
         } else {
             $this->setMensajeOperacion("usuario->cargar: " . $base->getError());
@@ -159,7 +166,7 @@ class Menu {
         if ($res > 0) {
             while ($row = $base->Registro()) {
                 $obj = new Menu();
-                $obj->set($row['idmenu'], $row['menombre'], $row["idpadre"],$row["medescripcion"],$row["medeshabilitado"]);
+                $obj->set($row['idmenu'], $row['menombre'], $row["idpadre"],$row["medescripcion"],$row["medeshabilitado"], $row['menurl']);
                 array_push($arreglo, $obj);
             }
         } else {
