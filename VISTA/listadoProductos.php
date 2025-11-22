@@ -83,6 +83,7 @@ $titulo = 'Listado de Productos';
                                         ?>
                                      
                                         <div class='card-footer p-4 pt-0 border-top-0 bg-transparent'>
+                                            <input type="hidden" name="idcompra" value="<?php echo $producto->getIdProducto(); ?>">
                                             <div class='text-center'><button class='btn btn-outline-dark mt-auto' type='submit' role='button'>Agregar al carrito</button></div>
                                         </div>
                                         </form>

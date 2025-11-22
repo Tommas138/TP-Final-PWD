@@ -164,7 +164,7 @@ $enlace = "";
                     <?php   }?>
    <?php if (!$sesion->activa()) { ?>
     <div class="bg-primary text-white p-2 rounded">
-        <form action="../../index.php">
+        <form action="../index.php">
             <button type="submit" class="btn btn-sm">
                 Iniciar Sesion
             </button>
@@ -172,7 +172,7 @@ $enlace = "";
   <?php  } else {
     ?>
         <div class="bg-primary text-white p-2 rounded">
-        <form action="../../VISTA/acciones/cerrarSesion.php">
+        <form action="../VISTA/acciones/cerrarSesion.php">
             <button type="submit" class="btn btn-sm">
                 Cerrar Sesion
             </button>

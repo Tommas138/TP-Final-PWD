@@ -27,13 +27,15 @@ $carrito = $arrayCarritos['carritoHabilitado'];
 if ($carrito == null) {
     $carrito = new Compra();
 }
-
+$abmCompraEstado = new AbmCompraEstado();
+//$abmCompraEstado->modificarEstadoCarrito($datos);
 $abmItemsCarrito = new AbmCompraItem();
 $compraItems = $abmItemsCarrito->buscar(['idcompra' => $carrito->getIdCompra()]);
 $subTotalCompra = 0;
 $iva = 0;
 $totalFinalCompra = 0;
-
+$arrayCarrito = ['idcompra' => $carrito->getIdCompra(), 'idcompraestadotipo' => 1];
+$exito = $abmCompraEstado->alta($arrayCarrito);
 ?>
 
 <div class="container mt-2">

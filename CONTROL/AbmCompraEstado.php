@@ -145,7 +145,35 @@ Class AbmCompraEstado {
     }
     return $resp;
 }
+public function modificarEstadoCarrito($param) {
+        $resp = false;
+        $idCompra = ['idcompra' => $param['idcompra']];
+            
+            $objCompraEstadoBusq = $this->buscar($idCompra);
+            $compraEstadoTipo = new AbmCompraEstadoTipo();
+            $objCompraEstadoTipo = $compraEstadoTipo->buscar(['idcompraestadotipo' => 2]);
+            //print_r($objCompraEstadoTipo);
+            $objCompraEstadoBusq[0]->setIdCompraEstadoTipo($objCompraEstadoTipo[0]);
+            $objCompraEstadoBusq[0]->modificar();
 
+            
+
+    }
+    
+public function modificarEstado($param) {
+        $resp = false;
+        $idCompra = ['idcompra' => $param['idcompra']];
+            
+            $objCompraEstadoBusq = $this->buscar($idCompra);
+            $compraEstadoTipo = new AbmCompraEstadoTipo();
+            $objCompraEstadoTipo = $compraEstadoTipo->buscar(['idcompraestadotipo' => 3]);
+            //print_r($objCompraEstadoTipo);
+            $objCompraEstadoBusq[0]->setIdCompraEstadoTipo($objCompraEstadoTipo[0]);
+            $objCompraEstadoBusq[0]->modificar();
+
+            
+
+    }
     public function finCompra($param) {
         $resp = false;
 
@@ -187,32 +215,29 @@ Class AbmCompraEstado {
     {
         $resp = false;
 
-        if ($this->seteadosCamposClaves($param)) {
-            // Busco el estadoCompra actual
-            $arreglo = ["idcompra" => $param['idcompraestado']];
-            $arrayBusqueda = ["idcompra" => $arreglo['idcompra']];
+        
+            $arrayBusqueda = ["idcompra" => $param['idcompra']];
             $objCompraEstadoBusqueda = $this->buscar($arrayBusqueda);
-            // Busco el estadoTipo de 'aceptada'
-            $abmEstadoTipo = new AbmCompraEstadoTipo;
-            $objCompraEstadoTipo = $abmEstadoTipo->buscar(['idcompraestadotipo' => 2]);
-            // print_r($objCompraEstadoBusqueda);
-            // Seteo el compraEstadoTipo 'aceptada'
-            $objCompraEstadoBusqueda[0]->setIdCompraEstadoTipo($objCompraEstadoTipo[0]);
-            // print_r($objCompraEstadoTipo[0]->getIdCompraEstadoTipo());
-            // Si la compra no es nula y la fecha de fin de la compraEstado es igual a '0000-00-00 00:00:00' entonces hago la modificacion del estadoTipo
+            $objCompra = $this->cargarObjeto($arrayBusqueda);
+            print_r($objCompra);
+            //$objCompra->setIdCompraEstado(3);
+            //echo $objCompra->getIdCompraEstado();
+            //print_r($idCompra);
+          //  $compra[0]->setIdCompraEstadoTipo(3);
 
             if ($objCompraEstadoBusqueda != null and $objCompraEstadoBusqueda[0]->getCeFechaFin() == "0000-00-00 00:00:00") {
                 if ($objCompraEstadoBusqueda[0]->modificar()) {
                     $resp = true;
                 }
             }
-        }
+        
 
         return $resp;
     }
     public function buscar($param) {
         $where = " true ";
 
+        //print_r($param);
         if ($param <> NULL) {
             if  (isset($param['idcompraestado']))
                 $where .= " AND idcompraestado = " . $param['idcompraestado'];

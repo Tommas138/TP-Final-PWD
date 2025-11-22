@@ -114,14 +114,19 @@ foreach ($displayItems as $it) {
 $exito = false;
 $abmCompraEstado = new AbmCompraEstado();
 $arrayCarrito = ['idcompra' => $datos['idcompra'], 'idcompraestadotipo' => 1];
-$exito = $abmCompraEstado->alta($arrayCarrito);
+$exito = $abmCompraEstado->buscar($arrayCarrito);
 $usuarioAbm = new AbmUsuario();
 $usuario = $usuarioAbm->buscar($datos)[0];
+
+$abmCompraEstado->modificarEstado($datos);
+
 if ($exito) {
+
     $message = 'Se envio el carrito correctamente';
     $compraItem = new CompraItem();   
     $compraItem->setIdCompra($datos['idcompra']); 
     $items = $compraItem->listar("idcompra = ". $datos['idcompra']);
+    
     $i = 0;
     $gastoTotal = 0;
     $productos = array();
@@ -206,7 +211,22 @@ if ($exito) {
         </div>
     </div>
 </div>
+<?php $paymentId = $_GET['payment_id'] ?? null;
+    
+    if ($paymentId) {
+        // 3. Consultar el pago usando el SDK
+        $payment = \MercadoPago\Payment::find_by_id($paymentId);
 
+        // 4. Verificar el estado
+        if ($payment && ($payment->status === 'approved' || $payment->status === 'settled')) {
+            // **Aquí es donde sabes que la compra es exitosa.**
+            // Puedes devolver TRUE o ejecutar la lógica de tu negocio.
+            echo "¡Compra Aprobada! ID: " . $payment->id;
+        } else {
+            // El estado es 'pending', 'in_process', 'rejected', etc.
+            echo "El pago está en estado: " . $payment->status;
+        }
+    } ?>
     <script>
         // Inicializa el objeto MercadoPago con el PUBLIC_KEY
         const mp = new MercadoPago('APP_USR-d6361bb6-836a-48d3-8faa-21744020faf9');
