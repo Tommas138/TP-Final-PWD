@@ -1,3 +1,19 @@
+<style>
+    nav {
+        position:absolute;
+    }
+    body {
+        height: 1800px;
+        position: relative;
+    }
+    #footer {
+        height: 100px;
+        left: 0px;
+    }
+    #small {
+        font-size:1.2rem;
+    }
+</style>
 <?php
 require_once __DIR__ . '/../UTILS/funciones.php';
 
@@ -23,6 +39,7 @@ $listaComprasIniciadas = $abmComprasIniciadas->buscar(null);
     </div>
 </header>
 
+<body>
 <div class="container mt-2">
     <section class="py-2">
         <div class="container px-4 px-lg-5">
@@ -123,6 +140,7 @@ $listaComprasIniciadas = $abmComprasIniciadas->buscar(null);
         </div>
     </section>
 </div>
+</body>
 
 <?php
 include_once '../VISTA/ACCION/ESTRUCTURA/reusables/footer.php';
