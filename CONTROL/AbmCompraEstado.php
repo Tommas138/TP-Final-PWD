@@ -16,7 +16,7 @@ Class AbmCompraEstado {
             $objProducto->cargar();
             
             $objCompraEstadoTipo = new CompraEstadoTipo();
-            $objCompraEstadoTipo->setIdCompraEstadoTipo($param['idcompraestadotipo']);
+            $objCompraEstadoTipo->setIdCompraEstadoTipo(1);
             $objCompraEstadoTipo->cargar();
 
             $obj = new CompraEstado();
@@ -45,45 +45,24 @@ Class AbmCompraEstado {
         return $resp;
     }
 
-    public function alta($param) {
+    public function crearNuevo($param) {
+        $compra = new AbmCompra();
+        $user = $compra->buscar(['idusuario' => $param['idusuario']]);
+        $ultimo = end($user);
+        $idCompra = $ultimo->getIdCompra();
+        $existe = $this->buscar(['idcompra' => $idCompra]);
+        if (!$existe) {
+        $this->alta(['idcompra' => $idCompra]);
+        }
+    }
+     public function alta($param)
+    {
         $resp = false;
-        $abmCompraItem = new AbmCompraItem();
-        $abmProducto = new AbmProducto();
-
-        $listadoitems = $abmCompraItem->buscar(['idcompra' => $param['idcompra']]);
-       // print_r($listadoitems);
-        $stock = true;
-        //busco stock
-        foreach ($listadoitems as $item) {
-            $respStock = $abmProducto->chequearStock($item);
-            if (!$respStock) {
-                $stock = false;
-            }
+        $objcompraestado = $this->cargarObjeto($param);
+        if ($objcompraestado != null and $objcompraestado->insertar()) {
+            $resp = true;
         }
-        //si hay stock envio carrito
-        if ($stock) {
-            $objCompraEstado = $this->cargarObjeto($param);
-            if ($objCompraEstado != null && $objCompraEstado->insertar()) {
-                $resp = true;
-            }
-        }
-        // si carga carrito modifico stock y cuantas veces se compro el producto
-        if ($resp) {
-            foreach ($listadoitems as $item) {
-                //hay que implementar clase producto
-                $objProducto = new Producto();
-                $producto = $objProducto->listar("idproducto = '" . $item->getIdProducto()->getIdProducto() . "'");
-                $stockActual = $producto[0]->getProCantStock();
-                $stockActualizado = $stockActual - $item->getCiCantidad();
-                $producto[0]->getProcantstock($stockActualizado);
-                $respModificar = $producto[0]->modificar();
-
-                if (!$respModificar) {
-                    $exito = false;
-                }
-            }
-        }
-    return $resp;
+        return $resp;
     }
 
     public function modificacion($param) {
@@ -166,7 +145,7 @@ public function modificarEstado($param) {
             
             $objCompraEstadoBusq = $this->buscar($idCompra);
             $compraEstadoTipo = new AbmCompraEstadoTipo();
-            $objCompraEstadoTipo = $compraEstadoTipo->buscar(['idcompraestadotipo' => 3]);
+            $objCompraEstadoTipo = $compraEstadoTipo->buscar(['idcompraestadotipo' => 2]);
             //print_r($objCompraEstadoTipo);
             $objCompraEstadoBusq[0]->setIdCompraEstadoTipo($objCompraEstadoTipo[0]);
             $objCompraEstadoBusq[0]->modificar();

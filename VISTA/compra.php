@@ -114,7 +114,7 @@ foreach ($displayItems as $it) {
 $exito = false;
 $abmCompraEstado = new AbmCompraEstado();
 $arrayCarrito = ['idcompra' => $datos['idcompra'], 'idcompraestadotipo' => 1];
-$exito = $abmCompraEstado->buscar($arrayCarrito);
+$exito = $abmCompraEstado->alta($arrayCarrito);
 $usuarioAbm = new AbmUsuario();
 $usuario = $usuarioAbm->buscar($datos)[0];
 

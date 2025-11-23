@@ -10,9 +10,11 @@ $user = $sesion->getUsuario();
 $idUser = $user->getIdUsuario();
 
 $abmCompraItem = new AbmCompraItem(); 
+$compraEstado = new AbmCompraEstado();
 $datos['idusuario'] = $idUser;
 //print_r($datos);
 $exito = $abmCompraItem->alta($datos);
+
 
 if ($exito) {
     $message = 'Agregado correctamente al carrito';

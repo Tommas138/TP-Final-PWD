@@ -15,6 +15,8 @@ Class ControlVerificarCarritoCliente {
             $compraEstadoCarrito = $abmCompraEstado->buscar(['idcompra' => $idCarrito]);
 
             if (!$compraEstadoCarrito) {
+                
+               // $abmCompraEstado->crearNuevo(['idusuario' => $usuario]);
                 $carritoHabilitado = $carrito;
             } else {
                 array_push($arrayCompras, $carrito);
