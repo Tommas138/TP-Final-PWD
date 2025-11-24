@@ -24,6 +24,7 @@ include_once __DIR__ . '/../CONTROL/ControlCargaImagenes.php';
 include_once __DIR__ . '/../CONTROL/ControlIngresoAdmin.php';
 include_once __DIR__ . '/../CONTROL/ControlIngresoManagerDeposito.php';
 include_once __DIR__ . '/../CONTROL/ControlVerificarCarritoCliente.php';
+include_once __DIR__ . '/../CONTROL/ControlCarrito.php';
 
 function verificarUsuario(Usuario $usuario) {
     $abmUsuario = new AbmUsuario();

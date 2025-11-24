@@ -4,9 +4,15 @@
 }
 .navbar-nav {
   list-style-type: none;
-}</style>
+}
+</style>
 <?php
 include_once __DIR__ . '../../../../../UTILS/funciones.php';
+include_once __DIR__ . '/../../../../CONTROL/AbmRol.php';
+include_once __DIR__ . '/../../../../MODELO/UsuarioRol.php';
+include_once __DIR__ . '/../../../../CONTROL/AbmMenuRol.php';
+
+
 
 $cantidadItemsCarrito = 0;
 $sesion = new Session();
@@ -25,44 +31,45 @@ $enlace = "";
 ?>
 <nav class="navbar navbar-expand-custom navbar-mainbg">
 
-    <a class="navbar-brand navbar-logo navbar-button " href="../../VISTA/index.php">Dunder Mifflin Store</a>
-    <a class="navbar-brand navbar-logo navbar-button" href="../../VISTA/listadoProductos.php">Productos</a>
-   <?php
-   if ($sesion->activa()) {
+    <a class="navbar-brand navbar-logo navbar-button " href="../VISTA/index.php">Dunder Mifflin Store</a>
+    <a class="navbar-brand navbar-logo navbar-button" href="../VISTA/listadoProductos.php">Productos</a>
+    <?php
     $objUs = new UsuarioRol();
-    
     $arrUs = $objUs->listar("idusuario = $idUser");
     $roles = $sesion->getUsRoles();
     if ($roles[0]->getObjRol()->getIdRol() == 1 || $roles[0]->getObjRol()->getIdRol() == 2 ) {
+   
     
-         if ($sesion->activa()) {
-                        
-                        if ($roles[0]->getObjRol()->getIDRol() == 1 || $roles[0]->getObjRol()->getIdRol() == 2) {
+   
+     if ($sesion->activa()) {
+                         if ($roles[0]->getObjRol()->getIdRol() == 1 || $roles[0]->getObjRol()->getIdRol() == 2) {
                         foreach ($sesion->getUsRoles() as $rol) {
 
                             $abmMenuRol = new AbmMenuRol();
                             $arrayMenusRol = $abmMenuRol->buscar(['idrol' => $rol->getObjRol()->getIdRol()]);
-
                             if (count($arrayMenusRol) > 0) {
                                 $abmMenu = new AbmMenu();
                                 $idMenu = $arrayMenusRol[0]->getObjMenu()->getIdMenu();
-                              
                                 $arrayMenus = $abmMenu->buscar(["idmenu" => $idMenu]);
+                               // print_r($arrayMenus);
                                 if (count($arrayMenus) > 0) {
                                     $idPadre = $arrayMenus[0]->getIdPadre();
                                     $arraySubMenus = $abmMenu->buscar(["idpadre" => $idPadre]);
+                                   // print_r($arraySubMenus);
                                 }
                             }
+                            
                             foreach ($arrayMenus as $menu) {
-                               
+
                     ?>
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"><?php echo $menu->getMeNombre(); ?></a>
                                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                             <?php
                                             foreach ($arraySubMenus as $subMenu) {
+                                                
                                                     switch ($rol->getObjRol()->getIdRol()) {
-                                                        case '1':
+                                                         case '1':
                                                             $enlace .= $subMenu->getMedescripcion() . '.php';
                                                             break;
                                                         case '2':
@@ -72,8 +79,10 @@ $enlace = "";
                                                             $enlace .=  $subMenu->getMedescripcion() . '.php';
                                                             break;
                                                     }
+                                                    
                                             ?>
-                                                    <li><a class="dropdown-item" href="<?php echo $enlace ?>"><?php echo $subMenu->getMeNombre(); ?></a></li>
+                                                    <li><a class="dropdown-item" href="<?php echo $enlace .=  '.php' ?>"><?php echo $subMenu->getMeNombre(); ?></a></li>
+                                                    
                                             <?php
                                                     $enlace = "";
                                                 }
@@ -84,26 +93,22 @@ $enlace = "";
                     <?php
                                 
                             }
-                        }
+       }                  }
+    }
                     }
-                   }
+                    
                     ?>
                 </ul>
                 <ul class="navbar-nav d-flex">
                     <!-- Icon carrito -->
                     <?php
-                    if (($sesion->activa())) {
-                        $clienteActivo = false;
+                    if ($sesion->activa()) {
+                        $clienteActivo = true;
 
-                        foreach ($roles as $rol) {
- 
-                                $clienteActivo = true;
-
-                        }
-
+                       
                         if ($clienteActivo) {
-                            $controlVerificarCarrito = new ControlVerificarCarritoCliente();
-                            $arrayCarritos = $controlVerificarCarrito->verificarCarrito($idUser);
+                            $controlVerificarCarrito = new ControlVerificarCarritoCliente2();
+                            $arrayCarritos = $controlVerificarCarrito->verificarCarrito2($idUser);
                             $carrito = $arrayCarritos['carritoHabilitado'];
 
                             if ($carrito <> "") {
@@ -113,7 +118,7 @@ $enlace = "";
                             }
                         }
 
-                        ?>
+                       ?>
                             <li class="nav-item">
                                 <a class="nav-link" href="carrito.php" role="button" aria-haspopup="true" aria-expanded="false">
                                     
@@ -143,40 +148,36 @@ $enlace = "";
                                     <?php
                                         break;
                                     default: ?>
-                                        <a class="dropdown-item" disabled="disabled">&nbsp;<i class="fas fa-id-badge"></i>&nbsp;&nbsp;Rol: Cliente</a>
+                                        
                                 <?php
                                         break;
                                 }
                                 ?>
 
-                                <a class="dropdown-item" href="../../VISTA/modificar.php"><i class="fas fa-user-cog"></i>&nbsp;Editar Perfil</a>
-                                <a class="dropdown-item" href="../../VISTA/compras.php"><i class="fas fa-user-cog"></i>&nbsp;Mis Compras</a>
+                                <a class="dropdown-item" href="../VISTA/modificar.php"><i class="fas fa-user-cog"></i>&nbsp;Editar Perfil</a>
+
+                                <a class="dropdown-item" href="../VISTA/compras.php"><i class="fas fa-user-cog"></i>&nbsp;Mis Compras</a>
                             </div>
                         </li>
                         <?php
-                     
-                      }
+                   ?>
+
+  
+      
+   <?php
+                    
+                       
+                    
                     ?>
                     
                 </ul>
             </div>
         </div>
-                    <?php   }?>
-   <?php if (!$sesion->activa()) { ?>
-    <div class="bg-primary text-white p-2 rounded">
-        <form action="../index.php">
-            <button type="submit" class="btn btn-sm">
-                Iniciar Sesion
-            </button>
-        </form>
-  <?php  } else {
-    ?>
-        <div class="bg-primary text-white p-2 rounded">
+            <div class="bg-primary text-white p-2 rounded">
         <form action="../VISTA/acciones/cerrarSesion.php">
             <button type="submit" class="btn btn-sm">
-                Cerrar Sesion
+                Cerrar Sesión
             </button>
         </form>
-        <?php } 
-        ?>
+    </div>
     </nav>

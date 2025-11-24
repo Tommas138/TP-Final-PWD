@@ -50,9 +50,9 @@ Class AbmCompraEstado {
         $user = $compra->buscar(['idusuario' => $param['idusuario']]);
         $ultimo = end($user);
         $idCompra = $ultimo->getIdCompra();
-        $existe = $this->buscar(['idcompra' => $idCompra]);
+        $existe = $this->buscar(['idcompra' => $param['idcompra']]);
         if (!$existe) {
-        $this->alta(['idcompra' => $idCompra]);
+        $this->alta(['idcompra' => $param['idcompra']]);
         }
     }
      public function alta($param)

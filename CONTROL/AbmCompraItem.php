@@ -17,7 +17,7 @@ Class AbmCompraItem {
         $objProducto->cargar();
 
         $objCompra = new Compra();
-        $objCompra->setIdCompra($param['idcompra']);
+        $objCompra->setIdCompra(idcompra: $param['idcompra']);
         $objCompra->cargar();
 
         $obj = new CompraItem();
@@ -42,13 +42,29 @@ Class AbmCompraItem {
             $resp = true;
         }
         return $resp;
+        
     }
-
+ private function seteadosCamposClaves2($param) {
+        $resp =false;
+        if (isset($param['idcompra'])) {
+            $resp = true;
+        }
+        return $resp;
+        
+    }
+    private function cargarObjetoConClave2($param) {
+        $obj = null;
+        if (isset($param['idcompraitem'])) {
+            $obj = new CompraItem();
+            $obj->set( null, null, $param['idcompra'], null);
+        }
+        return $obj;
+    }
     public function alta($param) {
         $resp = false;
         // traigo carritos del us
-        $controlVerificarCarrito = new ControlVerificarCarritoCliente();
-        $arrayCarritos = $controlVerificarCarrito->verificarCarrito($param['idusuario']);
+        $controlVerificarCarrito = new ControlVerificarCarritoCliente2();
+        $arrayCarritos = $controlVerificarCarrito->verificarCarrito2($param['idusuario']);
         // carrito habilitado
         $carrito = $arrayCarritos['carritoHabilitado'];
         // si no existe creo nuevo carrito
@@ -59,7 +75,7 @@ Class AbmCompraItem {
             $altaCarrito = $abmCarrito->alta($array);
             if ($altaCarrito) {
                 //traigo carrito
-                $arrayCarritos = $controlVerificarCarrito->verificarCarrito($param['idusuario']);
+                $arrayCarritos = $controlVerificarCarrito->verificarCarrito2($param['idusuario']);
                 $carrito = $arrayCarritos['carritoHabilitado'];
             }
         }
@@ -94,12 +110,13 @@ Class AbmCompraItem {
 
     public function baja($param) {
         $resp = false;
-        if ($this->seteadosCamposClaves($param)) {
-            $objCompraItem = $this->cargarObjetoConClave($param);
+        if ($this->seteadosCamposClaves2($param)) {
+            $objCompraItem = $this->cargarObjetoConClave2($param);
             if ($objCompraItem != null && $objCompraItem->eliminar()) {
                 $resp = true;
             }
         }
+
         return $resp;
     }
 

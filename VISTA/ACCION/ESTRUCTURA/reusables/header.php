@@ -60,8 +60,7 @@ $enlace = "";
                             }
                             
                             foreach ($arrayMenus as $menu) {
-                   ?> <a href="<?php echo $menu->getMenUrl(); ?>"><?php echo $menu->getMeNombre(); ?></a>
-               <?php
+
                     ?>
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"><?php echo $menu->getMeNombre(); ?></a>
@@ -70,14 +69,14 @@ $enlace = "";
                                             foreach ($arraySubMenus as $subMenu) {
                                                 
                                                     switch ($rol->getObjRol()->getIdRol()) {
-                                                        case '1':
-                                                            $enlace .= "" . $subMenu->getMeDescripcion();
+                                                         case '1':
+                                                            $enlace .= $subMenu->getMedescripcion() . '.php';
                                                             break;
                                                         case '2':
-                                                            $enlace .= $subMenu->getMeDescripcion();
+                                                            $enlace .= $subMenu->getMedescripcion() . '.php';
                                                             break;
                                                         case '3':
-                                                            $enlace .= $subMenu->getMeDescripcion();
+                                                            $enlace .=  $subMenu->getMedescripcion() . '.php';
                                                             break;
                                                     }
                                                     
@@ -108,8 +107,8 @@ $enlace = "";
 
                        
                         if ($clienteActivo) {
-                            $controlVerificarCarrito = new ControlVerificarCarritoCliente();
-                            $arrayCarritos = $controlVerificarCarrito->verificarCarrito($idUser);
+                            $controlVerificarCarrito = new ControlVerificarCarritoCliente2();
+                            $arrayCarritos = $controlVerificarCarrito->verificarCarrito2($idUser);
                             $carrito = $arrayCarritos['carritoHabilitado'];
 
                             if ($carrito <> "") {

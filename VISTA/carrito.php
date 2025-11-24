@@ -20,8 +20,8 @@ $datos = data_submitted();
 
 $titulo = 'Carrito de compras';
 
-$controlVerificarCarrito = new ControlVerificarCarritoCliente();
-$arrayCarritos = $controlVerificarCarrito->verificarCarrito($idUser);
+$controlVerificarCarrito = new ControlVerificarCarritoCliente2();
+$arrayCarritos = $controlVerificarCarrito->verificarCarrito2($idUser);
 $carrito = $arrayCarritos['carritoHabilitado'];
 
 if ($carrito == null) {

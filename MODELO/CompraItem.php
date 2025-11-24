@@ -123,8 +123,7 @@ Class CompraItem {
     public function eliminar() {
         $resp = false;
         $base = new BaseDatos();
-        $sql = "DELETE FROM compraitem WHERE idcompraitem = " . $this->getIdCompraItem();
-        echo $this->getIdCompra();
+        $sql = "DELETE FROM compraitem WHERE idcompra = " . $this->getIdCompra();
 
         if ($base->Iniciar()) {
             if ($base->Ejecutar($sql)) {
