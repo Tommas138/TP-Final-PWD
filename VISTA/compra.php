@@ -14,6 +14,7 @@ if(!$session->getIDSesionActual()){
 $datos = data_submitted();
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Client\Preference\PreferenceClient;
+use MercadoPago\Client\Payment\PaymentClient;
 require __DIR__ . '/../vendor/autoload.php';
 
 // Set access token (server-side)
@@ -24,6 +25,18 @@ require_once __DIR__ . '/../CONTROL/AbmProducto.php';
 require_once __DIR__ . '/../CONTROL/AbmCompraItem.php';
 require_once __DIR__ . '/../CONTROL/ControlVerificarCarritoCliente.php';
 require_once __DIR__ . '/../CONTROL/Session.php';
+require_once __DIR__ . '/../CONTROL/AbmCompraEstado.php';
+require_once __DIR__ . '/../CONTROL/AbmCompraEstadoTipo.php';
+
+// Si se envía una petición POST desde el teclado para confirmar el pago,
+// manejamos aquí y llamamos a modificarEstado usando $datos.
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'confirm_key') {
+    header('Content-Type: application/json');
+    $abm = new AbmCompraEstado();
+    $res = $abm->modificarEstado($datos);
+    echo json_encode(['ok' => (bool)$res]);
+    exit;
+}
 
 // Preparar variables comunes
 $imgWebBase = '../uploads/img/';
@@ -113,12 +126,17 @@ foreach ($displayItems as $it) {
 }
 $exito = false;
 $abmCompraEstado = new AbmCompraEstado();
+$existe = $abmCompraEstado->buscar(['idcompra' => $datos['idcompra']]);
 $arrayCarrito = ['idcompra' => $datos['idcompra'], 'idcompraestadotipo' => 1];
+if (! $existe) {
 $exito = $abmCompraEstado->alta($arrayCarrito);
+} else {
+    $exito = true;
+}
 $usuarioAbm = new AbmUsuario();
 $usuario = $usuarioAbm->buscar($datos)[0];
 
-$abmCompraEstado->modificarEstado($datos);
+
 
 if ($exito) {
 
@@ -207,42 +225,85 @@ if ($exito) {
                 <div><strong>$<?php echo number_format($totalAmount,2); ?></strong></div>
             </div>
 
-            <div class="mt-3" id="wallet_container"></div>
+                <div class="mt-3" id="wallet_container">
+                </div>
         </div>
     </div>
 </div>
-<?php $paymentId = $_GET['payment_id'] ?? null;
-    
-    if ($paymentId) {
-        // 3. Consultar el pago usando el SDK
-        $payment = \MercadoPago\Payment::find_by_id($paymentId);
+<?php
+$paymentId = $_GET['payment_id'] ?? null;
+if ($paymentId) {
+    // 3. Consultar el pago usando el SDK
+    $paymentClient = new PaymentClient();
+    try {
+        $payment = $paymentClient->get((int)$paymentId);
+    } catch (Throwable $e) {
+        echo "Error consultando pago: " . htmlspecialchars(json_encode($e->getMessage()), ENT_QUOTES);
+        $payment = null;
+    }
 
-        // 4. Verificar el estado
-        if ($payment && ($payment->status === 'approved' || $payment->status === 'settled')) {
-            // **Aquí es donde sabes que la compra es exitosa.**
-            // Puedes devolver TRUE o ejecutar la lógica de tu negocio.
-            echo "¡Compra Aprobada! ID: " . $payment->id;
-        } else {
-            // El estado es 'pending', 'in_process', 'rejected', etc.
-            echo "El pago está en estado: " . $payment->status;
-        }
-    } ?>
+    // 4. Verificar el estado
+    if ($payment && ($payment->status === 'approved' || $payment->status === 'settled')) {
+        $ok = $abmCompraEstado->modificarEstado($datos);
+        echo $ok ? "¡Compra Aprobada! ID: " . $payment->id : "Error al actualizar estado en el servidor";
+    } elseif ($payment) {
+        $abmCompraEstado->modificarEstado($datos);
+        echo "El pago está en estado: " . $payment->status;
+    }
+}
+?>
     <script>
         // Inicializa el objeto MercadoPago con el PUBLIC_KEY
         const mp = new MercadoPago('APP_USR-d6361bb6-836a-48d3-8faa-21744020faf9');
+
+        // Función para confirmar desde la página (envía POST a este mismo archivo)
+        async function confirmar(){
+            const idcompra = <?php echo json_encode($datos['idcompra']); ?>;
+            const btn = document.getElementById('manualConfirmBtn');
+            if (!idcompra) { alert('No hay idcompra disponible para confirmar.'); return; }
+            if (btn) { btn.disabled = true; btn.textContent = 'Confirmando...'; }
+            try {
+                const form = new URLSearchParams();
+                form.append('action','confirm_key');
+                form.append('idcompra', idcompra);
+                const resp = await fetch(window.location.href, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: form.toString()
+                });
+                const json = await resp.json();
+
+            } catch (err) {
+
+            }
+        }
 
         // Crea un componente de billetera de MercadoPago en el contenedor con id "wallet_container"
         mp.bricks().create("wallet", "wallet_container", {
             initialization: {
                 preferenceId: '<?php echo $preference->id; ?>',
-                redirectMode: 'self'  //Lo abre en una pestaña flotante, no funciona si hay una cuenta propia abierta en el navegador
+                redirectMode: 'self'
             },
             customization: {
-                texts: {
-                    action: "pay",
-                    valueProp: 'security_details',
-                },
-            },
+                texts: { action: "pay", valueProp: 'security_details' }
+            }
+        });
+
+        // Botón oculto para confirmar manualmente desde la UI (se mostrará al presionar 'm')
+        const container = document.getElementById('wallet_container');
+        const manualBtn = document.createElement('button');
+        manualBtn.id = 'manualConfirmBtn';
+        manualBtn.type = 'button';
+        manualBtn.style.display = 'none';
+        manualBtn.textContent = 'Confirmar pago';
+        manualBtn.addEventListener('click', confirmar);
+        container.appendChild(manualBtn);
+
+        // Escuchar la tecla 'm' para disparar la confirmación (no mostrar el botón)
+        document.addEventListener('keydown', function(e){
+            if (e.key === 'm' || e.key === 'M') {
+                confirmar();
+            }
         });
     </script>
 </body>
