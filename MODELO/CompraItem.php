@@ -136,6 +136,22 @@ Class CompraItem {
         }
         return $resp;
     }
+    public function eliminar2() {
+        $resp = false;
+        $base = new BaseDatos();
+        $sql = "DELETE FROM compraitem WHERE idcompraitem = " . $this->getIdCompraItem();
+
+        if ($base->Iniciar()) {
+            if ($base->Ejecutar($sql)) {
+                $resp = true;
+            } else {
+                $this->setMensajeOperacion("CompraItem->Eliminar: " . $base->getError());
+            }
+        } else {
+            $this->setMensajeOperacion("CompraItem->Eliminar: " . $base->getError());
+        }
+        return $resp;
+    }
 
     public function listar($param = "") {
         $arreglo = array();

@@ -30,7 +30,12 @@ if ($carrito == null) {
 $abmCompraEstado = new AbmCompraEstado();
 //$abmCompraEstado->modificarEstadoCarrito($datos);
 $abmItemsCarrito = new AbmCompraItem();
+$resultado = $abmCompraEstado->buscar(['idusuario' => $idUser]);
+$ultimo = end($resultado);
 $compraItems = $abmItemsCarrito->buscar(['idcompra' => $carrito->getIdCompra()]);
+if ($ultimo->getIdCompraEstadoTipo()->getIdCompraEstadoTipo() == 2) {
+    $compraItems = [];
+}
 $subTotalCompra = 0;
 $iva = 0;
 $totalFinalCompra = 0;

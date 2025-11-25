@@ -216,8 +216,6 @@ $imgSrc = $imgFile ? $imgWebBase . $imgFile : $defaultImg;
 </div>
 </div>
 <?php $paymentId = $_GET['payment_id'] ?? null;
-$compra = new AbmCompra();
-$compra->alta(['idusuario' => $datos['idusuario']]);
 if ($paymentId) {
 // 3. Consultar el pago usando el SDK
 $payment = \MercadoPago\Payment::find_by_id($paymentId);

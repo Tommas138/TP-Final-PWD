@@ -190,6 +190,19 @@ public function modificarEstado($param) {
         return $resp;
     }
 
+    public function check($idUser) {
+        $resultado = $this->buscar(['idusuario' => $idUser]);
+        $ultimo = end($resultado);
+        if ($resultado != null) {
+        if ($ultimo->getIdCompraEstadoTipo()->getIdCompraEstadoTipo() == 2) {
+            $compra = new AbmCompra();
+            $compra->alta(['idusuario' => $idUser]);
+        }
+        } else {
+            $compra = new AbmCompra();
+            $compra->alta(['idusuario' => $idUser]);
+        }
+    }
  public function aceptarCompra($param)
     {
         $resp = false;

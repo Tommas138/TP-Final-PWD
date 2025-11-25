@@ -29,6 +29,10 @@ if ($sesion->activa()) {
     $name = $sesion->getUsNombre();
     $idUser = $sesion->getIdUsuario();
         $objUs = new UsuarioRol();
+        $estado = new AbmCompraEstado();
+        $resultado = $estado->buscar(['idusuario' => $idUser]);
+$ultimo = end($resultado);
+
     $arrUs = $objUs->listar("idusuario = $idUser");
     $roles = $sesion->getUsRoles();
 
@@ -117,7 +121,11 @@ $enlace = "";
                                 $cantidadItemsCarrito = count($compraItems);
                             }
                         }
-
+                        if ($resultado != null) {
+                            if ($ultimo->getIdCompraEstadoTipo()->getIdCompraEstadoTipo() == 2) {
+                                $cantidadItemsCarrito = 0;
+                        }
+                    }
                        ?>
                             <li class="nav-item">
                                 <a class="nav-link" href="carrito.php" role="button" aria-haspopup="true" aria-expanded="false">

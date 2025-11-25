@@ -36,6 +36,11 @@ $enlace = "";
     <?php
     $objUs = new UsuarioRol();
     $arrUs = $objUs->listar("idusuario = $idUser");
+    $abmEstado = new AbmCompraEstado();
+    $resultado = $abmEstado->buscar(['idusuario' => $idUser]);
+    $ultimo = end($resultado);
+
+   
     $roles = $sesion->getUsRoles();
     if ($roles[0]->getObjRol()->getIdRol() == 1 || $roles[0]->getObjRol()->getIdRol() == 2 ) {
    
@@ -104,7 +109,7 @@ $enlace = "";
                     <?php
                     if ($sesion->activa()) {
                         $clienteActivo = true;
-
+                       
                        
                         if ($clienteActivo) {
                             $controlVerificarCarrito = new ControlVerificarCarritoCliente2();
@@ -116,6 +121,11 @@ $enlace = "";
                                 $compraItems = $abmItemsCarrito->buscar(['idcompra' => $carrito->getIdCompra()]);
                                 $cantidadItemsCarrito = count($compraItems);
                             }
+                            if ($resultado != null ) {
+                             if ($ultimo->getIdCompraEstadoTipo()->getIdCompraEstadoTipo() == 2) {
+                            $cantidadItemsCarrito = 0;
+                        } 
+                    }
                         }
 
                        ?>

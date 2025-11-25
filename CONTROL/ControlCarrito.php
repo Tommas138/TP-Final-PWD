@@ -13,13 +13,14 @@ Class ControlVerificarCarritoCliente2 {
         $ultimo = end($listaCompraEstado);
         $idCompra = $ultimo->getIdCompra();
         }
-        
+       
         foreach ($listaCarritos as $carrito) {
             $compraEstadoCarrito = null;
             $idCarrito = $carrito->getIdCompra();
             $abmCompraEstado = new AbmCompraEstado();
             $compraEstadoCarrito = $abmCompraEstado->buscar(['idcompra' => $idCarrito]);
             if ($idCompra != $idCarrito) {
+                
                 $abmCompraEstado->crearNuevo(param: ['idusuario' => $usuario, 'idcompra' => $idCarrito]);
             }
             if ($compraEstadoCarrito) {
@@ -30,6 +31,7 @@ Class ControlVerificarCarritoCliente2 {
             }
         }
         
+ 
 
        //  $abmCompraEstado->crearNuevo(['idusuario' => $usuario, 'idcompra' => $idCarrito]);
         $arrayCarritos = ['carritoHabilitado' => $carritoHabilitado, 'arrayCompras' => $arrayCompras];

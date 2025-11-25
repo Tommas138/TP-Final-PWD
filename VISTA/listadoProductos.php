@@ -9,11 +9,16 @@ if(!$session->getIDSesionActual()){
     require_once __DIR__ . '/../UTILS/funciones.php';
     include_once 'ACCION/ESTRUCTURA/reusables/header.php';
 }
-
+$idUser = $session->getIdUsuario();
 $abmProductos = new AbmProducto();
 $listaProductos = $abmProductos->buscar(null);
 $abmCompraEstado = new AbmCompraEstado();
-
+$exito = $abmCompraEstado->buscar(['idusuario' => $idUser]);
+$ultimo = end($exito);
+//if ($ultimo->getIdCompraEstadoTipo()->getIdCompraEstadoTipo() == 2) {
+//$compra = new AbmCompra();
+//$compra->alta(['idusuario' => $idUser]);
+//}
 $titulo = 'Listado de Productos';
 ?>
 

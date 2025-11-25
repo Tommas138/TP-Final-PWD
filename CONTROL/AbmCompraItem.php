@@ -120,6 +120,17 @@ Class AbmCompraItem {
         return $resp;
     }
 
+     public function baja2($param) {
+        $resp = false;
+        if ($this->seteadosCamposClaves($param)) {
+            $objCompraItem = $this->cargarObjetoConClave($param);
+            if ($objCompraItem != null && $objCompraItem->eliminar2()) {
+                $resp = true;
+            }
+        }
+
+        return $resp;
+    }
     public function modificacion($param) {
         $resp = false;
         if ($this->seteadosCamposClaves($param)) {
