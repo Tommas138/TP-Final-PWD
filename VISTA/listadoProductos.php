@@ -12,6 +12,8 @@ if(!$session->getIDSesionActual()){
 
 $abmProductos = new AbmProducto();
 $listaProductos = $abmProductos->buscar(null);
+$abmCompraEstado = new AbmCompraEstado();
+
 $titulo = 'Listado de Productos';
 ?>
 

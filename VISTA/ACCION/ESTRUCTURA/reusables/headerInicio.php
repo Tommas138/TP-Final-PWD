@@ -8,15 +8,17 @@
 </style>
 <?php
 include_once __DIR__ . '../../../../../UTILS/funciones.php';
-include_once __DIR__ . '/../../../../CONTROL/AbmRol.php';
-include_once __DIR__ . '/../../../../MODELO/UsuarioRol.php';
-include_once __DIR__ . '/../../../../CONTROL/AbmMenuRol.php';
 
 
 
 $cantidadItemsCarrito = 0;
 $sesion = new Session();
+?>
+<nav class="navbar navbar-expand-custom navbar-mainbg">
 
+    <a class="navbar-brand navbar-logo navbar-button " href="../VISTA/index.php">Dunder Mifflin Store</a>
+    <a class="navbar-brand navbar-logo navbar-button" href="../VISTA/listadoProductos.php">Productos</a>
+    <?php
 if ($sesion->activa()) {
 
     // $user = $sesion->getUsuario();
@@ -26,17 +28,15 @@ if ($sesion->activa()) {
     $user = $sesion->getUsuario();
     $name = $sesion->getUsNombre();
     $idUser = $sesion->getIdUsuario();
-}
-$enlace = "";
-?>
-<nav class="navbar navbar-expand-custom navbar-mainbg">
-
-    <a class="navbar-brand navbar-logo navbar-button " href="../VISTA/index.php">Dunder Mifflin Store</a>
-    <a class="navbar-brand navbar-logo navbar-button" href="../VISTA/listadoProductos.php">Productos</a>
-    <?php
-    $objUs = new UsuarioRol();
+        $objUs = new UsuarioRol();
     $arrUs = $objUs->listar("idusuario = $idUser");
     $roles = $sesion->getUsRoles();
+
+$enlace = "";
+?>
+
+    <?php
+
     if ($roles[0]->getObjRol()->getIdRol() == 1 || $roles[0]->getObjRol()->getIdRol() == 2 ) {
    
     
@@ -96,7 +96,7 @@ $enlace = "";
        }                  }
     }
                     }
-                    
+                    }
                     ?>
                 </ul>
                 <ul class="navbar-nav d-flex">
@@ -127,7 +127,7 @@ $enlace = "";
                             </li>
                         <?php
                         
-                    }
+                   
                     ?>
 </ul>
                        <ul class="navbar-nav d-flex">
@@ -163,8 +163,9 @@ $enlace = "";
                    ?>
 
   
-      
+       
    <?php
+    }
                     
                        
                     
@@ -173,11 +174,21 @@ $enlace = "";
                 </ul>
             </div>
         </div>
+         <?php if (!$sesion->activa()) { ?>
+    <div class="bg-primary text-white p-2 rounded">
+        <form action="../index.php">
+            <button type="submit" class="btn btn-sm">
+                Iniciar Sesion
+            </button>
+        </form>
+  <?php  } else {
+    ?>
             <div class="bg-primary text-white p-2 rounded">
         <form action="../VISTA/acciones/cerrarSesion.php">
             <button type="submit" class="btn btn-sm">
                 Cerrar Sesión
             </button>
         </form>
+  <?php } ?>
     </div>
     </nav>
