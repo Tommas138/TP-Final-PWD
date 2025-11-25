@@ -191,17 +191,20 @@ public function modificarEstado($param) {
     }
 
     public function check($idUser) {
+        $resp = true;
         $resultado = $this->buscar(['idusuario' => $idUser]);
         $ultimo = end($resultado);
         if ($resultado != null) {
         if ($ultimo->getIdCompraEstadoTipo()->getIdCompraEstadoTipo() == 2) {
             $compra = new AbmCompra();
             $compra->alta(['idusuario' => $idUser]);
+            $resp = false;
         }
         } else {
             $compra = new AbmCompra();
             $compra->alta(['idusuario' => $idUser]);
         }
+        return $resp;
     }
  public function aceptarCompra($param)
     {

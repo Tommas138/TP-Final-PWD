@@ -85,7 +85,7 @@ $enlace = "";
                                                     }
                                                     
                                             ?>
-                                                    <li><a class="dropdown-item" href="<?php echo $enlace .=  '.php' ?>"><?php echo $subMenu->getMeNombre(); ?></a></li>
+                                                    <li><a class="dropdown-item" href="<?php echo $enlace ?>"><?php echo $subMenu->getMeNombre(); ?></a></li>
                                                     
                                             <?php
                                                     $enlace = "";
