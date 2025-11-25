@@ -60,6 +60,18 @@ Class AbmCompraItem {
         }
         return $obj;
     }
+    public function alta2($param) {
+        $exito = false;
+        $existe = $param['existe'];
+        if (!$existe) {
+            $this->alta($param);
+            $exito = $this->alta($param);
+        } else {
+            $exito = $this->alta($param);
+        }
+        return $exito;
+    }
+
     public function alta($param) {
         $resp = false;
         // traigo carritos del us

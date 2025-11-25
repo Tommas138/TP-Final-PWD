@@ -13,12 +13,9 @@ $abmCompraItem = new AbmCompraItem();
 $compraEstado = new AbmCompraEstado();
 $existe = $compraEstado->check($idUser);
 $datos['idusuario'] = $idUser;
-if (!$existe) {
-   $abmCompraItem->alta($datos);
-   $exito = $abmCompraItem->alta($datos); 
-} else {
-$exito = $abmCompraItem->alta($datos);
-}
+$datos['existe'] = $existe;
+$exito = $abmCompraItem->alta2($datos); 
+
 
 if ($exito) {
     $message = 'Agregado correctamente al carrito';
