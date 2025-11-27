@@ -63,10 +63,11 @@ Class AbmCompraItem {
     public function alta2($param) {
         $exito = false;
         $existe = $param['existe'];
-        if (!$existe) {
-            $this->alta($param);
+        if ($existe == null || $existe == false ) {
+             $this->alta($param);
             $exito = $this->alta($param);
         } else {
+            $this->alta($param);
             $exito = $this->alta($param);
         }
         return $exito;

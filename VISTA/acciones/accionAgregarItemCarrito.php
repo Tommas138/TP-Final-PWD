@@ -20,7 +20,7 @@ $exito = $abmCompraItem->alta2($datos);
 if ($exito) {
     $message = 'Agregado correctamente al carrito';
     header("Location: ../listadoProductos.php?Message=" . urlencode($message));
-    exit;
+   exit;
 } else {
     $message = 'Hubo un error al agregar el articulo';
    header("Location: ../listadoProductos.php?Message=" . urlencode($message));
