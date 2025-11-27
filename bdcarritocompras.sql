@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-11-2025 a las 17:14:42
+-- Tiempo de generación: 27-11-2025 a las 02:59:24
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -38,11 +38,14 @@ CREATE TABLE `compra` (
 --
 
 INSERT INTO `compra` (`idcompra`, `cofecha`, `idusuario`) VALUES
-(97, '0000-00-00 00:00:00', 1),
-(98, '0000-00-00 00:00:00', 1),
-(99, '2025-11-20 16:14:38', 13),
-(100, '2025-11-20 16:14:33', 12),
-(101, '2025-11-20 16:14:30', 13);
+(570, '0000-00-00 00:00:00', 15),
+(571, '0000-00-00 00:00:00', 15),
+(572, '0000-00-00 00:00:00', 15),
+(573, '0000-00-00 00:00:00', 15),
+(574, '0000-00-00 00:00:00', 14),
+(575, '0000-00-00 00:00:00', 14),
+(576, '0000-00-00 00:00:00', 15),
+(577, '0000-00-00 00:00:00', 15);
 
 -- --------------------------------------------------------
 
@@ -63,11 +66,14 @@ CREATE TABLE `compraestado` (
 --
 
 INSERT INTO `compraestado` (`idcompraestado`, `idcompra`, `idcompraestadotipo`, `cefechaini`, `cefechafin`) VALUES
-(121, 97, 1, '2025-11-19 23:06:39', '0000-00-00 00:00:00'),
-(122, 98, 1, '2025-11-19 23:07:08', '0000-00-00 00:00:00'),
-(123, 99, 1, '2025-11-20 00:34:20', '0000-00-00 00:00:00'),
-(124, 100, 1, '2025-11-20 00:35:03', '0000-00-00 00:00:00'),
-(125, 101, 1, '2025-11-20 00:35:50', '0000-00-00 00:00:00');
+(591, 570, 1, '2025-11-25 19:31:56', '0000-00-00 00:00:00'),
+(592, 571, 3, '2025-11-25 19:31:56', '0000-00-00 00:00:00'),
+(593, 572, 3, '2025-11-25 19:32:40', '0000-00-00 00:00:00'),
+(594, 573, 4, '2025-11-25 19:32:52', '2025-11-27 05:42:40'),
+(595, 574, 2, '2025-11-27 01:41:41', '0000-00-00 00:00:00'),
+(596, 575, 2, '2025-11-27 01:41:58', '0000-00-00 00:00:00'),
+(597, 576, 2, '2025-11-27 01:57:07', '0000-00-00 00:00:00'),
+(598, 577, 1, '2025-11-27 01:57:52', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -87,7 +93,7 @@ CREATE TABLE `compraestadotipo` (
 
 INSERT INTO `compraestadotipo` (`idcompraestadotipo`, `cetdescripcion`, `cetdetalle`) VALUES
 (1, 'iniciada', 'cuando el usuario : cliente inicia la compra de uno o mas productos del carrito'),
-(2, 'aceptada', 'cuando el usuario administrador da ingreso a uno de las compras en estado = 1 '),
+(2, 'recibida', 'cuando el usuario administrador da ingreso a uno de las compras en estado = 1 '),
 (3, 'enviada', 'cuando el usuario administrador envia a uno de las compras en estado =2 '),
 (4, 'cancelada', 'un usuario administrador podra cancelar una compra en cualquier estado y un usuario cliente solo en estado=1 ');
 
@@ -109,12 +115,19 @@ CREATE TABLE `compraitem` (
 --
 
 INSERT INTO `compraitem` (`idcompraitem`, `idproducto`, `idcompra`, `cicantidad`) VALUES
-(190, 1, 97, 1),
-(191, 2, 97, 1),
-(198, 2, 98, 1),
-(199, 3, 99, 1),
-(200, 4, 100, 1),
-(201, 1, 101, 2);
+(657, 4, 570, 1),
+(658, 4, 571, 1),
+(659, 3, 571, 1),
+(660, 3, 572, 1),
+(661, 11, 572, 1),
+(662, 11, 573, 1),
+(663, 4, 574, 1),
+(664, 2, 574, 1),
+(665, 2, 575, 1),
+(666, 17, 573, 1),
+(667, 17, 576, 1),
+(668, 4, 576, 1),
+(669, 4, 577, 1);
 
 -- --------------------------------------------------------
 
@@ -135,18 +148,18 @@ CREATE TABLE `menu` (
 -- Volcado de datos para la tabla `menu`
 --
 
-INSERT INTO `menu` (`idmenu`, `menombre`, `medescripcion`, `idpadre`, `medeshabilitado`) VALUES
-(1, 'Administracion', '#', 5, '0000-00-00 00:00:00'),
-(2, 'Depósito', '#', NULL, '0000-00-00 00:00:00'),
-(3, 'Cliente', '#', NULL, '0000-00-00 00:00:00'),
-(4, 'Listado de usuarios', 'administrarUsuarios', 1, '0000-00-00 00:00:00'),
-(5, 'Administrar Menus', 'administrarMenus', 1, '0000-00-00 00:00:00'),
-(6, 'Administrar Compras', 'administrarCompras', 2, '0000-00-00 00:00:00'),
-(7, 'Administrar Productos', 'administrarProductos', 2, '0000-00-00 00:00:00'),
-(8, 'Cargar Producto', 'nuevoProducto', 2, '0000-00-00 00:00:00'),
-(9, 'Administrar Compras', 'compras', 3, '0000-00-00 00:00:00'),
-(10, 'Nuevo Menú', 'nuevoMenu', 1, '0000-00-00 00:00:00'),
-(11, 'Nuevo Usuario', 'nuevoUsuario', 1, '0000-00-00 00:00:00');
+INSERT INTO `menu` (`idmenu`, `menombre`, `medescripcion`, `idpadre`, `medeshabilitado`, `menurl`) VALUES
+(1, 'Administracion', '#', 1, '0000-00-00 00:00:00', NULL),
+(2, 'Depósito', '#', NULL, '0000-00-00 00:00:00', NULL),
+(3, 'Cliente', '#', NULL, '0000-00-00 00:00:00', NULL),
+(4, 'Listado de usuarios', 'administrarUsuarios', 1, '0000-00-00 00:00:00', './VISTA/ADMIN/administrarUsuarios'),
+(5, 'Administrar Menus', 'administrarMenus', 1, '0000-00-00 00:00:00', NULL),
+(6, 'Administrar Compras', 'administrarCompras', 2, '0000-00-00 00:00:00', NULL),
+(7, 'Administrar Productos', 'administrarProductos', 2, '0000-00-00 00:00:00', '../../VISTA/ADMIN/AdministrarProductos.php'),
+(8, 'Cargar Producto', 'nuevoProducto', 2, '0000-00-00 00:00:00', NULL),
+(9, 'Administrar Compras', 'compras', 3, '0000-00-00 00:00:00', NULL),
+(10, 'Nuevo Menú', 'nuevoMenu', 1, '0000-00-00 00:00:00', NULL),
+(11, 'Nuevo Usuario', 'nuevoUsuario', 1, '0000-00-00 00:00:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -191,25 +204,25 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`idproducto`, `pronombre`, `prodetalle`, `procantstock`, `proprecio`) VALUES
-(1, 'Creatina Star', 'Creatina Monohidrato Marca Star creapure', 12, 30000),
-(2, 'Creatina Protein', 'Creatina Monohidrato marca Protein Project', 3, 20762),
-(3, 'Creatina Animal', 'Creatina Monohidrato marca Animal', 2, 57070),
-(4, 'Creatina BSN', 'Creatina Monohidrato marca BSN', 11, 54470),
-(5, 'Creatina Optimum', 'Creatina Monohidrato marca Optimum Nutrion', 2, 51510),
+(1, 'Creatina Star', 'Creatina Monohidrato Marca Star creapure', 15, 30000),
+(2, 'Creatina Protein', 'Creatina Monohidrato marca Protein Project', 14, 20762),
+(3, 'Creatina Animal', 'Creatina Monohidrato marca Animal', 12, 57070),
+(4, 'Creatina BSN', 'Creatina Monohidrato marca BSN', 12, 54470),
+(5, 'Creatina Optimum', 'Creatina Monohidrato marca Optimum Nutrion', 15, 51510),
 (6, 'Creatina Gold', 'Creatina Monohidrato marca Gold', 15, 40365),
-(7, 'Creatina Ultimate', 'Creatina Monohidrato marca Ultimate Nutrition', 7, 46313),
-(8, 'Whey Proteina', 'Proteina marca Star', 8, 57070),
-(9, 'Best Whey', 'Proteina marca Atlhetica nutrition', 9, 77870),
-(10, 'Syntha6', 'Proteina marca BSN', 6, 174624),
-(11, 'Proteina Vegetal', 'Proteina marca gold', 10, 49078),
-(12, 'Barra Proteica QLP', 'Barra de proteina marca Que Lo Paleo pack x12 ', 10, 64870),
-(13, 'Pancakes Proteicos', 'Pancakes marca Granger', 19, 16770),
-(14, 'Omelettes proteicos', 'Omelettes Proteicos marca Granger', 18, 17278),
-(15, 'Barra Proteica Fuerza', 'Barra Proteica marca Mole pack x12', 14, 20670),
-(16, 'Gelatina', 'Gelatina marca Granger', 11, 10724),
-(17, 'Proteina Woman', 'Proteina marca pampita', 13, 38900),
-(18, 'Barra Proteica Placer', 'Barra Proteica marca Mole pack x12', 12, 19370),
-(19, 'Barra Proteica Energia', 'Barra Proteica marca Mole pack x12', 20, 19370),
+(7, 'Creatina Ultimate', 'Creatina Monohidrato marca Ultimate Nutrition', 15, 46313),
+(8, 'Whey Proteina', 'Proteina marca Star', 15, 57070),
+(9, 'Best Whey', 'Proteina marca Atlhetica nutrition', 15, 77870),
+(10, 'Syntha6', 'Proteina marca BSN', 15, 174624),
+(11, 'Proteina Vegetal', 'Proteina marca gold', 15, 49078),
+(12, 'Barra Proteica QLP', 'Barra de proteina marca Que Lo Paleo pack x12 ', 15, 64870),
+(13, 'Pancakes Proteicos', 'Pancakes marca Granger', 15, 16770),
+(14, 'Omelettes proteicos', 'Omelettes Proteicos marca Granger', 15, 17278),
+(15, 'Barra Proteica Fuerza', 'Barra Proteica marca Mole pack x12', 15, 20670),
+(16, 'Gelatina', 'Gelatina marca Granger', 13, 10724),
+(17, 'Proteina Woman', 'Proteina marca pampita', 11, 38900),
+(18, 'Barra Proteica Placer', 'Barra Proteica marca Mole pack x12', 11, 19370),
+(19, 'Barra Proteica Energia', 'Barra Proteica marca Mole pack x12', 18, 19370),
 (20, 'Barra Proteica Brava', 'Barra Proteica marca BRAVA* pack x12', 22, 25900);
 
 -- --------------------------------------------------------
@@ -237,7 +250,9 @@ INSERT INTO `rol` (`idrol`, `rodescripcion`) VALUES
 (13, ''),
 (14, ''),
 (15, ''),
-(16, '');
+(16, ''),
+(17, 'Cliente'),
+(18, 'Cliente');
 
 -- --------------------------------------------------------
 
@@ -260,7 +275,9 @@ CREATE TABLE `usuario` (
 INSERT INTO `usuario` (`idusuario`, `usnombre`, `uspass`, `usmail`, `usdeshabilitado`) VALUES
 (1, 'admin', 25, 'admin@gmail.com', '0000-00-00 00:00:00'),
 (12, 'manager', 25, 'manager@gmail.com', '0000-00-00 00:00:00'),
-(13, 'cliente', 25, 'cliente@gmail.com', '0000-00-00 00:00:00');
+(13, 'cliente', 25, 'cliente@gmail.com', '0000-00-00 00:00:00'),
+(14, 'test', 81, 'test@gmail.com', '0000-00-00 00:00:00'),
+(15, 'test2', 81, 'tomaso200208@gmail.com', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -280,7 +297,9 @@ CREATE TABLE `usuariorol` (
 INSERT INTO `usuariorol` (`idusuario`, `idrol`) VALUES
 (1, 1),
 (12, 2),
-(13, 3);
+(13, 3),
+(14, 3),
+(15, 3);
 
 --
 -- Índices para tablas volcadas
@@ -370,19 +389,19 @@ ALTER TABLE `usuariorol`
 -- AUTO_INCREMENT de la tabla `compra`
 --
 ALTER TABLE `compra`
-  MODIFY `idcompra` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
+  MODIFY `idcompra` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=578;
 
 --
 -- AUTO_INCREMENT de la tabla `compraestado`
 --
 ALTER TABLE `compraestado`
-  MODIFY `idcompraestado` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=127;
+  MODIFY `idcompraestado` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=599;
 
 --
 -- AUTO_INCREMENT de la tabla `compraitem`
 --
 ALTER TABLE `compraitem`
-  MODIFY `idcompraitem` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=202;
+  MODIFY `idcompraitem` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=670;
 
 --
 -- AUTO_INCREMENT de la tabla `menu`
@@ -396,14 +415,17 @@ ALTER TABLE `menu`
 ALTER TABLE `producto`
   MODIFY `idproducto` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
+--
+-- AUTO_INCREMENT de la tabla `rol`
+--
 ALTER TABLE `rol`
-  MODIFY `idrol` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `idrol` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `idusuario` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `idusuario` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Restricciones para tablas volcadas
