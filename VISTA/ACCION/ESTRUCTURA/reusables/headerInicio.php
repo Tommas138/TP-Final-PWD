@@ -144,7 +144,7 @@ $enlace = "";
                                 <i class="fas fa-user"></i><span class="">&nbsp;&nbsp;<?php echo $name ?></span>
                             </a>
 
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown-Usuario">
+                            <div class="dropdown-menu dropdown-menu-end position-absolute z-1 p-2" aria-labelledby="navbarDropdown-Usuario">
                                 <?php
                                 switch ($roles[0]->getObjRol()->getIdRol()) {
                                     case 1: ?>

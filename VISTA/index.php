@@ -1,18 +1,4 @@
-<style>
-    nav {
-        position:absolute;
-    }
-    body {
-        position: relative;
-    }
-    #footer {
-        height: 100px;
-        left: 0px;
-    }
-    #small {
-        font-size:1.2rem;
-    }
-</style>
+
 <?php
 
 require_once __DIR__ . '/../UTILS/funciones.php';
@@ -119,7 +105,11 @@ shuffle($listaProductos);
             </div></body>
             <?php
         }
-require_once __DIR__ . '../ACCION/ESTRUCTURA/reusables/footer.php';
-?>
+        ?>
     </section>
 </div>
+<?php
+
+require_once __DIR__ . '../ACCION/ESTRUCTURA/reusables/footer.php';
+
+?>

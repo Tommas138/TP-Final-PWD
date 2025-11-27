@@ -1,156 +1,188 @@
-        
-        
-    body {
-        font-family: "Stack Sans Text", sans-serif;
-        font-optical-sizing: auto;
-        font-weight: 400;
-        font-style: normal;
-        min-height: 100vh;
-    }
+:root{
+    --header-height: 120px;
+    --footer-height: 60px;
+}        
+    
+html {
+    height: 100%;
+}
 
-    * {
+body {
+    font-family: "Stack Sans Text", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    }
+}
 
-    /*-------------------------------LISTADO PRODUCTOS-----------------------------------*/
-    #imagenSuplemento{
-        width: auto;
-        height: 350px;
-    }
+.container, main, .main-content {
+    flex: 1 0 auto;
+}
 
-    #tarjetaSuplemento{
-        margin-bottom: 20px;
-    }
+/*-------------------------------LISTADO PRODUCTOS-----------------------------------*/
 
+#imagenSuplemento{
+    width: auto;
+    height: 350px;
+}
+
+#tarjetaSuplemento{
+    margin-bottom: 20px;
+}
 
 /* -------------------INICIAR SESION/REGISTRAR-------------------------- */
-        .login-container {
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            max-width: 400px;
-            width: 100%;
-        }
-        .login-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px;
-            text-align: center;
-        }
-        .login-body {
-            padding: 40px;
-        }
-        .form-control:focus {
-            border-color: #667eea;
-            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
-        }
-        .btn-login {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border: none;
-            padding: 12px;
-            font-weight: 600;
-            transition: transform 0.2s;
-        }
-        .btn-login:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-            -webkit-transform: translateY(-2px);
-            -moz-transform: translateY(-2px);
-            -ms-transform: translateY(-2px);
-            -o-transform: translateY(-2px);
-        }
 
+.login-container {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    max-width: 400px;
+    width: 100%;
+}
+.login-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 30px;
+    text-align: center;
+}
+.login-body {
+    padding: 40px;
+}
+.form-control:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+.btn-login {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    padding: 12px;
+    font-weight: 600;
+    transition: transform 0.2s;
+}
+.btn-login:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    -webkit-transform: translateY(-2px);
+    -moz-transform: translateY(-2px);
+    -ms-transform: translateY(-2px);
+    -o-transform: translateY(-2px);
+}
 
 /* -------------------------FIN INICIO SESION/REGISTRO------------------------------------------------*/
+/* -------------------------INICIO index------------------------------------------------*/
+
+.transition-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    -webkit-transition: transform 0.3s ease, box-shadow 0.3s ease;
+    -moz-transition: transform 0.3s ease, box-shadow 0.3s ease;
+    -ms-transition: transform 0.3s ease, box-shadow 0.3s ease;
+    -o-transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.transition-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+}
+
+.object-fit-cover {
+    object-fit: cover;
+}
+
+.footer-dunder{
+    width: 100%;
+    height: 150px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    justify-content: space-between;
+    flex-shrink: 0;
+    position: relative;
+    margin-top: auto;
+}
 
 /* -------------------------NAVBAR------------------------------------------------*/
 
 .navbar {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    padding: 0 3rem;
     display: flex;
+    min-height: 120px;
     align-items: center;
-    height: 120px;
+    justify-content: space-around;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     position: relative;
+    flex-shrink: 0;
 }
-
-nav {
-  display: flex;
-  height: 100%;
-}
-
 
 /* animacion del logo  */
 
 .navbar-button {
-  font-size: 1.5rem;
-  margin-left: 10px;
-  color:  white;
-  text-decoration: none;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-image: linear-gradient(
-    	to right,
-	    #4c58a0,
-	    #283271 50%,
-	    white 50%);
-	    background-size: 200% 100%;
-	    background-position: 100%;
+    font-size: 1.5rem;
+    margin-left: 10px;
+    color: white;
+    text-decoration: none;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-image: linear-gradient(
+        to right,
+        #4c58a0,
+        #283271 50%,
+        white 50%);
+    background-size: 200% 100%;
+    background-position: 100%;
 }
 
 .navbar-button:hover {
-  transition: all 0.3s cubic-bezier(0.000, 0.000, 0.230, 1);
-  background-position: 0%;
-  -webkit-transition: all 0.3s cubic-bezier(0.000, 0.000, 0.230, 1);
-  -moz-transition: all 0.3s cubic-bezier(0.000, 0.000, 0.230, 1);
-  -ms-transition: all 0.3s cubic-bezier(0.000, 0.000, 0.230, 1);
-  -o-transition: all 0.3s cubic-bezier(0.000, 0.000, 0.230, 1);
+    transition: all 0.3s cubic-bezier(0.000, 0.000, 0.230, 1);
+    background-position: 0%;
+    -webkit-transition: all 0.3s cubic-bezier(0.000, 0.000, 0.230, 1);
+    -moz-transition: all 0.3s cubic-bezier(0.000, 0.000, 0.230, 1);
+    -ms-transition: all 0.3s cubic-bezier(0.000, 0.000, 0.230, 1);
+    -o-transition: all 0.3s cubic-bezier(0.000, 0.000, 0.230, 1);
 }
+
 
 /* fin animacion de logo  */
 
 .add-carrito-button {
- background-color: transparent;
- border-radius: 1em;
- cursor: pointer;
- display: inline-block;
- font-weight: 600;
- line-height: normal;
- min-width: 0;
- padding: 1em 2.3em;
- text-align: center;
- text-decoration: none;
- transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
- -webkit-user-select: none;
- -webkit-border-radius: 1em;
- -moz-border-radius: 1em;
- -ms-border-radius: 1em;
- -o-border-radius: 1em;
- -webkit-transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
- -moz-transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
- -ms-transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
- -o-transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+    background-color: transparent;
+    border-radius: 1em;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: 600;
+    line-height: normal;
+    min-width: 0;
+    padding: 1em 2.3em;
+    text-align: center;
+    text-decoration: none;
+    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+    -webkit-border-radius: 1em;
+    -moz-border-radius: 1em;
+    -ms-border-radius: 1em;
+    -o-border-radius: 1em;
+    -webkit-transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+    -moz-transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+    -ms-transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+    -o-transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
 }
 
 .add-carrito-button:hover {
- color: #fff;
- background-color: #667eea;
- transform: translateY(-2px);
- -webkit-transform: translateY(-2px);
- -moz-transform: translateY(-2px);
- -ms-transform: translateY(-2px);
- -o-transform: translateY(-2px);
+    color: #fff;
+    background-color: #667eea;
+    transform: translateY(-2px);
+    -webkit-transform: translateY(-2px);
+    -moz-transform: translateY(-2px);
+    -ms-transform: translateY(-2px);
+    -o-transform: translateY(-2px);
 }
 
-
-
-
-
-
 /* -------------------------FIN NAVBAR------------------------------------------------*/
-

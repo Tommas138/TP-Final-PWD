@@ -22,14 +22,11 @@ $ultimo = end($exito);
 $titulo = 'Listado de Productos';
 ?>
 
-<br>
-<header class="bg-dark py-1">
-    <div class="container px-4 px-lg-5 my-2">
-        <div class="text-center text-white">
-            <h4>Listado de Productos</h4>
-        </div>
+<div class="px-4 px-lg-5  bg-dark w-100 p-2">
+    <div class="text-center text-white">
+        <h4>Listado de Productos</h4>
     </div>
-</header>
+</div>
 <body style="background-color: white;">
 <div class="container mt-2" >
     <section class="py-2">
@@ -74,7 +71,7 @@ $titulo = 'Listado de Productos';
                                     }
                                     ?>
                                     <div id="imagenSuplemento">
-                                        <img class='card-img-top' src='<?php echo $imgSrc ?>' alt='<?php echo htmlspecialchars($producto->getProNombre(), ENT_QUOTES) ?>' />
+                                        <img class='card-img-top p-3' src='<?php echo $imgSrc ?>' alt='<?php echo htmlspecialchars($producto->getProNombre(), ENT_QUOTES) ?>' />
                                     </div>
                                     <input type="hidden" name="idproducto" value="<?php echo $producto->getIdProducto(); ?>">
                                     <div class='card-body p-4' >

@@ -140,13 +140,13 @@ $enlace = "";
                     }
                     ?>
 </ul>
-                       <ul class="navbar-nav d-flex">
+                       <ul class="navbar-nav">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown-Usuario" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fas fa-user"></i><span class="">&nbsp;&nbsp;<?php echo $name ?></span>
                             </a>
 
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown-Usuario">
+                            <div class="dropdown-menu dropdown-menu-end position-absolute z-1" aria-labelledby="navbarDropdown-Usuario">
                                 <?php
                                 switch ($roles[0]->getObjRol()->getIdRol()) {
                                     case 1: ?>

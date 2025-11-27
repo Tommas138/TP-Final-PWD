@@ -1,11 +1,3 @@
-<style>
-    body {
-        display: flex; /* Habilita Flexbox */
-        flex-direction: column; /* Organiza los elementos verticalmente */
-        min-height: 100vh; /* Asegura que el body ocupe al menos la altura de la ventana */
-        margin-bottom: 0; /* Asegura que no haya margen extra abajo */
-    }
-</style>
 <?php
 include_once '../CONTROL/Session.php';
 
@@ -15,7 +7,7 @@ if(!$session->getIDSesionActual()){
 
 }else{
     require_once __DIR__ . '/../UTILS/funciones.php';
-    include_once 'ACCION/ESTRUCTURA/reusables/header.php';
+    include_once './ACCION/ESTRUCTURA/reusables/header.php';
 }
 
 $datos = data_submitted();
@@ -36,16 +28,14 @@ $arrayCarritos = $controlVerificarCarrito->verificarCarrito($idUser);
 $compras = $arrayCarritos['arrayCompras'];
 
 ?>
-<body style="display:flex;">
-<header class="bg-dark py-1">
-    <div class="container px-4 px-lg-5 my-2">
-        <div class="text-center text-white">
-            <h4>Historial de Compras</h4>
-        </div>
+<div class="px-4 px-lg-5  bg-dark w-100 p-2">
+    <div class="text-center text-white">
+        <h4>Listado de Productos</h4>
     </div>
-</header>
-
-<div class="container mt-2">
+</div>
+<body>
+    
+    <div class="container">
     <section class="py-2">
         <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
